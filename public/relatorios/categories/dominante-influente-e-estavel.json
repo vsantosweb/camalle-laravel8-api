@@ -1,0 +1,309 @@
+{
+    "data": {
+        "customerName": null,
+        "docType": "3",
+        "docName": "Dominante",
+        "docName2": "Influente",
+        "docName3": "Estável",
+        "title": null,
+        "letter": "D",
+        "letter2": "I",
+        "letter3": "S",
+        "descriptionParagraphs": [
+            "Você apresenta um alto grau nas dimensões Dominante, Influente e Estável. Este resultado não é conflitante. As características de cada dimensão formam o seu perfil.",
+	    "Contudo, dominância, influência e estabilidade apresentam comportamentos opostos, por isso a descrição do seu estilo está separada em três partes."
+        ],
+        "descriptionParagraphs2": [
+	    "Você é uma pessoa que impõe fortemente sua autoridade, gosta de diversidade e vanguarda. Por conta disso é inquieto e tem dificuldade em ficar parado por muito tempo. Quando um objetivo é alcançado, nem sempre você comemora, prefere pensar e/ou agir no próximo passo.",
+	    "Gosta de terminar as tarefas com rapidez e se preocupa mais com o resultado final do que com o processo. É questionador e pode ultrapassar limites estabelecidos por outras pessoas ou pelo ambiente se entender que eles não fazem sentido. Tenha cuidado para não ofender ou desrespeitar as pessoas ao seu redor.",
+	    "Em comparação aos outros, você pode ser rígido demais consigo mesmo por estar errado. Talvez isso possa motivá-lo a fazer o seu melhor, mas também pode impedir de correr riscos que podem ser benéficos. Por dar tanto valor a seu conhecimento, às vezes você pode perder tempo com erros.",
+	    "Você pode ser um questionador implacável. Por valorizar a lógica, é improvável que aceite novas ideias sem fazer uma análise minuciosa. Como resultado, você pode questionar as pessoas do grupo, mesmo que elas se sintam preparadas para progredir e você pode ser visto como alguém que impede o avanço.",
+	    "Você pode gostar de ter pessoas ao seu redor, mas gosta mesmo é de trabalhar sozinho. Isso permite que você se concentre de forma mais aprofundada para realização de resultados. Você valoriza sua independência, preferindo resolver as coisas sozinho ao invés de pedir ajuda. Isso não significa que você não gosta de trabalhar em equipe. Efetivamente, você gosta de dar conselhos e compartilhar experiências.",
+	    "Você tende a ser reservado, a não ser que conheça a pessoa muito bem para se abrir com ela. Você não se sente bem perto de pessoas emotivas, já que os sentimentos exagerados carregam uma dose de imprevisibilidade para você. Você demonstra autocontrole e espera isso das pessoas. Você pode se sentir vulnerável quando mostra suas emoções.",
+	    "Apesar do seu ar aparentemente calmo, às vezes você pode se irritar quando pensa que as normas e a lógica não estão sendo seguidas. Você não gosta de se envolver em conflitos, porém, pode demonstrar sua raiva de maneira sutil.",
+	    "Você se orgulha da qualidade do seu trabalho, mas evita reconhecimento público.", "Você pode pensar que todos pensam desta maneira e pode não lhe ocorrer que as pessoas queiram ser elogiadas por você.",
+	    "Você contribui de forma preciosa para sua organização ao insistir na precisão, primor e capacidade de encontrar soluções práticas para desafios complexos. Em suma, esses são alguns dos comportamentos que as pessoas mais admiram em você."
+        ],
+        "descriptionParagraphs3": [
+	    "Você gosta de se conectar com as pessoas e a sua rede de amigos é grande. Um ambiente cheio de pessoas estranhas pode ser uma oportunidade incrível e divertida de fazer novas amizades. Da mesma maneira, para você é satisfatório apresentar pessoas que de outra forma não se conectariam.",
+	    "Você é otimista, seu entusiasmo contagia as pessoas com a sua energia positiva e ideias. Você promove paixão ao falar. Mas tenha em mente que pessoas muito céticas podem achar o seu otimismo exagerado.",
+	    "Muito expressivo, você tende a falar alto e gesticular mais que as outras pessoas para chamar a atenção. Você tem uma grande necessidade de processar seus sentimentos e verbalizá-los. Tenha cuidado para não monopolizar as conversas, principalmente com os mais tímidos.",
+	    "Você se sente atraído por projetos onde possa trabalhar a colaboração e tende a ser o ponto de união entre as pessoas. As sessões de brainstorming são divertidas e fonte de infinitas possibilidades, onde você tende a solicitar a participação ativa das outras pessoas. No entanto, pelo alto desejo de se conectar com as outras pessoas e se expressar de forma ativa, você pode ofuscar os demais e não dar o espaço necessário para cada um.",
+	    "Você gosta de causar boas impressões e colaborar com seu círculo social. Provavelmente gosta de contar histórias e entreter as pessoas de forma lúdica.",
+	    "É natural para você receber novas pessoas e ideias, porém, tende a ser relutante em dar feedbacks negativos por medo de ser visto com uma pessoa chata. Seu otimismo pode supervalorizar suas habilidades e não dar a devida atenção à dificuldade da tarefa.",
+	    "Você tende a se esquivar de conflitos e guardar sentimentos ruins, o que pode ser catastrófico quando eles vêm à tona.",
+	    "Para não entrar em rotina, você está sempre envolvido em muitas tarefas ao mesmo tempo. Você está sempre animado para começar um novo projeto, mas nem sempre está preparado em seu planejamento ou recursos necessários. Por confiar na sua habilidade de improvisar, você deixa as coisas seguirem o seu fluxo natural.",
+	    "Você contribui de forma preciosa para sua organização ao gerar entusiasmo, energia e desejo de reunir as pessoas. Em suma, esses são alguns dos comportamentos que as pessoas mais admiram em você."
+        ],        
+        "descriptionParagraphs4": [
+	    "Você provavelmente é uma pessoa solidária e se sente bem contribuindo com a equipe. Você não precisa receber os louros da vitória para ter satisfação. Quando recebe os créditos, pensa logo em compartilhar com o time. Prefere compartilhar as obrigações a ter que mandar alguém fazer.",
+	    "Você tende a se acomodar facilmente e necessita da aprovação dos outros. Inclusive gosta de ajudar as pessoas e tem dificuldade em dizer não ou comunicar às elas quando fica constrangido.",
+	    "Você prefere harmonia e se esquiva de conflitos. Tem medo de magoar as pessoas e pode remoer situações do passado com facilidade. Em grupo você prefere assumir o papel de diplomata. Quando o clima fica tenso, você tende a deixar a situação passar ao invés de se posicionar.",
+	    "O alto S gosta de trabalhar em ambientes calmos. Gosta de ser estimado, mas quando elogiado em público ou exageradamente, tende a ficar tímido. É possível que você menospreze os seus próprios resultados, fazendo com que outras pessoas deixem de reconhecer o seu valor.",
+	    "Você é confiante e desperta a dúvida nas outras pessoas. Quando as pessoas trazem ideias inovadoras, você mantém a cabeça aberta para manter o apoio. Se alguém não atende aos seus padrões, você prefere refazer o trabalho ao invés de dar um retorno negativo para não ferir os sentimentos ou colocar a relação em risco.",
+	    "Você tende a ser indeciso em algumas ocasiões e sua timidez pode fazer com que guarde suas ideias somente para si. Por isso algumas pessoas podem achar você pouco persuasivo. Falar o que você pensa pode ser mais eficiente do que imagina.",
+	    "Por ser paciente, você gosta de projetos de longo prazo e rotinas estabelecidas. Gosta de procedimentos para guiar seu trabalho e manter a constância. Para você, a clareza nas tarefas é fundamental. Não gosta de desapontar ninguém da organização. Gosta de se tornar especialista em determinadas habilidades para ter mais confiança na execução.",
+	    "Você é cuidadoso e gosta de evitar riscos. Gosta de seguir regras e procedimentos. Quando mudanças ousadas aparecem, você tende a se concentrar em falhas, deixando os benefícios de lado. Você precisa ter muita certeza antes de tomar uma decisão e isso pode impedir a melhoria em questão.",
+	    "Você contribui de forma preciosa para sua organização ao aceitar outras pessoas, confiança e capacidade de jogar em equipe. Em suma, esses são alguns dos comportamentos que as pessoas mais admiram em você."
+        ],        
+        "priority": [
+            {
+                "name": "Colaboração",
+                "description": "Você é jogador de equipe, por isso prefere ambientes harmoniosos. Você gosta de interação e entende que esforços em grupos geram melhores resultados. Para você é simples reunir as pessoas, portanto pode ter problemas em entender pessoas que gostam de trabalhar sozinhas. A colaboração é essencial para você."
+            },
+            {
+                "name": "Entusiasmo",
+                "description": "Você é otimista mesmo diante de grandes desafios. Pode ser fácil para você estimular e motivar outros. Você enxerga o melhor das pessoas ao invés de focar nas falhas. Você foca em entusiasmo porque um ambiente harmonioso é importante para você."
+            },
+            {
+                "name": "Suporte",
+                "description": "Para você é importante que as relações sejam respeitosas e baseadas na compaixão. Ver as pessoas aflitas provavelmente o deixará triste. Possivelmente você quer que as pessoas sintam que você está disponível para escutá-las com paciência. Você quer dar apoio porque um ambiente harmonioso é importante para você."
+            }
+        ],
+        "motivation": {
+            "description": "Trabalhar com pessoas dedicadas, ambiente com alta energia e conhecer novas pessoas.",
+            "features": [
+                "Relações amigáveis",
+		"Motivar os outros a alcançar o seu melhor",
+		"Incluir pessoas",
+		"Estar entre pessoas com alto nível de energia",
+		"Ser reconhecido por um trabalho bem feito",
+		"Ouvir genuinamente as preocupações de outras pessoas",
+		"Ser a diferença positiva na vida das pessoas",
+		"Gerar ambiente seguro",
+		"Trabalhar em prol de um objetivo"
+            ]
+        },
+        "stress": {
+            "description": "Trabalhos rotineiros, ambientes excessivamente calmos e limitação de expressão.",
+            "features": [
+                "Pressionar as pessoas",
+		"Trabalhar com pessoas analíticas e competitivas",
+		"Dar feedback negativo",
+		"Ser enfático com as pessoas",
+		"Ambiente antissocial",
+		"Ser claro sobre o que está esperando",
+		"Ser prático ao avaliar os outros",
+		"Trabalhar em ambientes confusos",
+		"Trabalhar sem diretrizes claras"
+            ]
+        },
+        "discStyles": [
+            {
+                "name": "Dominante",
+                "descriptions": [
+                    "Entendem-se bem. Compartilham o sentido da urgência (rapidez), gostam de correr riscos e possuem um forte desejo de mudar seu ambiente. Ambos têm em vista serem reconhecidos.",
+		    "Cada um ao seu modo, ambos são extrovertidos e poderão trabalhar bem juntos se o D diminuir um pouco o ritmo e adicionar alguma diversão ao trabalho para motivar o DIS. O DIS pode ainda precisar de algum tempo a mais na tomada de decisão."
+                ],
+                "priorities": [
+                    "Resultados",
+                    "Ação",
+                    "Desafio"
+                ]
+            },
+            {
+                "name": "Influente",
+                "descriptions": [
+                    "Entendem-se bem. Os altos I são criativos e gostam de correr riscos. Podem precisar de complemento de outros estilos para manter o foco, já que seu interesse por pessoas pode fazer com que se percam quando trabalhando juntos.",
+		    "É importante que estejam cientes de seus objetivos e do que fazem. Prazos e agendas determinadas podem fazer-se necessárias, pois o gerenciamento do tempo, aqui, pode tornar-se um problema."
+                ],
+                "priorities": [
+                    "Entusiasmo",
+                    "Ação",
+                    "Colaboração"
+                ]
+            },
+            {
+                "name": "Estável",
+                "descriptions": [
+                    "Não se entendem bem. Ambos orientados a pessoas, precisam de interação, mas cada um à sua maneira. Pelo S, o DIS pode parecer entusiasta por demais, ou até forçado. Além disso, o senso de urgência e a disposição para correr riscos do S é menor.",
+                    "Para conquistar a confiança e construir um bom relacionamento, é preciso que o DIS diminua o ritmo, fale menos, escute mais e depois pergunte ao S o que sente. Do contrário, não conhecerá dele as preocupações e angústias que tende a internalizar."
+                ],
+                "priorities": [
+                    "Apoio",
+                    "Constância",
+                    "Colaboração"
+                ]
+            },
+            {
+                "name": "Cauteloso",
+                "descriptions": [
+                    "Não se entendem bem. Ambos têm muito pouco em comum. O DIS é extrovertido, o C não. O DIS precisará controlar suas emoções e diminuir o ritmo, além de prover o alto C com todos os dados de que precisa.",
+                    "Este, não obstante, tolerará pouco a conversa e contato pessoal. Este relacionamento será o maior desafio do DIS, mas, caso superado, trará sucesso, pois formarão uma excelente equipe."
+                ],
+                "priorities": [
+                    "Exatidão",
+                    "Constância",
+                    "Desafio"
+                ]
+            }
+        ],
+        "relationship": [
+            {
+                "letter": "D",
+                "name": "Dominante",
+                "relationship": {
+                    "description": [
+                        "Dominantes gostam de ir direto ao ponto, então tenha cuidado para não gerar discussões. Pessoas com estilo D são diretas e têm a intenção de que o trabalho seja feito de forma rápida. Já você se concentra em relações e envolver a todos.",
+                        "Você pode achar a abordagem dos dominantes muito direta e fria, já eles podem ficar frustrados se você usar o seu charme e persuasão em demasia."
+                    ],
+                    "strategies": [
+                        "Diminuir a conversa trivial e ir direto ao ponto",
+                        "Não levar fraquezas alheias para o lado pessoal",
+                        "Mostrar como suas ideias irão levar a resultados tangíveis"
+                    ]
+                },
+                "problems": {
+                    "description": [
+                        "Dominantes tomam decisão com rapidez e mantém o trabalho funcionando. Você tem dificuldades em tomar decisões agressivas e impopulares, característica do estilo D.", 
+                        "Você pode buscar apoio em outras pessoas para chegar em um resultado, o que pode gerar frustração em um dominante. Você pode achar eles limitados por darem respostas imediatas."
+                    ],
+                    "strategies": [
+                        "Dar menos ênfase no sentimento de outras pessoas para encontrar respostas",
+                        "Assumir e manter o seu posicionamento, mesmo que seus sentimentos sejam negligenciados",
+                        "Não permita que eles o forcem a tomar atitudes que te deixe desconfortável"
+                    ]
+                },
+                "strained": {
+                    "description": [
+                        "Você prioriza as amizades, por isso tende a evitar conflitos, ao contrário das pessoas D. Já eles são desafiadores e podem se tornar críticos em conflitos. Você não lida bem com ataques quando confrontado, o que pode dificultar a resolução de um conflito."
+                    ],
+                    "strategies": [
+                        "Não levar a franqueza deles como ataque pessoal",
+                        "Não ignorar os problemas para manter o ritmo acelerado",
+                        "Ser objetivo ao expor seus pontos e evite ser emotivo"
+                    ]
+                }
+            },
+            {
+                "letter": "I",
+                "name": "Influente",
+                "relationship": {
+                    "description": [
+                        "Influentes são extremamente extrovertidos, sociáveis e gostam de trabalhar de forma colaborativa. A conversa entre vocês tende a ser animada e otimista. ",
+                        "Tome cuidado com a empolgação e a falta de foco no objetivo em questão."
+                    ],
+                    "strategies": [
+                        "Criar oportunidades para colaboração",
+                        "Manter o social e o foco na tarefa",
+                        "Solicite ideias e externalize suas preocupações"
+                    ]
+                },
+                "problems": {
+                    "description": [
+                        "Influentes trabalham com a intuição e quando confrontados com um problema, agem rapidamente. Você evita decisões rápidas, o que faz com que eles o achem cauteloso demais. As soluções inovadoras dos influentes podem ter atritos com as suas respostas seguras e calculadas."
+                    ],
+                    "strategies": [
+                        "Esteja aberto às soluções criativas",
+                        "Use a energia deles quando for necessário ir rápido",
+                        "Equilibre a sua constância e o comportamento aventureiro deles"
+                    ]
+                },
+                "strained": {
+                    "description": [
+                        "É natural para uma pessoa I ignorar os problemas pensando no relacionamento. Para garantir o direito de se expressar, é comum que o influente fique emotivo e até mesmo agressivo. Você preza pela harmonia e pode deixar que eles ajam da maneira deles. Você pode não resolver a situação e sair ressentido."
+                    ],
+                    "strategies": [
+                        "Tente não ceder às vontades deles ou se afastar da situação muito rapidamente",
+                        "Não deixe de expressar sua opinião só para manter o ritmo",
+                        "Deixe que eles entendam que o conflito pode ser benéfico para uma boa relação"
+                    ]
+                }
+            },
+            {
+                "letter": "S",
+                "name": "Estável",
+                "relationship": {
+                    "description": [
+                        "Assim como uma pessoa de estilo S, você também prioriza a colaboração. Por ser mais expressivo, você pode monopolizar a conversa. Pessoas estáveis também são otimistas, por isso tenha cuidado para não subestimar os desafios."
+                    ],
+                    "strategies": [
+                        "Incentive-os a compartilhar ideias",
+                        "Enfrentem questões árduas de frente",
+                        "Trabalhem de forma colaborativa, mas não ignorem os problemas"
+                    ]
+                },
+                "problems": {
+                    "description": [
+                        "Você tende a ser mais rápido para solucionar problemas. Pessoas do estilo S tendem a evitar mudanças rápidas, enquanto você é aberto a soluções inovadoras e ousadas. Como resultado, uma pessoa de estilo S pode parecer indecisa, enquanto seu ímpeto de mudar rapidamente pode parecer arriscado para eles."
+                    ],
+                    "strategies": [
+                        "Respeitar o ritmo, mas trabalhar junto para melhorar eficiência",
+                        "Acordo mútuo em decisões de prazo",
+                        "Equilibrar as abordagens destemida e cautelosa"
+                    ]
+                },
+                "strained": {
+                    "description": [
+                        "Pessoas do Estilo S buscam evitar problemas e chatear as pessoas ao redor, enquanto você lida mais diretamente com conflitos. Os dois estilos não gostam de enfrentar problemas. Um alto S pode esconder seus sentimentos para manter a harmonia, já você pode ser agressivo quando pressionado."
+                    ],
+                    "strategies": [
+                        "Demonstrar preocupação com os sentimentos dele",
+                        "Ser transparente desde o início e não ocultar as diferenças",
+                        "Evitar ser esquivo de conflitos em aberto"
+                    ]
+                }
+            },
+            {
+                "letter": "C",
+                "name": "Cauteloso",
+                "relationship": {
+                    "description": [
+                        "Pessoas com o estilo C são mais factuais do que pessoas com estilo I e isso pode atrapalhar a relação. Por serem céticos, os cautelosos podem achar sua forma expansiva exagerada, preferindo uma abordagem mais analítica. Já você pode achar o cauteloso frio e impessoal"
+                    ],
+                    "strategies": [
+                        "Usar a objetividade baseada em fatos",
+                        "Não ser desiludido pela abordagem cética e reservada deles",
+                        "Respeitar a forma independente deles"
+                    ]
+                },
+                "problems": {
+                    "description": [
+                        "Para resolver problemas os cautelosos preferem uma abordagem mais detalhada e planejada, enquanto você é mais positivo e confiante. Você pode se atrasar nas tomadas de decisão por conta da maneira metódica deles. Você pode ter dificuldades em avançar para resolver os problemas."
+                    ],
+                    "strategies": [
+                        "Estabelecer prazo para tomar decisões",
+                        "Equilibrar o seu senso de cuidado compartilhado com a urgência",
+                        "Estar com eles nas análises minuciosas, mas recordar-se de ver o cronograma"
+                    ]
+                },
+                "strained": {
+                    "description": [
+                        "As pessoas do Estilo C levam a discordância como um embate sobre quem está correto, evitam confronto direto e desafiam através de argumento. Você não gosta de conflitos, por isso pode ceder aos argumentos factuais do cauteloso ou deixar de expor suas necessidades. O conflito pode ficar em aberto, deixando que ressentimentos ou sentimentos negativos permaneçam."
+                    ],
+                    "strategies": [
+                        "Lide com o problema de uma vez, não espere que ele se resolva sozinho",
+                        "Ouça o outro lado, mas não ceda só para evitar uma situação desagradável",
+                        "Apoie sua opinião com lógica e argumentos factuais"
+                    ]
+                }
+            }
+        ],
+        "efficiency": [
+            {
+                "title": "DESCUBRA NOVAS MANEIRAS",
+                "description": "Você gosta das ideias de outras pessoas, mas pode não ser pró-ativo em começar algo inovador. Você pode se manter na zona de conforto, o que pode impedir o crescimento ou ideias ousadas. É importante conceber novas ideias para não ficar paralisado.",
+                "features": [
+                    "Procure sair da sua zona de conforto",
+                    "Reconheça alguma área que precisa ser melhorada e chame as pessoas para criar novos caminhos"
+                ]
+            },
+            {
+                "title": "ENFRENTE OS PROBLEMAS DE FRENTE",
+                "description": "Você olha o lado positivo das coisas e prefere encobrir os possíveis problemas. Pequenas questões podem se tornar verdadeiros problemas por isso. Ser rápido ao detectar um desafio pode ser benéfico e evitar dores de cabeça.",
+                "features": [
+                    "Lide com os problemas rapidamente",
+                    "Busque o equilíbrio entre otimismo e realidade"
+                ]
+            },
+            {
+                "title": "FAÇA BEM AS COISAS NA PRIMEIRA VEZ",
+                "description": "Você tende a ser despreocupado e flexível, por isso tende a aceitar as coisas se elas se mostrarem “boas o suficiente”. Pessoas mais exigentes podem se sentir desrespeitadas se a sua falta de precisão os obrigar a refazer o seu trabalho. Ao ser mais criterioso, você evitará a perda de tempo e esforço.",
+                "features": [
+                    "Seja mais exigente para manter os padrões mais elevados",
+                    "Analise de forma mais detalhada ao invés do pressuposto de que as coisas estão certas"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,279 @@
+{
+    "data": {
+        "customerName": null,
+        "docType": "2",
+        "docName": "Dominante",
+        "docName2": "Influente",
+        "title": null,
+        "letter": "D",
+        "letter2": "I",
+        "descriptionParagraphs": [
+            "Você é ativo e tem metas ambiciosas. Mantém o andamento dos processos acelerado e pode ser impaciente para obstáculos que impeçam o progresso. Sempre em busca de novas oportunidades, mesmo que isso mude a sua direção.",
+	    "Você gosta de liberdade para traçar seu caminho. Você pode ser bastante colaborativo, embora goste de decidir como usar o seu tempo. Você pode se decepcionar com processos que atrapalhem sua criatividade e evolução.",
+	    "Você gosta de tarefas que exijam o máximo dos seus talentos.",
+	    "Gosta de assumir responsabilidades e tende a aproveitar as oportunidades para estar no comando. Você traz dinamismo ao grupo e pode delegar tarefas mais analíticas a outras pessoas.",
+	    "Você é ousado e audacioso e tende a escapar de situações que exijam comportamentos metódicos e sistemáticos. Gosta de assumir riscos e pode tomar decisões com base na intuição. Seu comportamento pode ser desafiado por pessoas mais cautelosas.",
+	    "Você sabe fazer e usar as suas conexões para atingir seus objetivos. É sincero, autoconfiante e persuasivo, fazendo com que as pessoas permaneçam ao seu lado, caminhando na mesma direção. Você gosta de ouvir outras ideias e pontos de vista.",
+	    "Você prefere resolver conflitos de forma rápida. Quando pressionado, pode ficar acuado e reativo. Liberar sua frustração com muita energia pode gerar desconforto para as outras pessoas.",
+	    "Por gostar que as pessoas ouçam suas ideias, você tende a se tornar assertivo quando suas ideias são deixadas de lado. Pode se tornar persistente se suas colocações não forem aceitas. Você gosta de reconhecimento público, mas não espera por elogios. Por valorizar o reconhecimento, pode ser generoso ao cumprimentar as outras pessoas.",
+	    "Você contribui de forma preciosa para sua organização ao colocar energia para obter resultados e habilidade em motivar e inspirar outros. Em suma, esses são alguns dos comportamentos que as pessoas mais admiram em você."
+        ],
+        "priority": [
+            {
+                "name": "Agir",
+                "description": "Por querer que as coisas aconteçam de forma rápida, você coloca bastante energia ao iniciar os projetos. Você não tem paciência para entraves no meio do caminho e espera que as outras pessoas acompanhem o seu ritmo. Você tende a tomar decisões de forma rápida sem pensar nas consequências. A sua energia pode ajudar o grupo a ser mais ágil."
+            },
+            {
+                "name": "Resultados",
+                "description": "Você é ambicioso e focado no sucesso. Tem padrões elevados e não se contenta com pouco. Gosta de obter grandes resultados e é nutrido pela inovação e riscos. Sua energia alta pode intimidar outras pessoas, o que não impede você de atingir seus resultados."
+            },
+            {
+                "name": "Entusiasmo",
+                "description": "Você mantém a positividade mesmo diante de adversidades. É apaixonado por suas ideias e transmite isso de forma clara para as pessoas. Sua confiança é contagiante. Por acreditar que compartilhar é importante, o entusiasmo tem muito valor para você."
+            }
+        ],
+        "motivation": {
+            "description": "Controle, autoridade e ambiente com alta energia.",
+            "features": [
+                "Gerar mudança",
+		"Autoridade",
+		"Resultados rápidos",
+		"Estimular a inovação",
+		"Correr riscos",
+		"Compartilhar ideias com entusiasmo",
+		"Manter o movimento",
+		"Poder questionar",
+		"Trazer à luz as ineficiências"
+            ]
+        },
+        "stress": {
+            "description": "Autoridade desafiada, não ter controle sobre o próprio sucesso e desperdiçar tempo.",
+            "features": [
+                "Seguir procedimentos absolutos",
+		"Retardar seu ritmo",
+		"Ser dependente",
+		"Fazer parceria com pessoas altamente analíticas",
+		"Deixar de lado ideias inovadoras",
+		"Ser desafiado",
+		"Trabalhar de forma lenta para metas de longo prazo",
+		"Lidar com pessoas que não se encaixam no seus padrões",
+		"Não poder expressar suas opiniões"
+            ]
+        },
+        "discStyles": [
+            {
+                "name": "Dominante",
+                "descriptions": [
+                    "Entendem-se bem. Competitivos, diretos e autoconfiantes, entenderão o desejo por ação um do outro. Ambos precisam de desafios.",
+		    "As discussões entre ambos devem ser abertas, dado que ninguém ali teme conflito. Em função de orientação por tarefas de ambos, terão de esforçar-se para se conscientizarem e cuidadosamente ouvirem um ao outro."
+                ],
+                "priorities": [
+                    "Resultados",
+                    "Ação",
+                    "Desafio"
+                ]
+            },
+            {
+                "name": "Influente",
+                "descriptions": [
+                    "Entendem-se bem. Compartilham o sentido da urgência (rapidez), gostam de correr riscos e possuem um forte desejo de mudar seu ambiente. Ambos têm em vista serem reconhecidos.",
+		    "Cada um ao seu modo, ambos são extrovertidos e poderão trabalhar bem juntos se o DI diminuir um pouco o ritmo e adicionar alguma diversão ao trabalho para motivar o alto I. O I pode, ainda, precisar de algum tempo a mais na tomada de decisão."
+                ],
+                "priorities": [
+                    "Entusiasmo",
+                    "Ação",
+                    "Colaboração"
+                ]
+            },
+            {
+                "name": "Estável",
+                "descriptions": [
+                    "Não se entendem bem. O DI tem a tendência de impor-se sobre o S e terá de diminuir o seu ritmo significativamente, uma vez que o alto S não gosta de correr riscos e precisa de tempo para tomar decisões.",
+                    "Desejando harmonia, o alto S poderá acompanhar o DI apenas para manter a paz. O DI precisará trabalhar muito duro para efetivamente ouvir e construir a confiança necessária para que o S verbalize suas preocupações."
+                ],
+                "priorities": [
+                    "Apoio",
+                    "Constância",
+                    "Colaboração"
+                ]
+            },
+            {
+                "name": "Cauteloso",
+                "descriptions": [
+                    "Não se entendem bem. Um é rápido e o outro opera em ritmo moderado. Faz-se necessária muita adaptação para melhorar a comunicação entre ambos. O maior desafio do alto D será prender-se aos fatos e diminuir o ritmo.",
+                    "Terá ainda de fornecer mais informações do que de costume, mas sem forçar ou tornar-se por demais pessoal. Compartilham o uso inteligente do tempo e a necessidade de controlar seu ambiente."
+                ],
+                "priorities": [
+                    "Exatidão",
+                    "Constância",
+                    "Desafio"
+                ]
+            }
+        ],
+        "relationship": [
+            {
+                "letter": "D",
+                "name": "Dominante",
+                "relationship": {
+                    "description": [
+                        "Dominantes gostam de ir direto ao ponto e isso pode abalar a maneira de como vocês se relacionam. Ambos estão dispostos a ser transparentes para chegar ao resultado. Tenha cuidado para não gerar discussões."
+                    ],
+                    "strategies": [
+                        "Escute atenciosamente e reconheça todos os pontos",
+                        "Não interrompa e permita que a ideia seja concluída",
+                        "Dê atenção ao diálogo e evite discussão"
+                    ]
+                },
+                "problems": {
+                    "description": [
+                        "Dominantes tomam decisão com rapidez e mantém o trabalho funcionando.", 
+                        "Vocês compartilham a ideia de usar soluções inovadoras e ágeis. Fique alerta para não haver luta de poder."
+                    ],
+                    "strategies": [
+                        "Não insista muito em suas opiniões a ponto de desvalorizar a capacidade alheia",
+                        "Trabalhe em conjunto para obter soluções benéficas",
+                        "Seja flexível em alguns momentos"
+                    ]
+                },
+                "strained": {
+                    "description": [
+                        "Pessoas com D alto são sinceras e não evitam embates, são competitivos e não abrem mão do seu posicionamento. Chegar a um acordo pode ser extremamente penoso."
+                    ],
+                    "strategies": [
+                        "Priorize resolver o conflito ao invés de ganhar a discussão",
+                        "Não agrida",
+                        "Seja objetivo ao expor seus pontos e evite lutas de poder"
+                    ]
+                }
+            },
+            {
+                "letter": "I",
+                "name": "Influente",
+                "relationship": {
+                    "description": [
+                        "Pessoas com estilo I são bem extravagantes e, provavelmente, mais sociáveis que você. Por isso tendem a focar mais no convívio enquanto você prefere obter resultados mensuráveis. Sua vontade de focar em seus objetivos pode fazer com que eles se sintam menosprezados."
+                    ],
+                    "strategies": [
+                        "Valorizar a ligação entre vocês",
+                        "Não colocar os resultados acima das pessoas",
+                        "Não falar somente sobre negócios"
+                    ]
+                },
+                "problems": {
+                    "description": [
+                        "Influentes gostam de iniciar a tratativa de um problema de forma rápida e você age do mesmo jeito, porém, de uma forma mais rígida. Por isso o alto I pode pensar que você não está levando a opinião dele a sério. Já você pode achar que ele não está levando a situação com comprometimento."
+                    ],
+                    "strategies": [
+                        "Ouvir outras ideias, mesmo que sua autoconfiança o tente impedir",
+                        "Manter a dinâmica em alto nível",
+                        "Permitir que o alto I compartilhe suas aventuras"
+                    ]
+                },
+                "strained": {
+                    "description": [
+                        "Pessoas com I alto prezam pelo relacionamento amigável, por isso elas podem ignorar os problemas e evitar conflitos, enquanto você quer resolver a situação logo. Influentes se posicionam de forma expressiva e emocional, já você se posiciona de forma racional e direta, o que pode exaltar os ânimos."
+                    ],
+                    "strategies": [
+                        "Ter cuidado para que sua sinceridade não pareça um ataque pessoal",
+                        "Ser cuidadoso",
+                        "Deixar claro que a situação tensa do momento não interferirá no relacionamento"
+                    ]
+                }
+            },
+            {
+                "letter": "S",
+                "name": "Estável",
+                "relationship": {
+                    "description": [
+                        "Pessoas do estilo S valorizam cooperação e interação amigável enquanto seu foco está em assumir o controle. Eles podem recuar e deixar as outras pessoas falarem, já você tem a tendência de dominar a situação."
+                    ],
+                    "strategies": [
+                        "Possibilitar ambiente acolhedor que facilite sua exposição",
+                        "Mostrar-se atento aos sentimentos",
+                        "Buscar as ideias e opiniões dele"
+                    ]
+                },
+                "problems": {
+                    "description": [
+                        "Você tende a ser mais rápido para solucionar problemas do que uma pessoa com estilo S. Enquanto pessoas do estilo S tendem a evitar mudanças rápidas e drásticas, você prefere soluções ousadas. Para você o alto S pode parecer indeciso, já para eles você pode passar a imagem de aventureiro."
+                    ],
+                    "strategies": [
+                        "Respeitar o ritmo, mas trabalhar junto para melhorar eficiência",
+                        "Acordo mútuo em decisões de prazo",
+                        "Equilibrar as abordagens destemida e cautelosa"
+                    ]
+                },
+                "strained": {
+                    "description": [
+                        "Pessoas do Estilo S buscam evitar problemas e chatear as pessoas ao redor, enquanto você lida mais diretamente com conflitos. Você pode dominar a situação, já que o alto S tem a tendência de ceder para evitar conflitos. O problema é que elas podem criar aversão a você."
+                    ],
+                    "strategies": [
+                        "Ser diplomático e buscar a raiz do conflito",
+                        "Não interpretar silêncio como resolução",
+                        "Só deixar o conflito quando estiver, de fato, resolvido"
+                    ]
+                }
+            },
+            {
+                "letter": "C",
+                "name": "Cauteloso",
+                "relationship": {
+                    "description": [
+                        "O cauteloso costuma precisar de mais tempo para analisar tudo cuidadosamente, enquanto você é mais imediatista e espera acontecimentos rápidos. Eles podem achar suas ações precipitadas e você pode achá-los demorados e sistemáticos."
+                    ],
+                    "strategies": [
+                        "Falar sobre o objetivo",
+                        "Evitar pressão por rapidez",
+                        "Dar tempo para análise"
+                    ]
+                },
+                "problems": {
+                    "description": [
+                        "Pessoas do Estilo C resolvem problemas considerando cuidadosamente o plano, enquanto você assume riscos e muda de direção. Você pode se frustrar ao ser questionado e o Estilo C pode achar você imprudente."
+                    ],
+                    "strategies": [
+                        "Respeitar a necessidade de considerar todas as opções",
+                        "Apoiar seu ponto de vista lógico em argumentos",
+                        "Equilibrar seu ritmo acelerado com a cautela dele"
+                    ]
+                },
+                "strained": {
+                    "description": [
+                        "As pessoas do Estilo C levam a discordância como um embate sobre quem está correto, evitam confronto direto e desafiam através de argumento, enquanto você tende a ser bruto e franco, deixando-o na defensiva. Por ser mais processual, eles podem recuar com a sua maneira impositiva."
+                    ],
+                    "strategies": [
+                        "Buscar ser lógico e calmo",
+                        "Dar espaço para processar a situação",
+                        "Apresentar posição objetivamente, sem cobrar solução imediata"
+                    ]
+                }
+            }
+        ],
+        "efficiency": [
+            {
+                "title": "RECEBA PERMISSÃO ANTES DE AVANÇAR",
+                "description": "Você tem uma ideia muito transparente do que quer, por isso avança no seu planejamento mesmo que haja pouco apoio dos seus parceiros. Você confia no seu propósito, mas se não conseguir o apoio de outros, as pessoas podem se frustrar.",
+                "features": [
+                    "Permita que as pessoas se organizem e acredite que o silêncio delas signifique apoio",
+                    "Tenha em mente que as pessoas podem negar apoio se sua energia for muito forte"
+                ]
+            },
+            {
+                "title": "AVALIE O IMPACTO DA SUA COMUNICAÇÃO",
+                "description": "Você é muito pragmático em seus relacionamentos. É possível que a concentração em resultados impeça que você socialize com os demais ou o faça de maneira ríspida. Perceba que nem todos são dessa maneira e algumas pessoas mais sentimentais podem se ofender com o seu jeito. Reconheça e seja mais diplomático quando necessário.",
+                "features": [
+                    "Algumas pessoas podem levar para o pessoal e se retrair com você",
+                    "Ao perceber que magoou alguém, mesmo sem intenção, peça desculpas de uma forma sincera"
+                ]
+            },
+            {
+                "title": "FAÇA BEM AS COISAS NA PRIMEIRA VEZ",
+                "description": "Por ser rápido, você pode se frustrar com os atrasos causados por pessoas mais analíticas. Já os analíticos podem se sentir desrespeitados se você for muito ágil, especialmente se houver retrabalho. Analise as questões mais profundas com calma e economize tempo e esforço.",
+                "features": [
+                    "Permita-se desacelerar o rápido progresso para analisar detalhes-chave e fazer possíveis correções",
+                    "Reconheça as pessoas que focam na qualidade e expresse esse sentimento a elas"
+                ]
+            }
+        ]
+    }
+}
