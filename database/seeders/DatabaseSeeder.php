@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             DiscGraphTypesSeeder::class,
             DiscRangeSeeder::class,
             RespondentListSeeder::class,
-            RespondentSeeder::class,
+            // RespondentSeeder::class,
             DiscPlanSeeder::class,
             DiscPlanPeriodSeeder::class,
             DiscPlanSubscriptionSeeder::class,
