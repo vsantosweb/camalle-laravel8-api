@@ -22,7 +22,7 @@ class RespondentDiscMessage extends Model
 
     public function respondentDiscTest()
     {
-        return $this->hasone(RespondentDiscTest::class);
+        return $this->hasMany(RespondentDiscTest::class, 'message_uuid', 'uuid');
     }
 
     public function lists()

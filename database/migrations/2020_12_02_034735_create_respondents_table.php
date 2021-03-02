@@ -23,6 +23,7 @@ class CreateRespondentsTable extends Migration
             $table->text('custom_fields')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('respondent_list_id')->references('id')->on('respondent_lists')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

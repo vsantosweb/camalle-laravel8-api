@@ -29,6 +29,8 @@ class CreateRespondentDemographicsTable extends Migration
             $table->string('gender')->nullable();
             $table->text('metadata')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

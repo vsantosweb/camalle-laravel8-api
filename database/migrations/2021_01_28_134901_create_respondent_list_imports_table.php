@@ -27,6 +27,7 @@ class CreateRespondentListImportsTable extends Migration
             $table->tinyInteger('status')->comment('0 Não importado | 1 Finalizado | 2 Pendente | 3 Falha ')->default(2);
             $table->text('log')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('respondent_list_id')->references('id')->on('respondent_lists')->onDelete('cascade');
         });

@@ -21,6 +21,6 @@ class RespondentSeeder extends Seeder
     {
         // Respondent::factory()->count(70)->create();
 
-        // Respondent::factory()->count(15)->has(RespondentDiscTest::factory()->count(1), 'discTests')->create();
+        Respondent::factory()->count(15)->has(RespondentDiscTest::factory()->count(1)->state(function(array $attr, Respondent $respondent){ return['respondent_name' => $respondent->name]; }), 'discTests')->create();
     }
 }

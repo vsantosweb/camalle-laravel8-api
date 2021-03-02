@@ -6,13 +6,14 @@ use App\Imports\ContactsImport;
 use App\Models\Customer\Customer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RespondentList extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['customer_id', 'uuid', 'name', 'description', 'settings'];
     protected $casts = ['settings' => 'object'];

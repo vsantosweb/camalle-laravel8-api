@@ -27,6 +27,7 @@ class CreateOrdersTable extends Migration
             $table->string('ip')->nullable();
             $table->string('geolocation')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('order_status_id')->references('id')->on('order_status');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

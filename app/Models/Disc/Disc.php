@@ -66,7 +66,7 @@ class Disc extends Model
         foreach ($respondents as $respondent) {
 
             $discTest = $respondent->discTests()->create([
-                'respondent_disc_test_message_id' => $message->id,
+                'message_uuid' => $message->uuid,
                 'code' => Str::random(15),
             ]);
 

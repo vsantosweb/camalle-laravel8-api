@@ -32,7 +32,7 @@ class RespondentDiscTest extends Model
 
     public function respondenetDiscTestMessage()
     {
-        return $this->belongsTo(RespondentDiscTestMessage::class);
+        return $this->belongsTo(RespondentDiscTestMessage::class, 'uuid', 'message_uuid');
     }
     
     public static function makeReport($respondents = [])
@@ -45,6 +45,7 @@ class RespondentDiscTest extends Model
 
             $currentGraphs[] = $test->metadata->graphs;
         }
+        
         $graphs = $currentGraphs;
 
         for ($i = 0; $i < count($graphs); $i++) {

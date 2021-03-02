@@ -21,7 +21,7 @@ class CreateRespondentListsTable extends Migration
             $table->text('description')->nullable();
             $table->text('settings')->nullable();
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }

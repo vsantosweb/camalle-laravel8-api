@@ -54,7 +54,7 @@ class Respondent extends Model
 
     public function discTests()
     {
-        return $this->hasMany(RespondentDiscTest::class);
+        return $this->hasMany(RespondentDiscTest::class, 'respondent_email', 'email');
     }
 
     public function customer()

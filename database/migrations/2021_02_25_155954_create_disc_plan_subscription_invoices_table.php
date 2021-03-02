@@ -21,6 +21,7 @@ class CreateDiscPlanSubscriptionInvoicesTable extends Migration
             $table->double('amount');
             $table->timestamp('expire_at');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('plan_subscription_id')->references('id')->on('disc_plan_subscriptions')->onDelete('cascade');
         });

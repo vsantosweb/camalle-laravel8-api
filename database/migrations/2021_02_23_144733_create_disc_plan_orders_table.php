@@ -22,6 +22,7 @@ class CreateDiscPlanOrdersTable extends Migration
             $table->double('total');
             $table->double('tax')->default(0);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('disc_plan_id')->references('id')->on('disc_plans');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

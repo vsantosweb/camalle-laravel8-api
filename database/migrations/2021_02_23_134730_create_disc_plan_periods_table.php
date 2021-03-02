@@ -19,6 +19,8 @@ class CreateDiscPlanPeriodsTable extends Migration
             $table->string('slug');
             $table->string('validity_days');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

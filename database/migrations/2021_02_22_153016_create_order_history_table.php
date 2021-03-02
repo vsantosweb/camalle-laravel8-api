@@ -18,6 +18,7 @@ class CreateOrderHistoryTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->text('order_data')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });

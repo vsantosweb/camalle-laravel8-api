@@ -24,6 +24,7 @@ class CreateCustomerAddressesTable extends Migration
             $table->string('state')->nullable();
             $table->tinyInteger('billing_address')->default(1);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });

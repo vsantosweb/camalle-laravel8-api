@@ -19,6 +19,7 @@ class CreateRespondentCustomFieldsTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });

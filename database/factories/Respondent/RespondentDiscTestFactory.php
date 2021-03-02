@@ -85,10 +85,12 @@ class RespondentDiscTestFactory extends Factory
         
         return [
             'code' => strtoupper(uniqid()),
-            'respondent_disc_test_message_id' => 1,
+            'customer_id' => 1,
+            'message_uuid' => md5(microtime()),
             'metadata' => json_decode($combination),
             'was_finished' => 1,
-            'ip' => $this->faker->ipv4
+            'ip' => $this->faker->ipv4,
+            'user_agent' => $this->faker->userAgent
         ];
     }
 }
