@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function () {
     Route::prefix('auth')->namespace('Auth')->group(function () {
         Route::post('password/forget', 'CustomerForgotPasswordController@forget');
+
         Route::post('password/reset', 'CustomerResetPasswordController@reset');
+        Route::get('password/reset', 'CustomerResetPasswordController@verifyResetToken');
 
         Route::post('login', 'CustomerAuthController@login');
         Route::post('register', 'CustomerRegisterController@register');
