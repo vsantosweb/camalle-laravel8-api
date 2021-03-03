@@ -20,7 +20,7 @@ class CustomerResetPasswordController extends Controller
         
         $passwordResetData = DB::table('password_resets')->where('email', request()->email)->where('token', request()->token);
 
-        if(!$passwordResetData->first()) return $this->outputJSON([], 'Invalid token', 400);
+        if(!$passwordResetData->first()) return $this->outputJSON([], 'Invalid token', true, 400);
 
         Customer::where('email', $passwordResetData->first()->email)->update(['password' => Hash::make(request()->password)]);
         
@@ -30,8 +30,8 @@ class CustomerResetPasswordController extends Controller
 
     public function verifyResetToken()
     {
-        
+
         $passwordResetData = DB::table('password_resets')->where('email', request()->email)->where('token', request()->token);
-        if(!$passwordResetData->first()) return $this->outputJSON([], 'Invalid token', 400);
+        if(!$passwordResetData->first()) return $this->outputJSON([], 'Invalid token', true,  400);
     }
 }
