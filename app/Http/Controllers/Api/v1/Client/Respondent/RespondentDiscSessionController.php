@@ -21,6 +21,8 @@ class RespondentDiscSessionController extends Controller
             return $this->outputJSON([], 'Invalid session', true, 401);
         }
 
+        $session->update(['last_activity' => now()]);
+
         return $this->outputJSON($session, '', false, 200);
     }
 
@@ -47,6 +49,15 @@ class RespondentDiscSessionController extends Controller
 
     public function onlineSessions()
     {
-        return $this->customer->where('last_activity', '>', now()->subMinutes(5)->format('Y-m-d H:i:s'))->get();
+        
+        $onlineSessions = RespondentDiscSession::where('last_activity', '>', now()->subMinutes(2)->format('Y-m-d H:i:s'))->get([
+            'email',
+            'token',
+            'session_url',
+            'active',
+            'user_agent'
+        ]);
+
+        return $this->outputJSON($onlineSessions, '', false, 200);
     }
 }

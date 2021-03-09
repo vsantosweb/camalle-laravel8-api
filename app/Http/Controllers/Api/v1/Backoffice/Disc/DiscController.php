@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Disc\Disc;
 use App\Models\Disc\DiscIntensity;
 use App\Models\Disc\DiscQuestion;
-use App\Models\Disc\DiscSession;
 use Illuminate\Http\Request;
 
 class DiscController extends Controller
@@ -16,13 +15,11 @@ class DiscController extends Controller
     (
         Disc $disc,
         DiscQuestion $discQuestion,
-        DiscSession $discSession,
         DiscIntensity $discIntensities
     )
     {
         $this->disc = $disc;
         $this->discQuestion = $discQuestion;
-        $this->discSession = $discSession;
         $this->discIntensities = $discIntensities;
     }
 

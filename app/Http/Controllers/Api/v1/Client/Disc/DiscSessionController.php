@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Api\v1\Client\Disc;
 
 use App\Http\Controllers\Controller;
 use App\Mail\mailToOwners;
-use App\Models\Customer\Customer;
 use App\Models\Disc\DiscCombination;
-use App\Models\Disc\DiscProfile;
 use App\Models\Disc\DiscRanges;
 use App\Models\Respondent\Respondent;
-use App\Models\Respondent\RespondentDemograph;
 use App\Models\Respondent\RespondentDemographic;
 use App\Models\Respondent\RespondentDiscSession;
 use App\Models\Respondent\RespondentDiscTest;
@@ -22,16 +19,15 @@ class DiscSessionController extends DiscController
 {
     public function start(Request $request)
     {
-
         try {
             $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->with('respondent')->firstOrFail();
 
             $respondentDiscSession->update([
                 'active' => 1,
                 'ip' => $request->ip(),
+                'last_activity' => now(),
                 'user_agent' => $request->userAgent()
             ]);
-
 
             if (is_null($respondentDiscSession)) {
 
