@@ -50,7 +50,7 @@ class RespondentDiscSessionController extends Controller
     public function onlineSessions()
     {
         
-        $onlineSessions = RespondentDiscSession::where('last_activity', '>', now()->subMinutes(2)->format('Y-m-d H:i:s'))->get([
+        $onlineSessions = RespondentDiscSession::where('last_activity', '>', now()->subMinutes(1)->format('Y-m-d H:i:s'))->get([
             'email',
             'token',
             'session_url',

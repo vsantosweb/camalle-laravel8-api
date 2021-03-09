@@ -19,7 +19,7 @@ class RespondentSeeder extends Seeder
      */
     public function run()
     {
-        Respondent::factory()->count(800)->create();
+        Respondent::factory()->count(100)->create();
 
         // Respondent::factory()->count(15)->has(RespondentDiscTest::factory()->count(1)->state(function(array $attr, Respondent $respondent){ return['respondent_name' => $respondent->name]; }), 'discTests')->create();
     }

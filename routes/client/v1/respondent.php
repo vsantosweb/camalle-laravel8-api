@@ -26,8 +26,10 @@ Route::prefix('respondent')->namespace('Api\v1\Client\Respondent')->group(functi
         });
     });
 
-    Route::prefix('session')->group(function () {
+    Route::prefix('sessions')->group(function () {
         Route::get('/{token}', 'RespondentDiscSessionController@checkSession');
+        Route::get('active/online', 'RespondentDiscSessionController@onlineSessions');
+
         Route::post('shutdown', 'RespondentDiscSessionController@hashLogout');
     });
 

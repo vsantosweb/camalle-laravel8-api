@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('disc')->namespace('Api\v1\Client\Disc')->group(function () {
 
-    Route::prefix('session')->group(function () {
+    Route::prefix('sessions')->group(function () {
         Route::post('/start', 'DiscSessionController@start');
         Route::post('/finish', 'DiscSessionController@finish');
     });
