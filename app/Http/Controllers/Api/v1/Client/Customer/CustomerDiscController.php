@@ -32,7 +32,7 @@ class CustomerDiscController extends Controller
     {
         $discTestQuery =  DB::table('respondent_disc_tests AS test')
             ->select('test.code as disc_test_code', 'test.was_finished', 'test.created_at', 'test.updated_at', 'respondent.name', 'respondent.email', 'respondent.custom_fields')
-            ->join('respondents AS respondent', 'test.respondent_id', '=', 'respondent.id')
+            ->join('respondents AS respondent', 'test.respondent_email', '=', 'respondent.email')
             ->join('respondent_lists AS respondentLists', 'respondentLists.id', '=', 'respondent.respondent_list_id')
             ->join('customers AS customer', 'customer.id', 'respondent.customer_id')->where('respondent.customer_id', auth()->user()->id);
 
@@ -41,6 +41,6 @@ class CustomerDiscController extends Controller
         $discTestQuery = isset($request->code) ? $discTestQuery->where('test.code', $request->code) : $discTestQuery;
         $discTestQuery = isset($request->list) ? $discTestQuery->where('respondentLists.uuid', $request->list) : $discTestQuery;
 
-        return $this->outputJSON($discTestQuery->paginate(20), '', false);
+        return $this->outputJSON($discTestQuery->get(), '', false);
     }
 }
