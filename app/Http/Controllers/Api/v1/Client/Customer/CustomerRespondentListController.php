@@ -90,7 +90,7 @@ class CustomerRespondentListController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $respondentList = auth()->user()->respondentLists()->whereIn('uuid', $request->uuids)->delete();
+            $respondentList = auth()->user()->respondentLists()->whereIn('uuid', $request->uuids)->forceDelete();
             return $this->outputJSON($respondentList, 'Success', false);
         } catch (\Exception $e) {
             return $this->outputJSON('', $e->getMessage(), true, 500);

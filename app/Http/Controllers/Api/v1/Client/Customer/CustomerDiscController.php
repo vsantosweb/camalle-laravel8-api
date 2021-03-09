@@ -24,7 +24,7 @@ class CustomerDiscController extends Controller
         try {
             return $this->outputJSON($disc->generateTestDiscToList($request), 'Envio para listas realizado com sucesso!', false, 200);
         } catch (\Exception $e) {
-            return $this->outputJSON('', $e->getMessage(), false, 500);
+            return $this->outputJSON('', $e->getMessage(), true, 200);
         }
     }
 

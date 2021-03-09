@@ -62,10 +62,12 @@ class Disc extends Model
         array_map(function ($list) use ($message) {
             $message->lists()->attach($list['id']);
         }, $lists->toArray());
-
+        
         foreach ($respondents as $respondent) {
 
             $discTest = $respondent->discTests()->create([
+                'customer_id' => auth()->user()->id,
+                'respondent_name' => $respondent->name,
                 'message_uuid' => $message->uuid,
                 'code' => Str::random(15),
             ]);
@@ -79,12 +81,12 @@ class Disc extends Model
                 'session_data' => json_decode('{"disc_code":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
             ]);
             
-            $respondent->notify(new SendDiscTestMailNotification($respondentSession, $message));
+            // $respondent->notify(new SendDiscTestMailNotification($respondentSession, $message));
 
         }
 
         auth()->user()->subscription->dispatchCreditConsummation($respondents);
 
-        return [];
+        return $lists;
     }
 }

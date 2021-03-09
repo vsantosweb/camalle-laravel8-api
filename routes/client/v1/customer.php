@@ -41,8 +41,11 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
         Route::resource('respondents', 'CustomerRespondentController');
         Route::post('respondent-lists/upload', 'CustomerRespondentListController@uploadFile');
         Route::resource('respondent-lists', 'CustomerRespondentListController');
-        Route::post('create-disc', 'CustomerDiscController@create');
-        Route::get('filter', 'CustomerDiscController@filter');
+
+        Route::prefix('reports')->group(function () {
+            Route::post('create', 'CustomerDiscController@create');
+            Route::get('filter', 'CustomerDiscController@filter');
+        });
 
         Route::prefix('settings')->group(function () {
             Route::resource('custom-fields', 'CustomerRespondentCustomFieldController');

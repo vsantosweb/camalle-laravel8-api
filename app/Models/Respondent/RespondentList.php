@@ -20,7 +20,7 @@ class RespondentList extends Model
 
     public function respondents()
     {
-        return $this->hasMany(Respondent::class);
+        return $this->hasMany(Respondent::class, 'respondent_list_id');
     }
 
     public function customer()

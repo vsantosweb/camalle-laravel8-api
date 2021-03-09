@@ -23,23 +23,28 @@ class DiscSessionController extends DiscController
     public function start(Request $request)
     {
 
-        $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->with('respondent')->firstOrFail();
+        try {
+            $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->with('respondent')->firstOrFail();
 
-        $respondentDiscSession->update([
-            'active' => 1,
-            'ip' => $request->ip(),
-            'user_agent' => $request->userAgent()
-        ]);
+            $respondentDiscSession->update([
+                'active' => 1,
+                'ip' => $request->ip(),
+                'user_agent' => $request->userAgent()
+            ]);
 
 
-        if (is_null($respondentDiscSession)) {
+            if (is_null($respondentDiscSession)) {
 
-            return $this->outputJSON([], 'Invalid session', true, 401);
+                return $this->outputJSON([], 'Invalid session', true, 401);
+            }
+
+            $respondentDiscSession->update(['active' => true]);
+
+            return $this->outputJSON($respondentDiscSession, '', false);
+        } catch (\Exception $e) {
+
+            return $this->outputJSON([], $e->getMessage() , true, 400);
         }
-
-        $respondentDiscSession->update(['active' => true]);
-
-        return $this->outputJSON($respondentDiscSession, '', false);
     }
 
     public function finish(Request $request)

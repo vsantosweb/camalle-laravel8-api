@@ -7,6 +7,7 @@ use App\Models\Disc\DiscPlanSubscription;
 use App\Models\Order\Order;
 use App\Models\Respondent\Respondent;
 use App\Models\Respondent\RespondentCustomField;
+use App\Models\Respondent\RespondentDiscTest;
 use App\Models\Respondent\RespondentList;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -84,6 +85,11 @@ class Customer extends Authenticatable implements JWTSubject
     public function subscription()
     {
         return $this->hasOne(DiscPlanSubscription::class)->with('plan');
+    }
+
+    public function discReports(){
+        return $this->hasMany(RespondentDiscTest::class, 'customer_id');
+
     }
 
     public function respondents()

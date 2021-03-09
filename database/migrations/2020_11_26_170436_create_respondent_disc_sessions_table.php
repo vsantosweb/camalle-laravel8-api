@@ -22,6 +22,7 @@ class CreateRespondentDiscSessionsTable extends Migration
             $table->dateTime('expire_at')->nullable();
             $table->tinyInteger('was_finished')->default(0)->comment('0 false | 1 true');
             $table->tinyInteger('active')->default(0)->comment('0 false | 1 true');
+            $table->timestamp('last_activity')->nullable();
             $table->string('ip')->nullable();
             $table->string('user_agent')->nullable();
             $table->string('geolocation')->nullable();

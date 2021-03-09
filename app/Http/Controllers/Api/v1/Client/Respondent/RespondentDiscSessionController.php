@@ -28,10 +28,10 @@ class RespondentDiscSessionController extends Controller
     {
         $location =  \Location::get($request->ip());
 
-        $session = RespondentDiscSession::where('token',  $request->query('token'))->first();
+        $session = RespondentDiscSession::where('token',  $request->token)->first();
 
         if (is_null($session)) {
-            return $this->outputJSON([], 'Invalid session', true, 401);
+            return $this->outputJSON([], 'Invalid session', true, 400);
         }
 
         $session->update([
@@ -43,5 +43,10 @@ class RespondentDiscSessionController extends Controller
         ]);
 
         return $this->outputJSON([], 'Session closed', false, 200);
+    }
+
+    public function onlineSessions()
+    {
+        return $this->customer->where('last_activity', '>', now()->subMinutes(5)->format('Y-m-d H:i:s'))->get();
     }
 }

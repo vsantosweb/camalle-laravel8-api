@@ -13,10 +13,12 @@ class RespondentDiscTest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'respondent_id',
         'code',
+        'customer_id',
+        'respondent_name',
+        'respondent_email',
+        'message_uuid',
         'metadata',
-        'respondent_disc_test_message_id',
         'ip',
         'geolocation',
         'was_finished',
