@@ -20,7 +20,8 @@ class DiscSessionController extends DiscController
     public function start(Request $request)
     {
         try {
-            $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->with('respondent')->firstOrFail();
+            $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->
+            where('was_finished', 0)->with('respondent')->firstOrFail();
 
             $respondentDiscSession->update([
                 'active' => 1,
@@ -37,7 +38,7 @@ class DiscSessionController extends DiscController
             $respondentDiscSession->update(['active' => true]);
 
             return $this->outputJSON($respondentDiscSession, '', false);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
 
             return $this->outputJSON([], $e->getMessage() , true, 400);
         }
@@ -92,13 +93,16 @@ class DiscSessionController extends DiscController
 
         $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->first();
 
+        $respondentDiscSession->session_data = $request->session_data;
+        $respondentDiscSession->save();
+
         $respondentDiscSession->update([
             'active' => 0,
             'was_finished' => 1,
             'ip' => $request->ip(),
             'user_agent' => $request->userAgent(),
-            'token' => Str::random(60)
         ]);
+        
 
         if ($request->demographic_data) {
 
@@ -111,6 +115,6 @@ class DiscSessionController extends DiscController
             Notification::route('mail', $respondent->list->settings->ownerMailList)->notify(new TestFinished($respondentTest));
         }
 
-        return $this->outputJSON($combination, '', false);
+        return $this->outputJSON($respondentDiscSession, '', false);
     }
 }

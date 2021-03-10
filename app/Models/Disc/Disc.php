@@ -77,8 +77,8 @@ class Disc extends Model
             $respondentSession = $respondent->discSessions()->create([
                 'token' => $token,
                 'email' => $respondent->email,
-                'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  $token  . DIRECTORY_SEPARATOR . $discTest->code,
-                'session_data' => json_decode('{"disc_code":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
+                'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid='.$token,
+                'session_data' => json_decode('{"ref":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
             ]);
             
             // $respondent->notify(new SendDiscTestMailNotification($respondentSession, $message));
