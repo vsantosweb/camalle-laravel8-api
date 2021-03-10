@@ -43,7 +43,7 @@ class CustomerForgotPasswordController extends Controller
         }
         
         $tokenData = DB::table('password_resets')->where('email', request()->email)->first();
-        $link = env('APP_URL_PASSWORD_RESET'). DIRECTORY_SEPARATOR .'?token='. $tokenData->token . '&email=' . $tokenData->email;
+        $link = env('APP_URL_PASSWORD_RESET').'?token='. $tokenData->token . '&email=' . $tokenData->email;
         $customer->notify(new SendResetEmailNotification($customer, $link));
 
         return $this->outputJSON('Reset password link sent on your email id.', [], false, 201);

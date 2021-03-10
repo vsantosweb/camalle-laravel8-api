@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () { return response()->json([]); });
 
 Route::get('login', function(){ return response()->json('401 Unauthorized', 401); })->name('login');
+Route::get('email-verified', function(){ return response()->json('Email verification required', 401); })->name('email-verified');

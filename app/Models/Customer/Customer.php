@@ -12,6 +12,8 @@ use App\Models\Respondent\RespondentList;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Str;
 
@@ -77,6 +79,35 @@ class Customer extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    /**
+     * Send email verification account.
+     *
+     * @return mixed
+     */
+    public function sendMailVerification()
+    {
+
+        try {
+
+            DB::table('email_verifications')->insert([
+                'email' => $this->email,
+                'token' => Str::random(60),
+                'signature' => Hash::make($this->email . env('APP_KEY')),
+                'created_at' => now()
+            ]);
+
+            $tokenData = DB::table('email_verifications')->where('email', $this->email)->first();
+
+            $link = env('APP_URL_EMAIL_VERIFY') . DIRECTORY_SEPARATOR . '?token=' . $tokenData->token . '&email=' . $tokenData->email;
+            // $this->notify(new SendResetEmailNotification($customer, $link));
+
+            return 'Verification email link sent on your email id. ' . $link;
+            
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    }
 
     public function address()
     {
@@ -87,9 +118,9 @@ class Customer extends Authenticatable implements JWTSubject
         return $this->hasOne(DiscPlanSubscription::class)->with('plan');
     }
 
-    public function discReports(){
+    public function discReports()
+    {
         return $this->hasMany(RespondentDiscTest::class, 'customer_id');
-
     }
 
     public function respondents()
@@ -116,5 +147,4 @@ class Customer extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Order::class)->with('discPlanOrder')->with('status');
     }
-
 }

@@ -48,4 +48,20 @@ class DiscPlanSubscription extends Model
         $this->total_usage += count($respondents);
         $this->save();
     }
+
+    public function consumationDetails()
+    {
+        $currentCredits =  $this->credits;
+        $planCredits = $this->plan->features->credits;
+
+        return [
+            'plan_name' => $this->plan->name,
+            'plan_credits' => $planCredits,
+            'current_credits' => $currentCredits,
+            'usage_percent' => $currentCredits /$planCredits * 100,
+            'total_usage' => $this->total_usage,
+            'additionals_credits' => $this->additionals_credits,
+            'expire_at' => $this->expire_at
+        ];
+    }
 }

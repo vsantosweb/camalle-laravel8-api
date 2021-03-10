@@ -18,14 +18,14 @@ class CustomerRegisterController extends Controller
 
     public function register(Request $request)
     {
-        $newCustomer =  $this->customer->firstOrCreate([
+        $newCustomer =  $this->customer->create([
             'uuid' => Str::uuid(),
             'customer_type_id' => 1,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-
+        
         $order = $newCustomer->orders()->create([
             'code' => strtoupper(uniqid()),
             'order_status_id' => 1,
@@ -64,6 +64,8 @@ class CustomerRegisterController extends Controller
             'expire_at' => now()->addDays($subscription->validity_days),
         ]);
 
-        return $this->outputJSON($subscription, 'Sucess', false, 201);
+         return $newCustomer->sendMailVerification();
+
+        return $this->outputJSON($newCustomer, 'Sucess', false, 201);
     }
 }

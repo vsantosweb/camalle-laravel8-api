@@ -13,7 +13,7 @@ class RespondentDiscSession extends Model
     protected $fillable = [
         'email', 'token', 'email', 'session_url',
         'was_finished', 'session_data', 'active', 'user_agent',
-        'geolocation', 'last_activity', 'expire_at', 'ip'
+        'geolocation', 'last_activity','view_report', 'expire_at', 'ip'
     ];
     protected $hidden = ['updated_at', 'created_at', 'id'];
     protected $casts = ['session_data' => 'object'];

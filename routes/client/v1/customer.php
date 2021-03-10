@@ -15,27 +15,39 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function () {
     Route::prefix('auth')->namespace('Auth')->group(function () {
-        Route::post('password/forget', 'CustomerForgotPasswordController@forget');
 
+        Route::post('password/forget', 'CustomerForgotPasswordController@forget');
         Route::post('password/reset', 'CustomerResetPasswordController@reset');
         Route::get('password/reset', 'CustomerResetPasswordController@verifyResetToken');
-
+        
         Route::post('login', 'CustomerAuthController@login');
         Route::post('register', 'CustomerRegisterController@register');
+        
+        Route::post('email/verify', 'CustomerVerificationController@verify');
 
         Route::middleware('auth:customer')->group(function () {
             Route::post('logout', 'CustomerAuthController@logout');
-            Route::get('logged', 'CustomerAuthController@logged');
+            Route::get('logged', 'CustomerAuthController@logged')->middleware(/*emailVerified */);
         });
     });
 
-    Route::middleware('auth:customer')->group(function () {
+    Route::middleware(['auth:customer', /*emailVerified */])->group(function () {
 
         Route::prefix('profile')->group(function () {
 
             Route::get('show', 'CustomerProfileController@showProfile');
             Route::patch('update', 'CustomerProfileController@updateProfile');
             Route::put('change-password', 'CustomerProfileController@changePassword');
+
+        });
+
+        Route::prefix('subscription')->group(function () {
+
+            Route::get('/', 'CustomerSubscriptionController@showSubscription');
+            Route::get('/consumation', 'CustomerSubscriptionController@consumation');
+            Route::patch('update', 'CustomerProfileController@updateProfile');
+            Route::put('change-password', 'CustomerProfileController@changePassword');
+
         });
 
         Route::resource('respondents', 'CustomerRespondentController');
