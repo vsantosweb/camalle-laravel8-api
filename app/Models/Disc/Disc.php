@@ -63,6 +63,8 @@ class Disc extends Model
             $message->lists()->attach($list['id']);
         }, $lists->toArray());
         
+        $respondentSessions = [];
+
         foreach ($respondents as $respondent) {
 
             $discTest = $respondent->discTests()->create([
@@ -74,7 +76,7 @@ class Disc extends Model
 
             $token = hash('sha256', microtime());
 
-            $respondentSession = $respondent->discSessions()->create([
+            $respondentSessions = $respondent->discSessions()->create([
                 'token' => $token,
                 'email' => $respondent->email,
                 'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid='.$token,
@@ -87,6 +89,6 @@ class Disc extends Model
 
         auth()->user()->subscription->dispatchCreditConsummation($respondents);
 
-        return $lists;
+        return $respondentSessions;
     }
 }
