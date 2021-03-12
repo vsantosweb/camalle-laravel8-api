@@ -52,6 +52,7 @@ class Respondent extends Model
         'custom_fields' => 'object'
     ];
 
+
     public function discTests()
     {
         return $this->hasMany(RespondentDiscTest::class, 'respondent_email', 'email');

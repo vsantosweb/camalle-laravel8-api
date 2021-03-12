@@ -50,12 +50,14 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
 
         });
 
+        Route::resource('messages','CustomerMessageController');
         Route::resource('respondents', 'CustomerRespondentController');
         Route::post('respondent-lists/upload', 'CustomerRespondentListController@uploadFile');
         Route::resource('respondent-lists', 'CustomerRespondentListController');
 
         Route::prefix('reports')->group(function () {
-            Route::post('create', 'CustomerDiscController@create');
+            Route::post('create-to-lists', 'CustomerDiscController@createToLists');
+            Route::post('create-to-respondent', 'CustomerDiscController@createToSingleRespondent');
             Route::get('filter', 'CustomerDiscController@filter');
         });
 

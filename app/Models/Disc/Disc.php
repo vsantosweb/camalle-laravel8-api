@@ -3,9 +3,8 @@
 namespace App\Models\Disc;
 
 use App\Mail\Disc\SendDiscTest;
+use App\Models\Respondent\Respondent;
 use App\Models\Respondent\RespondentDiscMessage;
-use App\Models\Respondent\RespondentDiscSession;
-use App\Models\Respondent\RespondentDiscTest;
 use App\Models\Respondent\RespondentList;
 use App\Notifications\SendDiscTestMailNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,9 +23,69 @@ class Disc extends Model
         return $this->hasMany(DiscIntensity::class);
     }
 
+
+    public function generateTestDiscToRespondent($data)
+    {
+
+        if (auth()->user()->subscription->credits < 1) {
+
+            throw new \Exception('Insufficient credit balance');
+        }
+
+        $list = RespondentList::create([
+            'name' => 'Temp ' . strtoupper(uniqid()),
+            'customer_id' => auth()->user()->id,
+            'uuid' => Str::uuid(),
+        ]);
+
+        $message = RespondentDiscMessage::create([
+            'uuid' => Str::uuid(),
+            'customer_id' => auth()->user()->id,
+            'name' => $data->name,
+            'subject' => $data->subject,
+            'content' => $data->content,
+            'sender_name' => auth()->user()->name
+        ]);
+
+        $respondent = Respondent::create([
+            'uuid' => Str::uuid(),
+            'customer_id' => auth()->user()->id,
+            'name' => $data->respondent_name,
+            'email' => $data->respondent_email,
+            'respondent_list_id' => $list->id
+        ]);
+
+        $discTest = $respondent->discTests()->create([
+            'customer_id' => auth()->user()->id,
+            'respondent_name' => $respondent->name,
+            'message_uuid' => $message->uuid,
+            'code' => Str::random(15),
+        ]);
+
+        $token = hash('sha256', microtime());
+
+        $respondentSession = $respondent->discSessions()->create([
+            'token' => $token,
+            'email' => $respondent->email,
+            'view_report' => $data->view_report,
+            'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid=' . $token,
+            'session_data' => json_decode('{"ref":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
+       
+            ]);
+
+        auth()->user()->subscription->dispatchCreditConsummation([0]);
+        $list->forceDelete();
+
+        $compiledMessage = str_replace('[respondente]', $respondent->name, $message->content);
+        $message->content = $compiledMessage;
+        $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
+
+        return $respondentSession;
+    }
+
     public function generateTestDiscToList($data)
     {
-        $lists = RespondentList::whereIn('uuid', $data->respondent_lists )->with('respondents')->get();
+        $lists = RespondentList::whereIn('uuid', $data->respondent_lists)->with('respondents')->get();
         //testing
         // $lists = RespondentList::all();
 
@@ -62,7 +121,7 @@ class Disc extends Model
         array_map(function ($list) use ($message) {
             $message->lists()->attach($list['id']);
         }, $lists->toArray());
-        
+
         $respondentSessions = [];
 
         foreach ($respondents as $respondent) {
@@ -76,15 +135,19 @@ class Disc extends Model
 
             $token = hash('sha256', microtime());
 
-            $respondentSessions = $respondent->discSessions()->create([
+            $respondentSession = $respondent->discSessions()->create([
                 'token' => $token,
                 'email' => $respondent->email,
-                'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid='.$token,
+                'view_report' => $data->view_report,
+                'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid=' . $token,
                 'session_data' => json_decode('{"ref":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
-            ]);
-            
-            // $respondent->notify(new SendDiscTestMailNotification($respondentSession, $message));
+                ]);
 
+            $respondentSessions[] = $respondentSession;
+
+            $compiledMessage = str_replace('[respondente]', $respondent->name, $message->content);
+            $message->content = $compiledMessage;
+            $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
         }
 
         auth()->user()->subscription->dispatchCreditConsummation($respondents);

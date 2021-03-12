@@ -10,10 +10,7 @@
 </html>
 
 <body style=" padding: 15px;">
-    <h4>Olá, {{ $respondentSession->respondent->name }}</h4>
-    {!! $discMessage->content !!}
+    {!! $discMessage !!}
     <hr />
-
     <a href={{ $respondentSession->session_url }}> {{ $respondentSession->session_url }} </a>
-
 </body>

@@ -45,7 +45,7 @@ class SendDiscTestMailNotification extends Notification
     {
         return (new MailMessage)
             ->subject($this->message->subject)
-            ->view('mails.disc.sendDiscTestMail' , ['respondentSession' => $this->respondentSession, 'discMessage' => $this->message]);
+            ->view('mails.disc.sendDiscTestMail' , ['respondentSession' => $this->respondentSession, 'discMessage' => $this->message->content]);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Models\Disc\DiscPlanSubscription;
 use App\Models\Order\Order;
 use App\Models\Respondent\Respondent;
 use App\Models\Respondent\RespondentCustomField;
+use App\Models\Respondent\RespondentDiscMessage;
 use App\Models\Respondent\RespondentDiscTest;
 use App\Models\Respondent\RespondentList;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -146,5 +147,10 @@ class Customer extends Authenticatable implements JWTSubject
     public function orders()
     {
         return $this->hasMany(Order::class)->with('discPlanOrder')->with('status');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(RespondentDiscMessage::class);
     }
 }
