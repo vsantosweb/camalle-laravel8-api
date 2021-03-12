@@ -11,9 +11,9 @@
 </html>
 
 <body style=" padding: 15px;">
-    <h4>Olá, {{ $discTest->respondent->customer->name }}</h4>
+    <h4>Olá, {{ $discTest->customer->name }}</h4>
     <p>
-        O teste de {{ $discTest->respondent->name }} foi concluído com êxito.
+        O teste de {{ $discTest->respondent_name }} foi concluído com êxito.
         O relatório está disponível no link abaixo:
     </p>
     <hr />

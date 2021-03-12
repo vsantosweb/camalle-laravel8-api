@@ -78,7 +78,7 @@ class Disc extends Model
 
         $compiledMessage = str_replace('[respondente]', $respondent->name, $message->content);
         $message->content = $compiledMessage;
-        $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
+        // $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
 
         return $respondentSession;
     }
@@ -147,7 +147,7 @@ class Disc extends Model
 
             $compiledMessage = str_replace('[respondente]', $respondent->name, $message->content);
             $message->content = $compiledMessage;
-            $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
+            // $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
         }
 
         auth()->user()->subscription->dispatchCreditConsummation($respondents);

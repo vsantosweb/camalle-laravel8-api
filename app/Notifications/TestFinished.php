@@ -43,7 +43,7 @@ class TestFinished extends Notification
         $url = env('APP_URL') . DIRECTORY_SEPARATOR . 'report' . DIRECTORY_SEPARATOR . $this->discTest->code;
 
         return (new MailMessage)
-            ->subject('O respondente ' . $this->discTest->respondent->name . ' finalizou o teste')
+            ->subject('O respondente ' . $this->discTest->respondent_name . ' finalizou o teste')
             ->view('mails.disc.testFinished' , ['discTest' => $this->discTest, 'url' => $url]);
     }
 

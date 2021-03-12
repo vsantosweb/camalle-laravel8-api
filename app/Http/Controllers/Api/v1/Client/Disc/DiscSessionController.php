@@ -20,8 +20,7 @@ class DiscSessionController extends DiscController
     public function start(Request $request)
     {
         try {
-            $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->
-            where('was_finished', 0)->with('respondent')->firstOrFail();
+            $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->where('was_finished', 0)->with('respondent')->firstOrFail();
 
             $respondentDiscSession->update([
                 'active' => 1,
@@ -40,16 +39,23 @@ class DiscSessionController extends DiscController
             return $this->outputJSON($respondentDiscSession, '', false);
         } catch (\Throwable $e) {
 
-            return $this->outputJSON([], $e->getMessage() , true, 400);
+            return $this->outputJSON([], $e->getMessage(), true, 400);
         }
     }
 
     public function finish(Request $request)
     {
+
+        $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->where('was_finished', 0)->with('respondent')->firstOrFail();
+        $respondentTest = RespondentDiscTest::where('code', $request->disc_test_code)->where('was_finished', 0)->firstOrFail();
+
         $graphs = $request->graphs;
+        // dd( $graphs);
 
         for ($i = 0; $i < count($graphs); $i++) {
+
             foreach ($graphs[$i]['graphLetters'] as $letter => $value) {
+
                 foreach (DiscRanges::all() as $discRanges) {
                     if ($discRanges->graphType->name == $graphs[$i]['graphName']) {
                         foreach ($discRanges->range as $rangeIntensity) {
@@ -80,9 +86,7 @@ class DiscSessionController extends DiscController
             return $this->outputJSON('Desvio', '', true, 200);
         }
 
-        $respondent = Respondent::where('uuid', $request->respondent_uuid)->firstOrFail();
 
-        $respondentTest = RespondentDiscTest::where('code', $request->disc_test_code)->where('was_finished', 0)->firstOrFail();
 
         $respondentTest->update([
             'metadata' => $combination,
@@ -102,7 +106,7 @@ class DiscSessionController extends DiscController
             'ip' => $request->ip(),
             'user_agent' => $request->userAgent(),
         ]);
-        
+
 
         if ($request->demographic_data) {
 
@@ -111,9 +115,15 @@ class DiscSessionController extends DiscController
             $newDemograph->save();
         }
 
-        if (!empty($respondent->list->settings->ownerMailList)) {
-            Notification::route('mail', $respondent->list->settings->ownerMailList)->notify(new TestFinished($respondentTest));
-        }
+
+        // if (isset($request->respondent_uuid)) {
+
+        //     if (!empty($respondent->list->settings->ownerMailList)) {
+        //         Notification::route('mail', $respondent->list->settings->ownerMailList)->notify(new TestFinished($respondentTest));
+        //     }
+
+        // }
+
 
         return $this->outputJSON($respondentDiscSession, '', false);
     }
