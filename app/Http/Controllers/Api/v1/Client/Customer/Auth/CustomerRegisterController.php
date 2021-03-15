@@ -7,6 +7,7 @@ use App\Models\Customer\Customer;
 use App\Models\Disc\DiscPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class CustomerRegisterController extends Controller
@@ -16,14 +17,28 @@ class CustomerRegisterController extends Controller
         $this->customer = $customer;
     }
 
-    public function register(Request $request)
+    public function register()
     {
+
+       
+        $validator = Validator::make(request()->all(), [
+            'email' => 'required|email|unique:customers',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        if($validator->fails()){
+
+            return $this->outputJSON($validator->errors(), '', true, 200);
+
+        }
+
         $newCustomer =  $this->customer->create([
             'uuid' => Str::uuid(),
             'customer_type_id' => 1,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'name' => request()->name,
+            'email' => request()->email,
+            'password' => Hash::make(request()->password)
         ]);
         
         $order = $newCustomer->orders()->create([
@@ -32,8 +47,8 @@ class CustomerRegisterController extends Controller
             'status' => 'APPROVED',
             'payment_method' => 'FREE_MODE',
             'type' => 'PLAN_SUBSCRIPTION',
-            'user_agent' => $request->userAgent(),
-            'ip' => $request->ip(),
+            'user_agent' => request()->userAgent(),
+            'ip' => request()->ip(),
             'total' => 0,
         ]);
 
@@ -64,8 +79,7 @@ class CustomerRegisterController extends Controller
             'expire_at' => now()->addDays($subscription->validity_days),
         ]);
 
-         return $newCustomer->sendMailVerification();
 
-        return $this->outputJSON($newCustomer, 'Sucess', false, 201);
+        return $this->outputJSON('', $newCustomer->sendMailVerification(), false, 201);
     }
 }

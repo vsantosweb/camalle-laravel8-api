@@ -34,6 +34,12 @@ class CustomerDiscController extends Controller
         return  $disc->generateTestDiscToRespondent($request);
     }
 
+    public function show($code)
+    {
+        $discReport = auth()->user()->discReports()->where('code', $code)->firstOrFail();
+        return $this->outputJSON( $discReport , '', false, 200);
+    }
+
     public function filter(Request $request)
     {
         $discTestQuery =  DB::table('respondent_disc_tests AS test')
