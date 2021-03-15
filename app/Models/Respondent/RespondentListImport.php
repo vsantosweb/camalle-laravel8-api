@@ -10,6 +10,7 @@ class RespondentListImport extends Model
     protected $fillable = [
         'respondent_list_id',
         'name',
+        'uuid',
         'file_size',
         'file_path',
         'file_url',

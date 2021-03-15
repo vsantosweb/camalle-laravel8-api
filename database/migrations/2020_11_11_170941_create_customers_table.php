@@ -32,6 +32,7 @@ class CreateCustomersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('last_activity')->nullable();
             $table->string('home_dir')->nullable();
+            $table->tinyInteger('first_access')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

@@ -67,9 +67,10 @@ class ContactsImport implements ToCollection
                         'name' => $defaultInserts['name'],
                         'uuid' => Str::uuid(),
                         'customer_id' =>  $this->listImport->respondentList->customer->id,
-                        'respondent_list_id' =>  $this->listImport->respondentList->id,
                     ]
                 );
+
+                $newRespondent->lists()->attach([$this->listImport->respondentList->id]);
             }
 
             $customValues = array_slice($value->toArray(), count($defaultInserts));

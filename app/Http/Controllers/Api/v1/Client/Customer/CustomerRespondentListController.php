@@ -22,7 +22,15 @@ class CustomerRespondentListController extends Controller
      */
     public function index()
     {
-        return $this->outputJSON(auth()->user()->respondentLists()->with('respondents')->get(), '', false);
+
+
+        $respondentLists = auth()->user()->respondentLists()
+        ->with('respondents', function($query){
+            $query->select('id', 'name', 'email');
+        })->withCount('respondents')->orderBy('created_at', 'desc');
+
+        $result = isset(request()->page) ? $respondentLists->paginate(25) : $respondentLists->get();
+        return $this->outputJSON($result, '', false);
     }
 
     /**
@@ -57,7 +65,7 @@ class CustomerRespondentListController extends Controller
      */
     public function show($uuid)
     {
-        $respondentList = auth()->user()->respondentLists()->where('uuid', $uuid)->with('respondents')->first();
+        $respondentList = auth()->user()->respondentLists()->where('uuid', $uuid)->with('respondents')->firstOrFail();
         return $this->outputJSON($respondentList, 'Success', false);
     }
 
@@ -91,7 +99,7 @@ class CustomerRespondentListController extends Controller
     {
         try {
             $respondentList = auth()->user()->respondentLists()->whereIn('uuid', $request->uuids)->forceDelete();
-            return $this->outputJSON($respondentList, 'Success', false);
+            return $this->outputJSON(auth()->user()->respondentLists()->with('respondents')->get(), 'Success', false);
         } catch (\Exception $e) {
             return $this->outputJSON('', $e->getMessage(), true, 500);
         }
@@ -99,11 +107,16 @@ class CustomerRespondentListController extends Controller
 
     public function uploadFile(Request $request)
     {
-        try {
 
-            $fileUploaded = auth()->user()->respondentLists()->where('uuid', $request->uuid)->firstOrFail()->uploadFile($request->fileBase64);
-            return $this->outputJSON($fileUploaded, 'Success', false, 201);
+        $fileToUpload = auth()->user()->respondentLists()->where('uuid', $request->respondent_list_uuids[0])->firstOrFail();
+
+         explode(';',$request->fileBase64);
+
+        try {
+            $fileToUpload->acceptedFileFormat($request->file_format);
+            $fileToUpload->uploadFile($request->all());
             
+            return $this->outputJSON($fileToUpload, 'Success', false, 201);
         } catch (\Exception $e) {
             return $this->outputJSON('', $e->getMessage(), true, 500);
         }

@@ -39,7 +39,7 @@ class Respondent extends Model
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','pivot'
     ];
 
     /**
@@ -66,6 +66,11 @@ class Respondent extends Model
     public function list()
     {
         return $this->belongsTo(RespondentList::class, 'respondent_list_id');
+    }
+
+    public function lists()
+    {
+        return $this->belongsToMany(RespondentList::class, 'respondents_to_respondent_lists');
     }
 
     public function messages()

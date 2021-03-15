@@ -26,7 +26,6 @@ class RespondentFactory extends Factory
         return [
             'name' => $this->faker->name,
             'customer_id' => 1,
-            'respondent_list_id' => mt_rand(1, RespondentList::count()),
             'email' => $this->faker->unique()->safeEmail,
             'uuid' => Str::uuid()
         ];

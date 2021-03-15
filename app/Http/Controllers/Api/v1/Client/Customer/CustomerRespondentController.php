@@ -21,7 +21,7 @@ class CustomerRespondentController extends Controller
      */
     public function index()
     {
-        return $this->outputJSON(auth()->user()->respondents()->with('discTests', 'list')->get(), 'Success', false);
+        return $this->outputJSON(auth()->user()->respondents()->with('discTests', 'list')->paginate(25), 'Success', false);
     }
 
     /**
@@ -39,12 +39,12 @@ class CustomerRespondentController extends Controller
                 'uuid' => Str::uuid(),
                 'name' => $request->name,
                 'email' => $request->email,
-                'respondent_list_id' => $request->respondent_list_id,
                 'custom_fields' => $request->custom_fields,
             ]);
 
+            $newRespondent->lists()->attach($request->respondent_lists);
 
-            return $this->outputJSON($newRespondent->with('list')->find($newRespondent->id), 'Success', false);
+            return $this->outputJSON($newRespondent->with('lists')->find($newRespondent->id), 'Success', false);
         } catch (\Exception $e) {
 
             return $this->outputJSON('', $e->getMessage(), false);
@@ -102,5 +102,11 @@ class CustomerRespondentController extends Controller
 
             return $this->outputJSON('', $e->getMessage(), false);
         }
+    }
+
+    public function removeFromList()
+    {
+        // $respondent = auth()->user()->respondents()->whereIn('uuid', $request->uuids)->detach();
+
     }
 }

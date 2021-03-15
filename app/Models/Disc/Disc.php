@@ -32,11 +32,6 @@ class Disc extends Model
             throw new \Exception('Insufficient credit balance');
         }
 
-        $list = RespondentList::create([
-            'name' => 'Temp ' . strtoupper(uniqid()),
-            'customer_id' => auth()->user()->id,
-            'uuid' => Str::uuid(),
-        ]);
 
         $message = RespondentDiscMessage::create([
             'uuid' => Str::uuid(),
@@ -52,7 +47,6 @@ class Disc extends Model
             'customer_id' => auth()->user()->id,
             'name' => $data->respondent_name,
             'email' => $data->respondent_email,
-            'respondent_list_id' => $list->id
         ]);
 
         $discTest = $respondent->discTests()->create([
@@ -70,22 +64,27 @@ class Disc extends Model
             'view_report' => $data->view_report,
             'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid=' . $token,
             'session_data' => json_decode('{"ref":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
-       
-            ]);
+
+        ]);
 
         auth()->user()->subscription->dispatchCreditConsummation([0]);
-        $list->forceDelete();
+        
 
         $compiledMessage = str_replace('[respondente]', $respondent->name, $message->content);
         $message->content = $compiledMessage;
         // $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
+        
+        if(!$data->save_respondent){
 
+            $respondent->forceDelete();
+        }
         return $respondentSession;
     }
 
     public function generateTestDiscToList($data)
     {
         $lists = RespondentList::whereIn('uuid', $data->respondent_lists)->with('respondents')->get();
+        // return $lists;
         //testing
         // $lists = RespondentList::all();
 
@@ -141,7 +140,7 @@ class Disc extends Model
                 'view_report' => $data->view_report,
                 'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid=' . $token,
                 'session_data' => json_decode('{"ref":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
-                ]);
+            ]);
 
             $respondentSessions[] = $respondentSession;
 
