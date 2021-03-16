@@ -89,17 +89,20 @@ class Customer extends Authenticatable implements JWTSubject
     {
 
         try {
-
-            DB::table('email_verifications')->insert([
-                'email' => $this->email,
-                'token' => Str::random(60),
-                'signature' => Hash::make($this->email . env('APP_KEY')),
-                'created_at' => now()
-            ]);
-
             $tokenData = DB::table('email_verifications')->where('email', $this->email)->first();
 
-            $link = env('APP_URL_EMAIL_VERIFY') . DIRECTORY_SEPARATOR . '?token=' . $tokenData->token . '&email=' . $tokenData->email;
+            if(is_null($tokenData)){
+                DB::table('email_verifications')->insert([
+                    'email' => $this->email,
+                    'token' => Str::random(60),
+                    'signature' => Hash::make($this->email . env('APP_KEY')),
+                    'created_at' => now()
+                ]);
+            }
+           
+            $tokenData = DB::table('email_verifications')->where('email', $this->email)->first();
+
+            $link = env('APP_URL_EMAIL_VERIFY') . '?token=' . $tokenData->token . '&email=' . $tokenData->email;
             // $this->notify(new SendResetEmailNotification($customer, $link));
 
             return 'Verification email link sent on your email id. ' . $link;

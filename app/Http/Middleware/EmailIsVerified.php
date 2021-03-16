@@ -17,7 +17,11 @@ class EmailIsVerified
     public function handle(Request $request, Closure $next)
     {
         if (is_null($request->user()->email_verified_at)) {
-            return redirect('email-verified');
+            return response()->json([
+                'error' => true,
+                'message' => 'Email verification required',
+                'type' => 'MAIL_VERIFY',
+            ], 401);
         }
 
         return $next($request);
