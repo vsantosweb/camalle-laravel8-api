@@ -92,6 +92,8 @@ class DiscSessionController extends DiscController
             'metadata' => $combination,
             'was_finished' => 1,
             'ip' => $request->ip(),
+            'category' => $combination->category->name,
+            'profile' => $combination->profile->name,
             'user_agent' => $request->userAgent(),
         ]);
 

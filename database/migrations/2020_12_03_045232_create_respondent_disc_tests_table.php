@@ -20,6 +20,8 @@ class CreateRespondentDiscTestsTable extends Migration
             $table->string('respondent_name');
             $table->string('respondent_email');
             $table->string('message_uuid');
+            $table->string('category')->nullable();
+            $table->string('profile')->nullable();
             $table->text('metadata')->nullable();
             $table->tinyInteger('was_finished')->default(0)->comment('0 Não finalizado | 1 finalizado');
             $table->string('ip')->nullable();

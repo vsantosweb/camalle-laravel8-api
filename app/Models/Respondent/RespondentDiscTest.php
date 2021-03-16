@@ -18,6 +18,8 @@ class RespondentDiscTest extends Model
         'respondent_name',
         'respondent_email',
         'message_uuid',
+        'category',
+        'profile',
         'metadata',
         'ip',
         'geolocation',

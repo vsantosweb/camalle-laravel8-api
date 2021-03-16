@@ -26,8 +26,8 @@ class CustomerVerificationController extends Controller
 
                 $emailToken->delete();
 
-               return $this->outputJSON(auth()->user(), 'Email verified successfully', false);
-           
+               return $this->outputJSON(JWTAuth::fromUser($customer), 'Email verified successfully', false);
+
             } catch (\Exception $e) {
 
                 return $this->outputJSON([],  $e->getMessage(), true);

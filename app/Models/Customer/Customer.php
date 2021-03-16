@@ -10,6 +10,7 @@ use App\Models\Respondent\RespondentCustomField;
 use App\Models\Respondent\RespondentDiscMessage;
 use App\Models\Respondent\RespondentDiscTest;
 use App\Models\Respondent\RespondentList;
+use App\Notifications\RegisterConfirmationNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -103,7 +104,8 @@ class Customer extends Authenticatable implements JWTSubject
             $tokenData = DB::table('email_verifications')->where('email', $this->email)->first();
 
             $link = env('APP_URL_EMAIL_VERIFY') . '?token=' . $tokenData->token . '&email=' . $tokenData->email;
-            // $this->notify(new SendResetEmailNotification($customer, $link));
+
+            $this->notify(new RegisterConfirmationNotification($this, $link));
 
             return 'Verification email link sent on your email id. ' . $link;
             
