@@ -68,8 +68,8 @@ class CustomerDiscController extends Controller
         $discTestQuery =  DB::table('respondent_disc_reports AS report')
             ->select(
 
-                'list.name as list_name',
-                'respondent.id',
+                // 'list.name as list_name',
+                // 'respondent.id',
                 'report.code',
                 'report.category',
                 'report.profile',
@@ -79,10 +79,10 @@ class CustomerDiscController extends Controller
                 'report.created_at',
                 'report.updated_at'
             )
-            ->join('respondents AS respondent', 'report.respondent_email', 'respondent.email')
+            // ->join('respondents AS respondent', 'report.respondent_email', 'respondent.email')
 
-            ->join('respondents_to_lists', 'respondents_to_lists.respondent_id', 'respondent.id')
-            ->join('respondent_lists AS list', 'respondents_to_lists.respondent_list_id', 'list.id')
+            // ->join('respondents_to_lists', 'respondents_to_lists.respondent_id', 'respondent.id')
+            // ->join('respondent_lists AS list', 'respondents_to_lists.respondent_list_id', 'list.id')
 
 
             ->where('report.customer_id', auth()->user()->id);
