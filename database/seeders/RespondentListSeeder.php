@@ -17,6 +17,6 @@ class RespondentListSeeder extends Seeder
      */
     public function run()
     {
-        RespondentList::factory()->count(100)->create();
+        RespondentList::factory()->count(12)->create();
     }
 }
