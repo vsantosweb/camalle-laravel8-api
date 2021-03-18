@@ -91,8 +91,8 @@ class CustomerDiscController extends Controller
         $discTestQuery = isset($request->category) ? $discTestQuery->where('category', $request->category) : $discTestQuery;
 
         $discTestQuery = isset($request->was_finished) ? $discTestQuery->where('was_finished', $request->was_finished) : $discTestQuery;
-        $discTestQuery = isset($request->email) ? $discTestQuery->where('respondent.email', $request->email) : $discTestQuery;
-        $discTestQuery = isset($request->respondent_name) ? $discTestQuery->where('respondent.name', 'like', '%' . $request->respondent_name . '%') : $discTestQuery;
+        $discTestQuery = isset($request->email) ? $discTestQuery->where('respondent_email', $request->email) : $discTestQuery;
+        $discTestQuery = isset($request->respondent_name) ? $discTestQuery->where('respondent_name', 'like', '%' . $request->respondent_name . '%') : $discTestQuery;
         $discTestQuery = isset($request->list_name) ? $discTestQuery->where('list.name', $request->list_name) : $discTestQuery;
 
         $discTestQuery = isset($request->code) ? $discTestQuery->where('report.code', $request->code) : $discTestQuery;
