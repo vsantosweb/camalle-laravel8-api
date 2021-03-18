@@ -55,7 +55,7 @@ class Respondent extends Model
 
     public function discTests()
     {
-        return $this->hasMany(RespondentDiscTest::class, 'respondent_email', 'email');
+        return $this->hasMany(RespondentDiscReport::class, 'respondent_email', 'email');
     }
 
     public function customer()
@@ -70,12 +70,12 @@ class Respondent extends Model
 
     public function lists()
     {
-        return $this->belongsToMany(RespondentList::class, 'respondents_to_respondent_lists');
+        return $this->belongsToMany(RespondentList::class, 'respondents_to_lists');
     }
 
     public function messages()
     {
-        return $this->belongsToMany(RespondentDiscMessage::class, 'respondent_disc_tests');
+        return $this->belongsToMany(RespondentDiscMessage::class, 'respondent_disc_reports');
 
     }
 

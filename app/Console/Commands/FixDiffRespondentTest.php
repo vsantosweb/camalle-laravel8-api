@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Respondent\Respondent;
-use App\Models\Respondent\RespondentDiscTest;
+use App\Models\Respondent\RespondentDiscReport;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -42,10 +42,10 @@ class FixDiffRespondentTest extends Command
     public function handle()
     {
         $respondents = DB::table('respondents')->where('customer_id', 1)->distinct()->get();
-        $originalTests = DB::table('respondent_disc_tests2')->distinct()->get();
+        $originalTests = DB::table('respondent_disc_reports2')->distinct()->get();
 
         foreach ($respondents as $respondent) {
-            DB::table('respondent_disc_tests')->insert([
+            DB::table('respondent_disc_reports')->insert([
                 'was_finished' => 0,
                 'code' => Str::random(15),
                 'metadata' =>0,
@@ -61,7 +61,7 @@ class FixDiffRespondentTest extends Command
             foreach ($originalTests as $originalTest) {
                 if ($test->respondent_id == $originalTest->respondent_id) {
 
-                    DB::table('respondent_disc_tests')->where('respondent_id', $originalTest->respondent_id)->update([
+                    DB::table('respondent_disc_reports')->where('respondent_id', $originalTest->respondent_id)->update([
                         'metadata' => $originalTest->metadata,
                         'was_finished' => 1,
                         'code' => Str::random(15),

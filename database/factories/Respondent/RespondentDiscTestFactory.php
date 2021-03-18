@@ -4,17 +4,17 @@ namespace Database\Factories\Respondent;
 
 use App\Models\Disc\DiscCombination;
 use App\Models\Disc\DiscRanges;
-use App\Models\Respondent\RespondentDiscTest;
+use App\Models\Respondent\RespondentDiscReport;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RespondentDiscTestFactory extends Factory
+class RespondentDiscReportFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = RespondentDiscTest::class;
+    protected $model = RespondentDiscReport::class;
 
     /**
      * Define the model's default state.

@@ -24,7 +24,7 @@ class RespondentList extends Model
 
     public function respondents()
     {
-        return $this->belongsToMany(Respondent::class, 'respondents_to_respondent_lists');
+        return $this->belongsToMany(Respondent::class, 'respondents_to_lists');
     }
 
     public function customer()

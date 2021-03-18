@@ -9,7 +9,7 @@ use App\Models\Disc\DiscRanges;
 use App\Models\Respondent\Respondent;
 use App\Models\Respondent\RespondentDemographic;
 use App\Models\Respondent\RespondentDiscSession;
-use App\Models\Respondent\RespondentDiscTest;
+use App\Models\Respondent\RespondentDiscReport;
 use App\Notifications\TestFinished;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
@@ -47,7 +47,7 @@ class DiscSessionController extends DiscController
     {
 
         $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->where('was_finished', 0)->with('respondent')->firstOrFail();
-        $respondentTest = RespondentDiscTest::where('code', $request->disc_test_code)->where('was_finished', 0)->firstOrFail();
+        $respondentTest = RespondentDiscReport::where('code', $request->disc_test_code)->where('was_finished', 0)->firstOrFail();
 
         $graphs = $request->graphs;
         // dd( $graphs);

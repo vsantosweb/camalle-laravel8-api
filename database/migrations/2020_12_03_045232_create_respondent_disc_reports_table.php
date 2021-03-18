@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRespondentDiscTestsTable extends Migration
+class CreateRespondentDiscReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRespondentDiscTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('respondent_disc_tests', function (Blueprint $table) {
+        Schema::create('respondent_disc_reports', function (Blueprint $table) {
             $table->id();
             $table->uuid('code', 60)->unique();
             $table->unsignedBigInteger('customer_id');
@@ -41,6 +41,6 @@ class CreateRespondentDiscTestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('respondent_disc_tests');
+        Schema::dropIfExists('respondent_disc_reports');
     }
 }

@@ -8,7 +8,7 @@ use App\Models\Respondent\Respondent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RespondentDiscTest extends Model
+class RespondentDiscReport extends Model
 {
     use HasFactory;
 
@@ -36,12 +36,12 @@ class RespondentDiscTest extends Model
 
     public function respondenetDiscTestMessage()
     {
-        return $this->belongsTo(RespondentDiscTestMessage::class, 'uuid', 'message_uuid');
+        return $this->belongsTo(RespondentDiscReportMessage::class, 'uuid', 'message_uuid');
     }
-    
+
     public static function makeReport($respondents = [])
     {
-        $respondentTests = RespondentDiscTest::where('was_finished', 1)->get();
+        $respondentTests = RespondentDiscReport::where('was_finished', 1)->get();
 
         $currentGraphs = [];
 
@@ -49,7 +49,7 @@ class RespondentDiscTest extends Model
 
             $currentGraphs[] = $test->metadata->graphs;
         }
-        
+
         $graphs = $currentGraphs;
 
         for ($i = 0; $i < count($graphs); $i++) {
@@ -86,6 +86,8 @@ class RespondentDiscTest extends Model
 
             $respondentTests[$i]->update([
                 'metadata' => $combination[$i],
+                'category' => $combination[$i]->category->name,
+                'profile' => $combination[$i]->profile->name,
             ]);
         }
 

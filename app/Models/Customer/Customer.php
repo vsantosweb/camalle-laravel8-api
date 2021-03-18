@@ -8,7 +8,7 @@ use App\Models\Order\Order;
 use App\Models\Respondent\Respondent;
 use App\Models\Respondent\RespondentCustomField;
 use App\Models\Respondent\RespondentDiscMessage;
-use App\Models\Respondent\RespondentDiscTest;
+use App\Models\Respondent\RespondentDiscReport;
 use App\Models\Respondent\RespondentList;
 use App\Notifications\RegisterConfirmationNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -126,7 +126,7 @@ class Customer extends Authenticatable implements JWTSubject
 
     public function discReports()
     {
-        return $this->hasMany(RespondentDiscTest::class, 'customer_id');
+        return $this->hasMany(RespondentDiscReport::class, 'customer_id');
     }
 
     public function respondents()

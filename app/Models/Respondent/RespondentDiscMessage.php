@@ -10,7 +10,7 @@ class RespondentDiscMessage extends Model
     protected $fillable = [
         'uuid',
         'customer_id',
-        'respondent_disc_test_id',
+        'respondent_disc_report_id',
         'name',
         'subject',
         'sender_name',
@@ -20,9 +20,9 @@ class RespondentDiscMessage extends Model
         'bounce',
     ];
 
-    public function respondentDiscTest()
+    public function RespondentDiscReport()
     {
-        return $this->hasMany(RespondentDiscTest::class, 'message_uuid', 'uuid');
+        return $this->hasMany(RespondentDiscReport::class, 'message_uuid', 'uuid');
     }
 
     public function lists()
@@ -32,7 +32,7 @@ class RespondentDiscMessage extends Model
 
     public function respondents()
     {
-        return $this->belongsToMany(Respondent::class,'respondent_disc_tests', 'respondent_id', 'respondent_disc_message_id');
+        return $this->belongsToMany(Respondent::class,'respondent_disc_reports', 'respondent_id', 'respondent_disc_message_id');
 
     }
 }
