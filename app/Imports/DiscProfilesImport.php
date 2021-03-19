@@ -35,7 +35,7 @@ class DiscProfilesImport implements ToCollection
 
             if (!is_null($discCategory)) {
                 $category = DiscCategory::firstOrCreate([
-                    'name' => $discCategory,
+                    'name' => ucfirst($discCategory),
                     'slug' => Str::slug($discCategory)
                 ]);
             }
