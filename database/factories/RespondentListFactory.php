@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\respondent;
+namespace Database\Factories;
 
 use App\Models\Respondent\RespondentList;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,7 +23,7 @@ class RespondentListFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'List '. strtoupper(uniqid()),
+            'name' => 'Lista '. strtoupper(uniqid()),
             'customer_id' => 1,
             'uuid' => Str::uuid(),
             'description' => $this->faker->paragraph

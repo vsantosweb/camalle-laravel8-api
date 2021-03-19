@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\disc;
+namespace Database\Factories;
 
 use App\Models\Disc\DiscGraph;
 use Illuminate\Database\Eloquent\Factories\Factory;

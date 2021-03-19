@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\respondent;
+namespace Database\Factories;
 
 use App\Models\disc\DiscCombination;
 use App\Models\disc\DiscRanges;

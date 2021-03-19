@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\respondent;
+namespace Database\Factories;
 
 use App\Models\Respondent\Respondent;
 use Illuminate\Database\Eloquent\Factories\Factory;
