@@ -1,20 +1,19 @@
 <?php
 
-namespace Database\Factories\Respondent;
+namespace Database\Factories\respondent;
 
-use App\Models\Respondent\Respondent;
 use App\Models\Respondent\RespondentList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class RespondentFactory extends Factory
+class RespondentListFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Respondent::class;
+    protected $model = RespondentList::class;
 
     /**
      * Define the model's default state.
@@ -24,10 +23,10 @@ class RespondentFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => 'List '. strtoupper(uniqid()),
             'customer_id' => 1,
-            'email' => $this->faker->unique()->safeEmail,
-            'uuid' => Str::uuid()
+            'uuid' => Str::uuid(),
+            'description' => $this->faker->paragraph
         ];
     }
 }

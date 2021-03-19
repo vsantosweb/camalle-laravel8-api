@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('customer')->namespace('Api\v1\BackOffice\Customer')->group(function () {
+Route::prefix('customer')->namespace('Api\v1\Backoffice\Customer')->group(function () {
 
     Route::get('online', 'CustomerController@online');
 

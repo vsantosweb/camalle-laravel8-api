@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\BackOffice\Disc\Plan;
+namespace App\Http\Controllers\Api\v1\Backoffice\Disc\Plan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

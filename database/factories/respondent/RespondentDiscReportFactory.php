@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories\Respondent;
+namespace Database\Factories\respondent;
 
-use App\Models\Disc\DiscCombination;
-use App\Models\Disc\DiscRanges;
+use App\Models\disc\DiscCombination;
+use App\Models\disc\DiscRanges;
 use App\Models\Respondent\RespondentDiscReport;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

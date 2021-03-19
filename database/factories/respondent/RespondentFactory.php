@@ -1,19 +1,19 @@
 <?php
 
-namespace Database\Factories\Disc;
+namespace Database\Factories\respondent;
 
-use App\Models\Disc\DiscSession;
+use App\Models\Respondent\Respondent;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class DiscSessionFactory extends Factory
+class RespondentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = DiscSession::class;
+    protected $model = Respondent::class;
 
     /**
      * Define the model's default state.
@@ -23,11 +23,10 @@ class DiscSessionFactory extends Factory
     public function definition()
     {
         return [
-            'uuid' => Str::uuid(),
-            'expire_at' => now()->addMinutes(15),
-            'has_expired' => 0,
-            'has_finished'=>0,
-            'active' => 1,
+            'name' => $this->faker->name,
+            'customer_id' => 1,
+            'email' => $this->faker->unique()->safeEmail,
+            'uuid' => Str::uuid()
         ];
     }
 }

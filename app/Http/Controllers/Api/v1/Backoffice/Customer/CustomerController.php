@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\BackOffice\Customer;
+namespace App\Http\Controllers\Api\v1\Backoffice\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer\Customer;

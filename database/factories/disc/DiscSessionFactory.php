@@ -1,19 +1,19 @@
 <?php
 
-namespace Database\Factories\Respondent;
+namespace Database\Factories\disc;
 
-use App\Models\Respondent\RespondentList;
+use App\Models\Disc\DiscSession;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class RespondentListFactory extends Factory
+class DiscSessionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = RespondentList::class;
+    protected $model = DiscSession::class;
 
     /**
      * Define the model's default state.
@@ -23,10 +23,11 @@ class RespondentListFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'List '. strtoupper(uniqid()),
-            'customer_id' => 1,
             'uuid' => Str::uuid(),
-            'description' => $this->faker->paragraph
+            'expire_at' => now()->addMinutes(15),
+            'has_expired' => 0,
+            'has_finished'=>0,
+            'active' => 1,
         ];
     }
 }
