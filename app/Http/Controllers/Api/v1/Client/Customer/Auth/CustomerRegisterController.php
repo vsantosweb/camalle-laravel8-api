@@ -39,8 +39,8 @@ class CustomerRegisterController extends Controller
         $newCustomer =  $this->customer->create([
             'uuid' => Str::uuid(),
             'customer_type_id' => request()->customer_type,
-            'name' => request()->name,
-            'email' => request()->email,
+            'name' => ucwords(strtolower(request()->name)),
+            'email' => strtolower(request()->email),
             'accepted_terms' => request()->accepted_terms,
             'notify' => isset(request()->notify) ?  request()->notify : 0,
             'password' => Hash::make(request()->password)
