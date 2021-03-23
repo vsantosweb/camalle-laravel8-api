@@ -39,6 +39,11 @@ class RespondentDiscReport extends Model
         return $this->belongsTo(RespondentDiscReportMessage::class, 'uuid', 'message_uuid');
     }
 
+    public function session()
+    {
+        return $this->belongsTo(RespondentDiscSession::class, 'respondent_email', 'email')->withHiden('metadata');
+    }
+    
     public static function makeReport($respondents = [])
     {
         $respondentTests = RespondentDiscReport::where('was_finished', 1)->get();

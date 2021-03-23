@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 
 class RespondentController extends Controller
 {
-    public function getTest($code)
+    public function showReport(Request $request)
     {
-        $respondentTest = RespondentDiscReport::where('code', $code)->with('respondent')->firstOrFail();
-        return $this->outputJSON($respondentTest, '', false);
+
+        try {
+            $respondentTest = RespondentDiscReport::where('code', $request->code)->where('respondent_email', $request->respondent_email)->firstOrFail();
+
+            return $this->outputJSON($respondentTest, '', false);
+        } catch (\Exception $e) {
+
+            return $this->outputJSON([], $e->getMessage(), true);
+        }
     }
 }

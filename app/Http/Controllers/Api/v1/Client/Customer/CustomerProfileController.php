@@ -24,7 +24,10 @@ class CustomerProfileController extends Controller
                 auth()->user()->address()->create($request->address);
             }
 
-            auth()->user()->address()->update($request->address);
+            if(isset($request->address)){
+                auth()->user()->address()->update($request->address);
+
+            }
 
             return $this->outputJSON(auth()->user()->load('address'), 'Sucesss', 200);
 

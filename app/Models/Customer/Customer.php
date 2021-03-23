@@ -41,7 +41,9 @@ class Customer extends Authenticatable implements JWTSubject
         'notify',
         'newsletter',
         'last_activity',
-        'email_verified_at'
+        'email_verified_at',
+        'first_time',
+        'accepted_terms',
     ];
 
     /**
@@ -117,7 +119,7 @@ class Customer extends Authenticatable implements JWTSubject
 
     public function address()
     {
-        return $this->hasOne(CustomerAddress::class);
+        return $this->hasMany(CustomerAddress::class);
     }
     public function subscription()
     {

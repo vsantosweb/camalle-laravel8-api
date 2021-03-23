@@ -24,6 +24,8 @@ class CreateRespondentDiscReportsTable extends Migration
             $table->string('profile')->nullable();
             $table->text('metadata')->nullable();
             $table->tinyInteger('was_finished')->default(0)->comment('0 Não finalizado | 1 finalizado');
+            $table->tinyInteger('is_private')->default(1);
+            $table->timestamp('free_view_expire_at')->nullable();
             $table->string('ip')->nullable();
             $table->string('user_agent')->nullable();
             $table->string('geolocation')->nullable();

@@ -14,6 +14,7 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
+            
             $table->id();
             $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('customer_type_id');
@@ -32,7 +33,8 @@ class CreateCustomersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('last_activity')->nullable();
             $table->string('home_dir')->nullable();
-            $table->tinyInteger('first_access')->default(0);
+            $table->tinyInteger('first_time')->default(1);
+            $table->tinyInteger('accepted_terms')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function () {
+
     Route::prefix('auth')->namespace('Auth')->group(function () {
 
         Route::post('password/forget', 'CustomerForgotPasswordController@forget');
@@ -22,9 +23,9 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
 
         Route::post('login', 'CustomerAuthController@login');
         Route::post('register', 'CustomerRegisterController@register');
-
         Route::post('email/verify', 'CustomerVerificationController@verify');
 
+        Route::get('customer-types', 'CustomerRegisterController@customerTypes');
 
         Route::middleware('auth:customer')->group(function () {
             

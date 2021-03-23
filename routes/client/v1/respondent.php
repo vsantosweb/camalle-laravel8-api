@@ -26,12 +26,16 @@ Route::prefix('respondent')->namespace('Api\v1\Client\Respondent')->group(functi
         });
     });
 
+    Route::post('/reports', 'RespondentController@showReport');
+
     Route::prefix('sessions')->group(function () {
+
         Route::get('/{token}', 'RespondentDiscSessionController@checkSession');
         Route::get('active/online', 'RespondentDiscSessionController@onlineSessions');
 
         Route::post('shutdown', 'RespondentDiscSessionController@hashLogout');
+
+
     });
 
-    Route::get('disc/{code}', 'RespondentController@getTest');
 });
