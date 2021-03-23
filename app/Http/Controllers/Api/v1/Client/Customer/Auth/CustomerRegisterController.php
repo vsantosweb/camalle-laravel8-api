@@ -31,10 +31,9 @@ class CustomerRegisterController extends Controller
             'password_confirmation' => 'required',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
 
             return $this->outputJSON($validator->errors(), '', true, 200);
-
         }
 
         $newCustomer =  $this->customer->create([
@@ -42,9 +41,11 @@ class CustomerRegisterController extends Controller
             'customer_type_id' => request()->customer_type,
             'name' => request()->name,
             'email' => request()->email,
+            'accepted_terms' => request()->accepted_terms,
+            'notify' => isset(request()->notify) ?  request()->notify : 0,
             'password' => Hash::make(request()->password)
         ]);
-        
+
         $order = $newCustomer->orders()->create([
             'code' => strtoupper(uniqid()),
             'order_status_id' => 1,
