@@ -25,6 +25,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        $schedule->call(function () {
+            echo('xablauu funfou');
+          })->everyMinute();
+
+        $schedule->command('queue:work')->everyMinute();
+
+       
     }
 
     /**

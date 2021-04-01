@@ -23,7 +23,7 @@ class RespondentSeeder extends Seeder
             RespondentDiscReport::factory()->count(1)->state(function (array $attr, Respondent $respondent) {
                 return ['respondent_name' => $respondent->name];
             }),
-            'discTests'
+            'reports'
         )->create();
 
         $lists = RespondentList::all();

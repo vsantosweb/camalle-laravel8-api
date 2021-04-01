@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1\Client\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Disc\Disc;
+use App\Models\Respondent\RespondentDiscMessageQueue;
 use App\Models\Respondent\RespondentDiscReport;
 use App\Models\Respondent\RespondentList;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,7 +24,7 @@ class CustomerDiscController extends Controller
         $disc = new Disc;
 
         try {
-            return $this->outputJSON($disc->generateTestDiscToList($request), 'Envio para listas realizado com sucesso!', false, 200);
+            return $this->outputJSON($disc->createDiscQuizToList($request->all()), 'Envio para listas realizado com sucesso!', false, 200);
         } catch (\Exception $e) {
             return $this->outputJSON('', $e->getMessage(), true, 500);
         }
@@ -32,7 +33,7 @@ class CustomerDiscController extends Controller
     public function createToSingleRespondent(Request $request)
     {
         $disc = new Disc;
-        return  $disc->generateTestDiscToRespondent($request);
+        return  $disc->createDiscQuizToRespondent($request->all());
     }
 
     public function show($code)
@@ -41,6 +42,11 @@ class CustomerDiscController extends Controller
         return $this->outputJSON($discReport, '', false, 200);
     }
 
+    public function queues()
+    {
+        return $this->outputJSON(auth()->user()->messages()->orderBy('created_at','desc')->get(), '', false, 200);
+    }
+    
     public function filter(Request $request)
     {
         // $discTestQuery =  DB::table('respondent_disc_reports AS test')

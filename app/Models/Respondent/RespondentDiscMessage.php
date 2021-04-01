@@ -15,6 +15,7 @@ class RespondentDiscMessage extends Model
         'subject',
         'sender_name',
         'content',
+        'status',
         'report',
         'respondent_lists',
         'bounce',
@@ -33,6 +34,10 @@ class RespondentDiscMessage extends Model
     public function respondents()
     {
         return $this->belongsToMany(Respondent::class,'respondent_disc_reports', 'respondent_id', 'respondent_disc_message_id');
+    }
 
+    public function queue()
+    {
+        return $this->hasOne(RespondentDiscMessageQueue::class, 'respondent_disc_message_id');
     }
 }

@@ -62,6 +62,7 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
             Route::get('view/{code}', 'CustomerDiscController@show');
             Route::post('create-to-lists', 'CustomerDiscController@createToLists');
             Route::post('create-to-respondent', 'CustomerDiscController@createToSingleRespondent');
+            Route::get('queues', 'CustomerDiscController@queues');
             Route::get('filter', 'CustomerDiscController@filter');
         });
 

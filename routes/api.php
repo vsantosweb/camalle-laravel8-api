@@ -16,19 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->namespace('Api\v1')->group(function () {
 
+    Route::prefix('webhook')->namespace('Disc')->group(function () {
 
-    /*
-    |--------------------------------------------------------------------------
-    | Backoffice Routes
-    |--------------------------------------------------------------------------
-    */
-
-    Route::namespace('Backoffice')->group(function () {
-
-        Route::prefix('disc')->namespace('Disc')->group(function () {
-
-            Route::get('questions', 'DiscQuestionsController@index');
-        });
+        Route::get('message', 'DiscQuestionsController@index');
     });
-
 });

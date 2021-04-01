@@ -18,8 +18,8 @@ class CustomerTypeSeeder extends Seeder
     {
         DB::table('customer_types')->insert([
             [
-                'name'=> 'AdminisStrativo',
-                'slug' => Str::slug('AdminisStrativo')
+                'name'=> 'Administrativo',
+                'slug' => Str::slug('Administrativo')
             ],
             [
                 'name'=> 'Agilidade',

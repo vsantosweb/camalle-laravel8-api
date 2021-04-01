@@ -18,7 +18,7 @@ class RespondentList extends Model
 
     protected $fillable = ['customer_id', 'uuid', 'name', 'description', 'settings'];
     protected $casts = ['settings' => 'object'];
-    protected $hidden = ['deleted_at', 'pivot.respondent_id'];
+    protected $hidden = ['deleted_at', 'pivot.respondent_id', 'pivot'];
 
     private $acceptedFileFormats = ['xls', 'xlsx', 'csv', 'txt'];
 

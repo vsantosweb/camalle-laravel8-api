@@ -2,7 +2,9 @@
 
 namespace App\Models\Disc;
 
+use App\Jobs\JobsSendDiscQuiz;
 use App\Mail\Disc\SendDiscTest;
+use App\Models\Customer\Customer;
 use App\Models\Respondent\Respondent;
 use App\Models\Respondent\RespondentDiscMessage;
 use App\Models\Respondent\RespondentList;
@@ -24,133 +26,37 @@ class Disc extends Model
     }
 
 
-    public function generateTestDiscToRespondent($data)
+    public function createDiscQuizToRespondent($data)
     {
 
-        if (auth()->user()->subscription->credits < 1) {
+        auth()->user()->subscription->checkCreditAvaiable(1);
 
-            throw new \Exception('Insufficient credit balance');
-        }
-
-
-        $message = RespondentDiscMessage::create([
-            'uuid' => Str::uuid(),
-            'customer_id' => auth()->user()->id,
-            'name' => $data->name,
-            'subject' => $data->subject,
-            'content' => $data->content,
-            'sender_name' => auth()->user()->name
-        ]);
-
-        $respondent = Respondent::create([
-            'uuid' => Str::uuid(),
-            'customer_id' => auth()->user()->id,
-            'name' => $data->respondent_name,
-            'email' => $data->respondent_email,
-        ]);
-
-        $discTest = $respondent->discTests()->create([
-            'customer_id' => auth()->user()->id,
-            'respondent_name' => $respondent->name,
-            'message_uuid' => $message->uuid,
-            'code' => Str::random(15),
-        ]);
-
-        $token = hash('sha256', microtime());
-
-        $respondentSession = $respondent->discSessions()->create([
-            'token' => $token,
-            'email' => $respondent->email,
-            'view_report' => $data->view_report,
-            'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid=' . $token,
-            'session_data' => json_decode('{"ref":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
-
-        ]);
+        JobsSendDiscQuiz::dispatch($data, auth()->user()->id, 'respondent')->delay(now()->addSeconds(5));
 
         auth()->user()->subscription->dispatchCreditConsummation([0]);
-        
 
-        $compiledMessage = str_replace('[respondente]', $respondent->name, $message->content);
-        $message->content = $compiledMessage;
-        $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
-        
-        if(!$data->save_respondent){
-
-            $respondent->forceDelete();
-        }
-        return $respondentSession;
     }
 
-    public function generateTestDiscToList($data)
+    public function createDiscQuizToList($data)
     {
-        $lists = RespondentList::whereIn('uuid', $data->respondent_lists)->with('respondents')->get();
-        // return $lists;
-        //testing
-        // $lists = RespondentList::all();
 
-        if ($lists->isEmpty()) {
-            throw new \Exception('No registered lists');
-        }
 
+        $lists = RespondentList::whereIn('uuid',  $data['respondent_lists'])->with('respondents')->get();
         $respondents = [];
 
-        foreach ($lists as $list) {
+        foreach ($lists->toArray() as $list) {
 
-            foreach ($list->respondents as $respondent) array_push($respondents, $respondent);
+            foreach ($list['respondents'] as $respondent) array_push($respondents, $respondent);
         }
 
-        array_map(function ($list) {
-            $respondents[] = $list['respondents'];
-        }, $lists->toArray());
+        auth()->user()->subscription->checkCreditAvaiable(count($respondents));
 
-        if (auth()->user()->subscription->credits < count($respondents)) {
 
-            throw new \Exception('Insufficient credit balance');
-        }
-
-        $message = RespondentDiscMessage::create([
-            'uuid' => Str::uuid(),
-            'customer_id' => auth()->user()->id,
-            'name' => $data->name,
-            'subject' => $data->subject,
-            'content' => $data->content,
-            'sender_name' => auth()->user()->name
-        ]);
-
-        array_map(function ($list) use ($message) {
-            $message->lists()->attach($list['id']);
-        }, $lists->toArray());
-
-        $respondentSessions = [];
-
-        foreach ($respondents as $respondent) {
-
-            $discTest = $respondent->discTests()->create([
-                'customer_id' => auth()->user()->id,
-                'respondent_name' => $respondent->name,
-                'message_uuid' => $message->uuid,
-                'code' => Str::random(15),
-            ]);
-
-            $token = hash('sha256', microtime());
-
-            $respondentSession = $respondent->discSessions()->create([
-                'token' => $token,
-                'email' => $respondent->email,
-                'view_report' => $data->view_report,
-                'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid=' . $token,
-                'session_data' => json_decode('{"ref":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
-            ]);
-
-            $respondentSessions[] = $respondentSession;
-
-            $compiledMessage = str_replace('[respondente]', $respondent->name, $message->content);
-            $message->content = $compiledMessage;
-            $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
-        }
+        $job = JobsSendDiscQuiz::dispatch($data, auth()->user()->id, 'list')->delay(now()->addSeconds(5));
 
         auth()->user()->subscription->dispatchCreditConsummation($respondents);
 
-        return $respondentSessions;
+        return $job;
+
     }
 }

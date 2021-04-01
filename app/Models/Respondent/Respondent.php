@@ -53,7 +53,7 @@ class Respondent extends Model
     ];
 
 
-    public function discTests()
+    public function reports()
     {
         return $this->hasMany(RespondentDiscReport::class, 'respondent_email', 'email');
     }
