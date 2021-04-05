@@ -180,7 +180,7 @@ class JobsSendDiscQuiz implements ShouldQueue
 
             $compiledMessage = str_replace('[respondente]', $respondent->name, $message->content);
             $message->content = $compiledMessage;
-            // $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
+            $respondent->notify(new SendDiscTestMailNotification($respondentSession,  $message));
 
         }
 
