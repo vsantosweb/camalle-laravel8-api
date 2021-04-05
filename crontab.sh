@@ -1,13 +1,14 @@
 #!/bin/bash
 
+COMMANDS=("queue:work route:clear")
+PWD="/var/www/workstation/project-disc-laravel8-server"
 
-PROC_NAME="queue:work"
-QUIZ_QUEUE_PROCESS_COUNT=$(ps -ef | grep -i $PROC_NAME | wc -l)
-RUN_CMD="php /var/www/workstation/project-disc-laravel8-server/artisan schedule:run"
-
-if [[ $QUIZ_QUEUE_PROCESS_COUNT -gt 1 ]]
-then
-   echo "PHP job already running, nothing to do"
-else
-   $($RUN_CMD) 2> /dev/null 2>&1
-fi
+for command in $COMMANDS; do 
+   PROCESS_COUNT=$(ps -ef | grep -i $command | wc -l)
+      if [[ $PROCESS_COUNT -gt 1 ]]
+       then
+          echo $command "job already running, nothing to do"  2> /dev/null 2>&1
+      else
+         $(php $PWD/artisan $command) 2> /dev/null 2>&1
+      fi
+done

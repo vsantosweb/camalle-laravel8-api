@@ -82,7 +82,7 @@ class DiscSessionController extends DiscController
         $combination->intensities = $intensities;
         $combination->graphs = $request->graphs;
 
-        if ($combination->disc_profile_id == 3 || $combination->disc_profile_id == 4 || $combination->disc_profile_id == 5) {
+        if ($combination->disc_profile_id == 3) {
             return $this->outputJSON('Desvio', '', true, 200);
         }
 
