@@ -64,6 +64,7 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
             Route::post('create-to-respondent', 'CustomerDiscController@createToSingleRespondent');
             Route::get('queues', 'CustomerDiscController@queues');
             Route::get('filter', 'CustomerDiscController@filter');
+            Route::get('session/{code}', 'CustomerDiscController@getQuizSession');
         });
 
         Route::prefix('settings')->group(function () {

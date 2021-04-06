@@ -41,7 +41,7 @@ class RespondentDiscReport extends Model
 
     public function session()
     {
-        return $this->belongsTo(RespondentDiscSession::class, 'respondent_email', 'email')->withHiden('metadata');
+        return $this->belongsTo(RespondentDiscSession::class, 'respondent_email', 'email');
     }
     
     public static function makeReport($respondents = [])
