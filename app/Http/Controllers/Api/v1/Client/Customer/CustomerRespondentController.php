@@ -21,7 +21,13 @@ class CustomerRespondentController extends Controller
      */
     public function index()
     {
-        $respondents = auth()->user()->respondents()->with('lists', function ($query) {
+        
+        $respondents = auth()->user()->respondents();
+
+        $respondents = isset(request()->name) ? $respondents->where('name', 'like',  '%'.request()->name.'%') : $respondents;
+        $respondents = isset(request()->email) ? $respondents->where('email', request()->email) : $respondents;
+        
+        $respondents = $respondents->with('lists', function ($query) {
             $query->select('name');
         })
         ->withCount('reports');
@@ -69,7 +75,7 @@ class CustomerRespondentController extends Controller
     public function show($uuid)
     {
         $respondent = auth()->user()->respondents()->where('uuid', $uuid);
-        return $this->outputJSON($respondent->with('list', 'reports')->first(), 'Success', false);
+        return $this->outputJSON($respondent->with('lists', 'reports')->first(), 'Success', false);
     }
 
     /**

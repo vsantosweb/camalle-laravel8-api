@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class TestFinished extends Notification
+class NewCustomerNotification extends Notification
 {
     use Queueable;
 
@@ -16,9 +16,9 @@ class TestFinished extends Notification
      *
      * @return void
      */
-    public function __construct($discTest)
+    public function __construct()
     {
-        $this->discTest = $discTest;
+        //
     }
 
     /**
@@ -29,7 +29,7 @@ class TestFinished extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['database'];
     }
 
     /**
@@ -40,11 +40,10 @@ class TestFinished extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = env('APP_URL') . DIRECTORY_SEPARATOR . 'report' . DIRECTORY_SEPARATOR . $this->discTest->code;
-
         return (new MailMessage)
-            ->subject('O respondente ' . $this->discTest->respondent_name . ' finalizou o teste')
-            ->view('mails.disc.testFinished' , ['discTest' => $this->discTest, 'url' => $url]);
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**
@@ -56,7 +55,7 @@ class TestFinished extends Notification
     public function toArray($notifiable)
     {
         return [
-            'respondent' => $this->discTest->respondent_name
+            //
         ];
     }
 }

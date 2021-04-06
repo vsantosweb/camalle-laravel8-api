@@ -44,38 +44,15 @@ class CustomerDiscController extends Controller
 
     public function queues()
     {
-        return $this->outputJSON(auth()->user()->messages()->orderBy('created_at','desc')->get(), '', false, 200);
+        return $this->outputJSON(auth()->user()->messages()->orderBy('created_at', 'desc')->get(), '', false, 200);
     }
-    
+
     public function filter(Request $request)
     {
-        // $discTestQuery =  DB::table('respondent_disc_reports AS test')
-        //     ->select(
-        //         'test.code as disc_test_code',
-        //         'test.category',
-        //         'test.profile',
-        //         'test.was_finished',
-        //         'test.created_at',
-        //         'test.updated_at',
-        //         'respondent.name',
-        //         'respondent.email',
-        //         'respondent.custom_fields'
-        //     )
-        //     ->join('respondents AS respondent', 'test.respondent_email', 'respondent.email')
-        //     ->join('respondents_to_respondent_lists', 'respondents_to_respondent_lists.respondent_id', 'respondent.id')
-
-        //     ->join('customers AS customer', 'customer.id', 'respondent.customer_id')
-
-        //     ->join('respondent_lists AS respondentList', 'customer.id','respondentList.customer_id')
-        //     ->where('respondent.customer_id', auth()->user()->id);
-
-
 
         $discTestQuery =  DB::table('respondent_disc_reports AS report')
             ->select(
 
-                // 'list.name as list_name',
-                // 'respondent.id',
                 'report.code',
                 'report.category',
                 'report.profile',
@@ -83,13 +60,8 @@ class CustomerDiscController extends Controller
                 'report.respondent_email',
                 'report.was_finished',
                 'report.created_at',
-                'report.updated_at'
+                'report.updated_at',
             )
-            // ->join('respondents AS respondent', 'report.respondent_email', 'respondent.email')
-
-            // ->join('respondents_to_lists', 'respondents_to_lists.respondent_id', 'respondent.id')
-            // ->join('respondent_lists AS list', 'respondents_to_lists.respondent_list_id', 'list.id')
-
 
             ->where('report.customer_id', auth()->user()->id);
 
@@ -111,5 +83,14 @@ class CustomerDiscController extends Controller
 
 
         return $this->outputJSON($queryResulType, '', false);
+    }
+
+    public function getQuizSession($code)
+    {   
+        $reports = auth()->user()->discReports();
+
+        return $this->outputJSON( $reports->where('code', $code)->first()->session, '', false);
+
+        return auth()->user()->discReports;
     }
 }
