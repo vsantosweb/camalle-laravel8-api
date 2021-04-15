@@ -88,6 +88,7 @@ class Customer extends Authenticatable implements JWTSubject
      *
      * @return mixed
      */
+ 
     public function sendMailVerification()
     {
 

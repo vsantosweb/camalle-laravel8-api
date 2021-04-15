@@ -50,7 +50,7 @@ class DiscPlanSubscription extends Model
     public static function closeInvoices()
     {
 
-        $subscriptions = self::where('expire_at', '>', now())->get();
+        $subscriptions = self::where('expire_at', '>=', date('Y-m-d'))->get();
 
         foreach ($subscriptions as $subscription) {
 
@@ -58,10 +58,21 @@ class DiscPlanSubscription extends Model
 
             $expirationDate = Carbon::createFromDate($subscription->expire_at);
 
-            $subscriptionCicle = Carbon::createFromDate($subscription->expire_at)->format('d-m-y');
-            $invoiceExpireAt = Carbon::createFromDate($subscription->expire_at)->addDays(10)->format('d-m-y');
-            $invoiceCloseAt = Carbon::createFromDate($subscription->expire_at)->addDays(-5)->format('d-m-y');
+            $subscriptionCicle = Carbon::createFromDate($subscription->expire_at)->format('y-m-d');
+            $invoiceExpireAt = Carbon::createFromDate($subscription->expire_at)->addDays(-1)->format('y-m-d');
+            $invoiceCloseAt = Carbon::createFromDate($subscription->expire_at)->addDays(-5)->format('y-m-d');
 
+            // return [$expirationDate->addDays(-5)->diffInDays($subscription->expire_at), $subscription->expire_at];
+
+           return DiscPlanSubscriptionInvoice::create([
+                'code' => md5(microtime()),
+                'plan_subscription_id'=> $subscription->id,
+                'amount' => $subscription->amount,
+                'cicle' => $subscriptionCicle,
+                'status' => 'CLOSING',
+                'closed_at' => $invoiceCloseAt,
+                'expire_at' => $invoiceExpireAt
+            ]);
             return dd([
 
                 'ciclo' => $subscriptionCicle,
@@ -70,7 +81,6 @@ class DiscPlanSubscription extends Model
 
             ]);
 
-            return [$expirationDate->addDays(-5)->diffInDays($subscription->expire_at), $subscription->expire_at];
         }
     }
 

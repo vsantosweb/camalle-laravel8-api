@@ -19,7 +19,9 @@ class CreateDiscPlanSubscriptionInvoicesTable extends Migration
             $table->unsignedBigInteger('plan_subscription_id');
             $table->string('status');
             $table->double('amount');
-            $table->timestamp('expire_at');
+            $table->timestamp('expire_at')->nullable();
+            $table->timestamp('closed_at')->nullable();
+            $table->timestamp('cicle')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

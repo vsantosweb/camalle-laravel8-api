@@ -50,7 +50,7 @@ class CustomerDiscController extends Controller
     public function filter(Request $request)
     {
 
-        $discTestQuery =  DB::table('respondent_disc_reports AS report')
+        $discTestQuery =  DB::table('respondent_lists AS list')
             ->select(
 
                 'report.code',
@@ -61,11 +61,14 @@ class CustomerDiscController extends Controller
                 'report.was_finished',
                 'report.created_at',
                 'report.updated_at',
+                'list.name'
             )
-
+            ->join('respondents_to_lists', 'respondents_to_lists.respondent_list_id',  'list.id')
+            ->join('respondents as respondent', 'respondent.id', 'respondents_to_lists.respondent_id')
+            ->join('respondent_disc_reports as report', 'report.respondent_email', 'respondent.email')
             ->where('report.customer_id', auth()->user()->id);
 
-        $discTestQuery = isset($request->profile) ? $discTestQuery->where('profile', $request->profile) : $discTestQuery;
+        $discTestQuery = isset($request->profile) ? $discTestQuery->whereIn('profile', explode(',',  $request->profile)) : $discTestQuery;
         $discTestQuery = isset($request->category) ? $discTestQuery->where('category', $request->category) : $discTestQuery;
 
         $discTestQuery = isset($request->was_finished) ? $discTestQuery->where('was_finished', $request->was_finished) : $discTestQuery;
@@ -86,10 +89,10 @@ class CustomerDiscController extends Controller
     }
 
     public function getQuizSession($code)
-    {   
+    {
         $reports = auth()->user()->discReports();
 
-        return $this->outputJSON( $reports->where('code', $code)->first()->session, '', false);
+        return $this->outputJSON($reports->where('code', $code)->first()->session, '', false);
 
         return auth()->user()->discReports;
     }

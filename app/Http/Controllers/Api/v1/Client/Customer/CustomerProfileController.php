@@ -17,25 +17,24 @@ class CustomerProfileController extends Controller
     public function updateProfile(Request $request)
     {
         try {
-
+            
             auth()->user()->update($request->all());
 
             if (is_null(auth()->user()->address)) {
                 auth()->user()->address()->create($request->address);
             }
 
-            if(isset($request->address)){
+            if (isset($request->address)) {
                 auth()->user()->address()->update($request->address);
-
             }
 
             return $this->outputJSON(auth()->user()->load('address'), 'Sucesss', 200);
-
         } catch (\Exception $e) {
 
             return $this->outputJSON([], 'false', $e->getMessage(), 500);
         }
     }
+
     public function changePassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -55,5 +54,12 @@ class CustomerProfileController extends Controller
 
             return $this->outputJSON([], 'false', $e->getMessage(), 500);
         }
+    }
+
+    public function generateApicredential()
+    {
+        $apiCredential = auth()->user()->api_token = hash('sha256', auth()->user()->email . env('APP_KEY'));
+        auth()->user()->save();
+        return $this->outputJSON($apiCredential, '', false, 200);
     }
 }

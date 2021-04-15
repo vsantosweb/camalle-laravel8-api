@@ -40,6 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'customer-integration' => [
+            'driver' => 'token',
+            'provider' => 'customers',
+            'hash' => false,
+        ],
+        
         'user' => [
             'driver' => 'jwt',
             'provider' => 'users',

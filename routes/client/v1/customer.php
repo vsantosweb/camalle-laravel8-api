@@ -43,6 +43,7 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
             Route::get('show', 'CustomerProfileController@showProfile');
             Route::patch('update', 'CustomerProfileController@updateProfile');
             Route::put('change-password', 'CustomerProfileController@changePassword');
+            Route::post('api-token', 'CustomerProfileController@generateApicredential');
         });
 
         Route::prefix('subscription')->group(function () {
@@ -71,4 +72,10 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
             Route::resource('custom-fields', 'CustomerRespondentCustomFieldController');
         });
     });
+});
+
+
+
+Route::middleware('auth:customer-integration')->get('/test', function() {
+    return auth()->user();
 });
