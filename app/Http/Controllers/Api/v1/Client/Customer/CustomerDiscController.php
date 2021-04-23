@@ -32,8 +32,30 @@ class CustomerDiscController extends Controller
 
     public function createToSingleRespondent(Request $request)
     {
-        $disc = new Disc;
-        return  $disc->createDiscQuizToRespondent($request->all());
+
+        if (!auth()->user()->subscription->status) {
+            return $this->outputJSON([], 'subscription disabled', false);
+        }
+        
+        $request->validate( [
+            'name' => 'required',
+            'subject'=> 'required',
+            'content' => 'required',
+            'respondent_name'=> 'required',
+            'respondent_email' => 'required',
+        ]);
+
+        try {
+
+            $disc = new Disc;
+            $disc->createDiscQuizToRespondent($request->all());
+            return $this->outputJSON('Quiz generated successfully', '', false, 201);
+
+        } catch (\Exception $e) {
+
+            return $this->outputJSON($e->getMessage(), '', false, 201);
+
+        }
     }
 
     public function show($code)
