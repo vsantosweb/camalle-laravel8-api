@@ -1,0 +1,98 @@
+{
+    "openapi" : "3.0.0",
+    "info" : {
+      "description" : "O objetivo desta documentação é orientar o desenvolvedor sobre como integrar com a API Camalle, descrevendo as funcionalidades, os métodos a serem utilizados, listando informações a serem enviadas e recebidas, e provendo exemplos. Para utilização da API é necessário possuir o token de authenticação",
+      "version" : "1.0.0-oas3",
+      "title" : "Visão Geral - Api Camalle",
+      "contact" : {
+        "email" : "contato@camalle.com.br"
+      }
+    },
+    "paths" : {
+      "/generate-quiz" : {
+        "post" : {
+          "tags" : [ "Criar novo questionário" ],
+          "summary" : "cria um novo questionário",
+          "description" : "Para criar um novo questionário par um respondente basta fazer um POST conforme o exemplo enviando seu token de de authenticação.",
+          "operationId" : "createQuestionary",
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MessageData"
+                }
+              }
+            },
+            "description" : "Inventory item to add"
+          },
+          "responses" : {
+            "201" : {
+              "description" : "item created"
+            },
+            "400" : {
+              "description" : "invalid input, object invalid"
+            },
+            "409" : {
+              "description" : "an existing item already exists"
+            }
+          }
+        }
+      }
+    },
+    "servers" : [ {
+      "url" : "http://api.disc-camalle-ho.soue.com.br/api/v1/client"
+    } ],
+    "security" : [ {
+      "bearerAuth" : [ ]
+    } ],
+    "components" : {
+      "securitySchemes" : {
+        "bearerAuth" : {
+          "type" : "http",
+          "scheme" : "bearer",
+          "bearerFormat" : "JWT"
+        }
+      },
+      "schemas" : {
+        "MessageData" : {
+          "type" : "object",
+          "required" : [ "content", "name", "respondent_email", "respondent_name", "subject" ],
+          "properties" : {
+            "name" : {
+              "type" : "string",
+              "example" : "Avaliação DISC 2021-04-20",
+              "description" : "Nome para identificação da mensagem"
+            },
+            "subject" : {
+              "type" : "string",
+              "example" : "Avaliação disc",
+              "description" : "Assunto do email que chegará ao respondente"
+            },
+            "content" : {
+              "type" : "string",
+              "example" : "Olá você foi convidado para realizar uma avaição disc.",
+              "description" : "Conteúdo da mensagem que será visualizada no email do respondent está opção pode ser predefinida."
+            },
+            "view_report" : {
+              "type" : "boolean",
+              "example" : false,
+              "description" : "Define se o respondente poderá visualizar o relatório no final do questionário"
+            },
+            "save_respondent" : {
+              "type" : "boolean",
+              "example" : false,
+              "description" : "Com está opção habilitada o respondente será salvo na sua lista de respondentes"
+            },
+            "respondent_name" : {
+              "type" : "string",
+              "example" : "John Doe"
+            },
+            "respondent_email" : {
+              "type" : "string",
+              "example" : "john@doe.com"
+            }
+          }
+        }
+      }
+    }
+  }
