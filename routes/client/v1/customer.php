@@ -43,6 +43,7 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
             Route::get('show', 'CustomerProfileController@showProfile');
             Route::patch('update', 'CustomerProfileController@updateProfile');
             Route::put('change-password', 'CustomerProfileController@changePassword');
+            Route::post('api-token', 'CustomerProfileController@generateApicredential');
         });
 
         Route::prefix('subscription')->group(function () {
@@ -72,3 +73,24 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
         });
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| CUSTOMER INTEGRATION Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register CUSTOMER routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
+
+Route::middleware('auth:customer-integration')->namespace('Api\v1\Client\Customer')->group(function() {
+
+    Route::post('generate-quiz', 'CustomerDiscController@createToSingleRespondent');
+
+});
+
+// Route::middleware('auth:customer-integration')->group(function() {
+//     Route::post('generate-quiz', 'CustomerDiscController@createToSingleRespondent');
+// });

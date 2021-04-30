@@ -21,16 +21,16 @@ class CustomerRespondentController extends Controller
      */
     public function index()
     {
-        
+
         $respondents = auth()->user()->respondents();
 
-        $respondents = isset(request()->name) ? $respondents->where('name', 'like',  '%'.request()->name.'%') : $respondents;
+        $respondents = isset(request()->name) ? $respondents->where('name', 'like',  '%' . request()->name . '%') : $respondents;
         $respondents = isset(request()->email) ? $respondents->where('email', request()->email) : $respondents;
-        
+
         $respondents = $respondents->with('lists', function ($query) {
             $query->select('name');
         })
-        ->withCount('reports');
+            ->withCount('reports');
 
         $result = isset(request()->page) ? $respondents->paginate(25) : $respondents->get();
 
@@ -49,12 +49,12 @@ class CustomerRespondentController extends Controller
         try {
 
             $newRespondent = auth()->user()->respondents()->firstOrcreate([
-                
+
                 'uuid' => Str::uuid(),
                 'name' => $request->name,
                 'email' => $request->email,
                 'custom_fields' => $request->custom_fields,
-                
+
             ]);
 
             $newRespondent->lists()->attach($request->respondent_lists);

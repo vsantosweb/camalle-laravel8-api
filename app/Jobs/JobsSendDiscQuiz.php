@@ -78,7 +78,7 @@ class JobsSendDiscQuiz implements ShouldQueue
             'status' =>'sending',
             'sender_name' => $customer->name
         ]);
-
+        
         $respondent = Respondent::create([
             'uuid' => Str::uuid(),
             'customer_id' => $customer->id,

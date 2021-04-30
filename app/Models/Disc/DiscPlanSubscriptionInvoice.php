@@ -15,6 +15,8 @@ class DiscPlanSubscriptionInvoice extends Model
         'status',
         'amount',
         'expire_at',
+        'closed_at',
+        'cicle',
     ];
 
     public function subscription()
