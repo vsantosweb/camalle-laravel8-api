@@ -2,8 +2,8 @@
     "openapi" : "3.0.0",
     "info" : {
       "description" : "O objetivo desta documentação é orientar o desenvolvedor sobre como integrar com a API Camalle, descrevendo as funcionalidades, os métodos a serem utilizados, listando informações a serem enviadas e recebidas, e provendo exemplos. Para utilização da API é necessário possuir o token de authenticação",
-      "version" : "1.0.0-oas3",
-      "title" : "Visão Geral - Api Camalle",
+      "version" : "1.0.0",
+      "title" : "Camalle",
       "contact" : {
         "email" : "contato@camalle.com.br"
       }
@@ -13,7 +13,7 @@
         "post" : {
           "tags" : [ "Criar novo questionário" ],
           "summary" : "cria um novo questionário",
-          "description" : "Para criar um novo questionário par um respondente basta fazer um POST conforme o exemplo enviando seu token de de authenticação.",
+          "description" : "Para criar um novo questionário para um respondente basta fazer um POST conforme o exemplo enviando seu token de de authenticação.",
           "operationId" : "createQuestionary",
           "requestBody" : {
             "content" : {
@@ -60,18 +60,18 @@
           "properties" : {
             "name" : {
               "type" : "string",
-              "example" : "Avaliação DISC 2021-04-20",
-              "description" : "Nome para identificação da mensagem"
+              "example" : "<string>",
+              "description" : "<string>"
             },
             "subject" : {
               "type" : "string",
-              "example" : "Avaliação disc",
-              "description" : "Assunto do email que chegará ao respondente"
+              "example" : "<string>",
+              "description" : "<string>"
             },
             "content" : {
               "type" : "string",
-              "example" : "Olá você foi convidado para realizar uma avaição disc.",
-              "description" : "Conteúdo da mensagem que será visualizada no email do respondent está opção pode ser predefinida."
+              "example" : "<string>",
+              "description" : "<string>"
             },
             "view_report" : {
               "type" : "boolean",
@@ -85,11 +85,11 @@
             },
             "respondent_name" : {
               "type" : "string",
-              "example" : "John Doe"
+              "example" : "<string>"
             },
             "respondent_email" : {
               "type" : "string",
-              "example" : "john@doe.com"
+              "example" : "<string>"
             }
           }
         }
