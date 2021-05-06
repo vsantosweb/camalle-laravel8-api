@@ -53,7 +53,7 @@ class CustomerDiscController extends Controller
 
         } catch (\Exception $e) {
 
-            return $this->outputJSON($e->getMessage(), '', false, 201);
+            return $this->outputJSON($e->getMessage(), '', true, 500);
 
         }
     }
