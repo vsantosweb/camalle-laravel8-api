@@ -40,7 +40,7 @@
       }
     },
     "servers" : [ {
-      "url" : "http://api.disc-camalle-ho.soue.com.br/api/v1/client"
+      "url" : "https://api.camalle.com.br/api/v1/client"
     } ],
     "security" : [ {
       "bearerAuth" : [ ]
