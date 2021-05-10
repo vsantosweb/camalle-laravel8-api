@@ -8,6 +8,12 @@
         "email" : "contato@camalle.com.br"
       }
     },
+    "servers" : [ {
+      "url" : "https://api.camalle.com.br/api/v1/client"
+    } ],
+    "security" : [ {
+      "bearerAuth" : [ ]
+    } ],
     "paths" : {
       "/generate-quiz" : {
         "post" : {
@@ -38,22 +44,28 @@
           }
         }
       },
-      "/consult-report" : {
+      "/consult-report?respondent_email={respondent_email}" : {
         "get" : {
           "tags" : [ "Consultar relatório de um respondente" ],
           "summary" : "Faz a consulta de um relátorio",
           "description" : "Para fazer a consulta, basta enviar o endereço de email de um respondente que já tenha algum relatório na Camalle",
           "operationId" : "consultReport",
-          "requestBody" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetReport"
-                }
-              }
-            },
-            "description" : ""
-          },
+          "parameters": [
+            {
+              "name": "respondent_email",
+              "in": "query",
+              "description": "Email do respondente",
+              "required": true,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [],
+                "default": "available"
+              },
+              "collectionFormat": "multi"
+            }
+          ],
+         
           "responses" : {
             "201" : {
               "description" : "item created"
@@ -68,12 +80,7 @@
         }
       }
     },
-    "servers" : [ {
-      "url" : "http://souedisc/api/v1/client"
-    } ],
-    "security" : [ {
-      "bearerAuth" : [ ]
-    } ],
+   
     "components" : {
       "securitySchemes" : {
         "bearerAuth" : {
