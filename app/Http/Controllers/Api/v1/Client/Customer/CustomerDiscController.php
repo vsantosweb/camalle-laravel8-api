@@ -119,18 +119,19 @@ class CustomerDiscController extends Controller
     public function consultReport()
     {
         $data = request()->only('respondent_email');
-        
+
         if (empty($data)) {
 
             return $this->outputJSON([], '', true, 400);
         }
-        $report = RespondentDiscReport::where('respondent_email', $data['respondent_email'])->get();
+        $report = 
+        RespondentDiscReport::where('was_finished', 1)->where('respondent_email', $data['respondent_email'])->get();
 
 
         if (!$report->isEmpty()) {
 
             $report = $report->last();
-
+            return $report;
             return $this->outputJSON([
                 'respondent_name' => $report->respondent_name,
                 'respondent_email' => $report->respondent_email,
