@@ -28,7 +28,7 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
         Route::get('customer-types', 'CustomerRegisterController@customerTypes');
 
         Route::middleware('auth:customer')->group(function () {
-            
+
             Route::post('email/resend', 'CustomerVerificationController@resend');
 
             Route::post('logout', 'CustomerAuthController@logout');
@@ -85,10 +85,13 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
 |
 */
 
-Route::middleware('auth:customer-integration')->namespace('Api\v1\Client\Customer')->group(function() {
+Route::namespace('Api\v1\Client\Customer')->group(function () {
 
-    Route::post('generate-quiz', 'CustomerDiscController@createToSingleRespondent');
+    Route::middleware('auth:customer-integration')->group(function () {
+        Route::post('generate-quiz', 'CustomerDiscController@createToSingleRespondent');
+    });
 
+    Route::get('consult-report', 'CustomerDiscController@consultReport');
 });
 
 // Route::middleware('auth:customer-integration')->group(function() {
