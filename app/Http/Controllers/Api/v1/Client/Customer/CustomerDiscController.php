@@ -36,12 +36,12 @@ class CustomerDiscController extends Controller
         if (!auth()->user()->subscription->status) {
             return $this->outputJSON([], 'subscription disabled', false);
         }
-        
-        $request->validate( [
+
+        $request->validate([
             'name' => 'required',
-            'subject'=> 'required',
+            'subject' => 'required',
             'content' => 'required',
-            'respondent_name'=> 'required',
+            'respondent_name' => 'required',
             'respondent_email' => 'required',
         ]);
 
@@ -50,11 +50,9 @@ class CustomerDiscController extends Controller
             $disc = new Disc;
             $disc->createDiscQuizToRespondent($request->all());
             return $this->outputJSON('Quiz generated successfully', '', false, 201);
-
         } catch (\Exception $e) {
 
             return $this->outputJSON($e->getMessage(), '', true, 500);
-
         }
     }
 
@@ -116,5 +114,34 @@ class CustomerDiscController extends Controller
         return $this->outputJSON($reports->where('code', $code)->first()->session, '', false);
 
         return auth()->user()->discReports;
+    }
+
+    public function consultReport()
+    {
+        $data = request()->only('respondent_email');
+        
+        if (empty($data)) {
+
+            return $this->outputJSON([], '', true, 400);
+        }
+        $report = RespondentDiscReport::where('respondent_email', $data['respondent_email'])->get();
+
+
+        if (!$report->isEmpty()) {
+
+            $report = $report->last();
+
+            return $this->outputJSON([
+                'respondent_name' => $report->respondent_name,
+                'respondent_email' => $report->respondent_email,
+                'perfil' => $report->profile,
+                'category' => $report->category,
+                'report_url' => env('APP_URL') . '/view-report?trackid=' . $report->code,
+                'metadata' => $report->metadata->intensities->difference,
+            ], '', false, 200);
+        }
+
+
+        return $this->outputJSON([], '', true, 404);
     }
 }

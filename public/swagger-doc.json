@@ -23,7 +23,36 @@
                 }
               }
             },
-            "description" : "Inventory item to add"
+            "description" : ""
+          },
+          "responses" : {
+            "201" : {
+              "description" : "item created"
+            },
+            "400" : {
+              "description" : "invalid input, object invalid"
+            },
+            "409" : {
+              "description" : "an existing item already exists"
+            }
+          }
+        }
+      },
+      "/consult-report" : {
+        "post" : {
+          "tags" : [ "Consultar relatório de um respondente" ],
+          "summary" : "Faz a consulta de um relátorio",
+          "description" : "Para fazer a consulta, basta enviar o endereço de email de um respondente que já tenha algum relatório na Camalle",
+          "operationId" : "consultReport",
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetReport"
+                }
+              }
+            },
+            "description" : ""
           },
           "responses" : {
             "201" : {
@@ -40,7 +69,7 @@
       }
     },
     "servers" : [ {
-      "url" : "https://api.camalle.com.br/api/v1/client"
+      "url" : "http://souedisc/api/v1/client"
     } ],
     "security" : [ {
       "bearerAuth" : [ ]
@@ -90,6 +119,17 @@
             "respondent_email" : {
               "type" : "string",
               "example" : "<string>"
+            }
+          }
+        },
+        "GetReport" : {
+          "type" : "object",
+          "required" : ["respondent_email"],
+          "properties" : {
+            "respondent_email" : {
+              "type" : "string",
+              "example" : "<string>",
+              "description" : "<string>"
             }
           }
         }
