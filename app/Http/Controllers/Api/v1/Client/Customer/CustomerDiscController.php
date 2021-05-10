@@ -131,14 +131,15 @@ class CustomerDiscController extends Controller
         if (!$report->isEmpty()) {
 
             $report = $report->last();
-            
+
             return $this->outputJSON([
                 'respondent_name' => $report->respondent_name,
                 'respondent_email' => $report->respondent_email,
                 'perfil' => $report->profile,
                 'category' => $report->category,
                 'report_url' => env('APP_URL') . '/view-report?trackid=' . $report->code,
-                'metadata' => $report->metadata->intensities->difference,
+                'created_at' => $report->created_at->format('d-m-Y'),
+                'metadata' => $report->metadata->intensities->difference
             ], '', false, 200);
         }
 
