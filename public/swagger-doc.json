@@ -39,7 +39,7 @@
         }
       },
       "/consult-report" : {
-        "post" : {
+        "get" : {
           "tags" : [ "Consultar relatório de um respondente" ],
           "summary" : "Faz a consulta de um relátorio",
           "description" : "Para fazer a consulta, basta enviar o endereço de email de um respondente que já tenha algum relatório na Camalle",
