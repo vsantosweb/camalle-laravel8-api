@@ -131,7 +131,7 @@ class CustomerDiscController extends Controller
         if (!$report->isEmpty()) {
 
             $report = $report->last();
-            return $report;
+            
             return $this->outputJSON([
                 'respondent_name' => $report->respondent_name,
                 'respondent_email' => $report->respondent_email,
