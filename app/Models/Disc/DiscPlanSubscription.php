@@ -40,9 +40,11 @@ class DiscPlanSubscription extends Model
 
     public function checkCreditAvaiable($respondentcount)
     {
-
+        
         if ($this->credits >= $respondentcount) {
-            return true;
+            return 'credits';
+        } else if ($this->additionals_credits >= $respondentcount) {
+            return  'additionals_credits';
         }
         throw new \Exception('Insufficient credit balance', 1);
     }
@@ -64,9 +66,9 @@ class DiscPlanSubscription extends Model
 
             // return [$expirationDate->addDays(-5)->diffInDays($subscription->expire_at), $subscription->expire_at];
 
-           return DiscPlanSubscriptionInvoice::create([
+            return DiscPlanSubscriptionInvoice::create([
                 'code' => md5(microtime()),
-                'plan_subscription_id'=> $subscription->id,
+                'plan_subscription_id' => $subscription->id,
                 'amount' => $subscription->amount,
                 'cicle' => $subscriptionCicle,
                 'status' => 'CLOSING',
@@ -80,14 +82,13 @@ class DiscPlanSubscription extends Model
                 'vencimento_fatura' => $invoiceExpireAt,
 
             ]);
-
         }
     }
 
-    public function dispatchCreditConsummation($respondents)
+    public function dispatchCreditConsummation($respondents, $creditType)
     {
-        
-        $this->credits -= count($respondents);
+
+        $this->$creditType -= count($respondents);
         $this->total_usage += count($respondents);
         $this->save();
     }

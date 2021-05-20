@@ -93,17 +93,14 @@ class JobsSendDiscQuiz implements ShouldQueue
             'code' => Str::random(15),
         ]);
 
-        $token = hash('sha256', microtime());
-
         $respondentSession = $respondent->discSessions()->create([
-            'token' => $token,
+            'token' => $this->data['token'],
             'email' => $respondent->email,
             'view_report' => $this->data['view_report'],
-            'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid=' . $token,
+            'session_url' => env('APP_URL_DISC_SESSION') . DIRECTORY_SEPARATOR .  '?trackid=' .  $this->data['token'],
             'session_data' => json_decode('{"ref":"' . $discTest->code . '","items":[{"graphName":"less","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"more","graphLetters":{"D":0,"I":0,"S":0,"C":0}},{"graphName":"difference","graphLetters":{"D":0,"I":0,"S":0,"C":0}}]}', TRUE)
 
         ]);
-
 
 
         $compiledMessage = str_replace('[respondente]', $respondent->name, $message->content);
@@ -165,7 +162,6 @@ class JobsSendDiscQuiz implements ShouldQueue
                 'message_uuid' => $message->uuid,
                 'code' => Str::random(15),
             ]);
-
             $token = hash('sha256', microtime());
 
             $respondentSession = $respondent->discSessions()->create([

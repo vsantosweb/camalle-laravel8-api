@@ -4,13 +4,9 @@ namespace App\Http\Controllers\Api\v1\Client\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Disc\Disc;
-use App\Models\Respondent\RespondentDiscMessageQueue;
 use App\Models\Respondent\RespondentDiscReport;
-use App\Models\Respondent\RespondentList;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CustomerDiscController extends Controller
 {
@@ -48,8 +44,10 @@ class CustomerDiscController extends Controller
         try {
 
             $disc = new Disc;
-            $disc->createDiscQuizToRespondent($request->all());
-            return $this->outputJSON('Quiz generated successfully', '', false, 201);
+            $response =  $disc->createDiscQuizToRespondent($request->all());
+            return $this->outputJSON([
+                'session_url' => $response->session_url,
+            ], 'Envio realizado com sucesso', false, 201);
         } catch (\Exception $e) {
 
             return $this->outputJSON($e->getMessage(), '', true, 500);
@@ -124,8 +122,8 @@ class CustomerDiscController extends Controller
 
             return $this->outputJSON([], '', true, 400);
         }
-        $report = 
-        RespondentDiscReport::where('was_finished', 1)->where('respondent_email', $data['respondent_email'])->get();
+        $report =
+            RespondentDiscReport::where('was_finished', 1)->where('respondent_email', $data['respondent_email'])->get();
 
 
         if (!$report->isEmpty()) {
