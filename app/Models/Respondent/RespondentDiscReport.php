@@ -41,7 +41,7 @@ class RespondentDiscReport extends Model
 
     public function session()
     {
-        return $this->belongsTo(RespondentDiscSession::class, 'respondent_email', 'email');
+        return $this->belongsTo(RespondentDiscSession::class, 'id', 'id');
     }
     
     public static function makeReport($respondents = [])
