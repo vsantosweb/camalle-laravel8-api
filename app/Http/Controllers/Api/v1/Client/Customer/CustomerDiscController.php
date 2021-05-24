@@ -40,14 +40,16 @@ class CustomerDiscController extends Controller
             'respondent_name' => 'required',
             'respondent_email' => 'required',
         ]);
-
+        
         try {
 
             $disc = new Disc;
             $response =  $disc->createDiscQuizToRespondent($request->all());
+            
             return $this->outputJSON([
                 'session_url' => $response->session_url,
             ], 'Envio realizado com sucesso', false, 201);
+
         } catch (\Exception $e) {
 
             return $this->outputJSON($e->getMessage(), '', true, 500);
@@ -70,11 +72,13 @@ class CustomerDiscController extends Controller
 
         $discTestQuery =  DB::table('respondent_disc_reports as report')->where('report.customer_id', auth()->user()->id);
         $discTestQuery = isset($request->list) ?
+
             $discTestQuery->where('list.uuid', $request->list)
             ->join('respondents AS respondent', 'report.respondent_email', 'respondent.email')
             ->join('respondents_to_lists', 'respondents_to_lists.respondent_id',  'respondent.id')
             ->join('respondent_lists AS list', 'list.id', 'respondents_to_lists.respondent_list_id')
             ->select('list.name', 'list.uuid') : $discTestQuery;
+            
         $discTestQuery
             ->select(
                 'report.code',
