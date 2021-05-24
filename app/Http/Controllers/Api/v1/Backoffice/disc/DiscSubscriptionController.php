@@ -1,18 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Backoffice\Disc\Plan;
+namespace App\Http\Controllers\Api\v1\Backoffice\disc;
 
 use App\Http\Controllers\Controller;
-use App\Models\Disc\DiscPlanSubscription;
 use Illuminate\Http\Request;
 
-class DiscPlanSubscriptionController extends Controller
+class DiscSubscriptionController extends Controller
 {
-
-    public function __construct(DiscPlanSubscription $discPlanSubscription){
-
-        $this->discPlanSubscription = $discPlanSubscription;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,11 +14,7 @@ class DiscPlanSubscriptionController extends Controller
      */
     public function index()
     {
-        $customers = $this->discPlanSubscription->with(['customer' => function($query){
-            $query->select('id', 'name', 'company_name');
-        }])->get();
-
-        return $customers;
+        //
     }
 
     /**

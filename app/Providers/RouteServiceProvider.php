@@ -53,7 +53,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::prefix('api/v1/backoffice')->middleware('api')->namespace($this->namespace)->group(function(){
 
                 require_once base_path('routes/backoffice/v1/customer.php');
-
+                require_once base_path('routes/backoffice/v1/user.php');
+                
             });
         });
     }

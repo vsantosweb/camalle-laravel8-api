@@ -4,13 +4,9 @@ namespace App\Http\Controllers\Api\v1\Client\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Disc\Disc;
-use App\Models\Respondent\RespondentDiscMessageQueue;
 use App\Models\Respondent\RespondentDiscReport;
-use App\Models\Respondent\RespondentList;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CustomerDiscController extends Controller
 {
@@ -48,8 +44,10 @@ class CustomerDiscController extends Controller
         try {
 
             $disc = new Disc;
-            $disc->createDiscQuizToRespondent($request->all());
-            return $this->outputJSON('Quiz generated successfully', '', false, 201);
+            $response =  $disc->createDiscQuizToRespondent($request->all());
+            return $this->outputJSON([
+                'session_url' => $response->session_url,
+            ], 'Envio realizado com sucesso', false, 201);
         } catch (\Exception $e) {
 
             return $this->outputJSON($e->getMessage(), '', true, 500);
@@ -70,13 +68,14 @@ class CustomerDiscController extends Controller
     public function filter(Request $request)
     {
 
-        $discTestQuery =  DB::table('respondents as respondent')->where('report.customer_id', auth()->user()->id);
+        $discTestQuery =  DB::table('respondent_disc_reports as report')->where('report.customer_id', auth()->user()->id);
         $discTestQuery = isset($request->list) ?
             $discTestQuery->where('list.uuid', $request->list)
+            ->join('respondents AS respondent', 'report.respondent_email', 'respondent.email')
             ->join('respondents_to_lists', 'respondents_to_lists.respondent_id',  'respondent.id')
             ->join('respondent_lists AS list', 'list.id', 'respondents_to_lists.respondent_list_id')
             ->select('list.name', 'list.uuid') : $discTestQuery;
-        $discTestQuery->join('respondent_disc_reports as report', 'report.respondent_email', 'respondent.email')
+        $discTestQuery
             ->select(
                 'report.code',
                 'report.category',
@@ -124,23 +123,29 @@ class CustomerDiscController extends Controller
 
             return $this->outputJSON([], '', true, 400);
         }
-        $report = 
-        RespondentDiscReport::where('was_finished', 1)->where('respondent_email', $data['respondent_email'])->get();
 
+        $report = RespondentDiscReport::where('respondent_email', $data['respondent_email'])
+        ->orderBy('created_at', 'DESC')
+        ->get()
+        ->map(function ($report){
+            
+            return [
+                'respondent_name' => $report->respondent_name,
+                'respondent_email' => $report->respondent_email,
+                'profile' => $report->profile,
+                'category' => $report->category,
+                'status' => $report->was_finished ? 'finished' : 'pending',
+                'session_url' => !$report->was_finished ? $report->session->session_url: NULL,
+                'report_url' =>$report->was_finished ? env('APP_URL') . '/view-report?trackid=' . $report->code : NULL,
+                'created_at' => $report->created_at->format('d-m-Y H:i'),
+                'finished_at' => $report->was_finished ? $report->updated_at->format('d-m-Y H:i') : NULL,
+                'metadata' => $report->metadata ? $report->metadata->intensities->difference : NULL,
+            ];
+        });
 
         if (!$report->isEmpty()) {
 
-            $report = $report->last();
-
-            return $this->outputJSON([
-                'respondent_name' => $report->respondent_name,
-                'respondent_email' => $report->respondent_email,
-                'perfil' => $report->profile,
-                'category' => $report->category,
-                'report_url' => env('APP_URL') . '/view-report?trackid=' . $report->code,
-                'created_at' => $report->created_at->format('d-m-Y'),
-                'metadata' => $report->metadata->intensities->difference
-            ], '', false, 200);
+            return $this->outputJSON($report, '', false, 200);
         }
 
 

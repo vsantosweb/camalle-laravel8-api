@@ -48,13 +48,12 @@ class CustomerRespondentController extends Controller
 
         try {
 
-            $newRespondent = auth()->user()->respondents()->firstOrcreate([
-
+            $newRespondent = auth()->user()->respondents()->firstOrcreate(
+                ['email' => $request->email],
+                [
                 'uuid' => Str::uuid(),
                 'name' => $request->name,
-                'email' => $request->email,
                 'custom_fields' => $request->custom_fields,
-
             ]);
 
             $newRespondent->lists()->attach($request->respondent_lists);

@@ -2,7 +2,6 @@
 
 namespace App\Models\Customer;
 
-use App\Models\Disc\DiscPlan;
 use App\Models\Disc\DiscPlanSubscription;
 use App\Models\Order\Order;
 use App\Models\Respondent\Respondent;

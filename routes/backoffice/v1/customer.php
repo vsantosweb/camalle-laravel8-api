@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('customer')->namespace('Api\v1\Backoffice\Customer')->group(function () {
 
-    Route::get('online', 'CustomerController@online');
+Route::middleware('auth:user')->namespace('Api\v1\Backoffice\Customer')->group(function () {
+    Route::get('customer/online', 'CustomerController@online');
+    Route::resource('customers', 'CustomerController');
+});
 
+Route::middleware('auth:user')->namespace('Api\v1\Backoffice\Disc\Plan')->group(function () {
+    Route::resource('customer/assinaturas', 'DiscPlanSubscriptionController');
 });

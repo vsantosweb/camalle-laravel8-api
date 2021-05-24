@@ -7,6 +7,7 @@ use App\Mail\Disc\SendDiscTest;
 use App\Models\Customer\Customer;
 use App\Models\Respondent\Respondent;
 use App\Models\Respondent\RespondentDiscMessage;
+use App\Models\Respondent\RespondentDiscSession;
 use App\Models\Respondent\RespondentList;
 use App\Notifications\SendDiscTestMailNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,11 +30,12 @@ class Disc extends Model
     public function createDiscQuizToRespondent($data)
     {
 
-        auth()->user()->subscription->checkCreditAvaiable(1);
+        $creditToconsume = auth()->user()->subscription->checkCreditAvaiable(1);
+        $data['token'] = hash('sha256', microtime());
 
         JobsSendDiscQuiz::dispatch($data, auth()->user()->id, 'respondent')->delay(now()->addSeconds(5));
-
-        auth()->user()->subscription->dispatchCreditConsummation([0]);
+        auth()->user()->subscription->dispatchCreditConsummation([0], $creditToconsume);
+        return RespondentDiscSession::where('token', $data['token'])->first();
 
     }
 
@@ -49,12 +51,12 @@ class Disc extends Model
             foreach ($list['respondents'] as $respondent) array_push($respondents, $respondent);
         }
 
-        auth()->user()->subscription->checkCreditAvaiable(count($respondents));
+        $creditToconsume = auth()->user()->subscription->checkCreditAvaiable(count($respondents));
 
 
         $job = JobsSendDiscQuiz::dispatch($data, auth()->user()->id, 'list')->delay(now()->addSeconds(5));
 
-        auth()->user()->subscription->dispatchCreditConsummation($respondents);
+        auth()->user()->subscription->dispatchCreditConsummation($respondents, $creditToconsume);
 
         return $job;
 
