@@ -79,11 +79,12 @@ class JobsSendDiscQuiz implements ShouldQueue
             'sender_name' => $customer->name
         ]);
         
-        $respondent = Respondent::create([
+        $respondent = Respondent::firstOrCreate(
+            ['email' => $this->data['respondent_email']],
+            [
             'uuid' => Str::uuid(),
             'customer_id' => $customer->id,
             'name' => $this->data['respondent_name'],
-            'email' => $this->data['respondent_email'],
         ]);
 
         $discTest = $respondent->reports()->create([

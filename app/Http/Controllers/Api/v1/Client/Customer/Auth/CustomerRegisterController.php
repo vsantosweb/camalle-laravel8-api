@@ -24,8 +24,6 @@ class CustomerRegisterController extends Controller
     }
     public function register()
     {
-        return 'ok';
-
         $validator = Validator::make(request()->all(), [
             'email' => 'required|email|unique:customers',
             'password' => 'required|string|min:6|confirmed',
