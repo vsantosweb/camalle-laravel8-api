@@ -125,10 +125,11 @@ class CustomerDiscController extends Controller
         }
 
         $report = RespondentDiscReport::where('respondent_email', $data['respondent_email'])
+        ->orderBy('was_finished', 'DESC')
         ->orderBy('created_at', 'DESC')
         ->get()
         ->map(function ($report){
-            
+
             return [
                 'respondent_name' => $report->respondent_name,
                 'respondent_email' => $report->respondent_email,
