@@ -3,16 +3,10 @@
 namespace App\Models\Disc;
 
 use App\Jobs\JobsSendDiscQuiz;
-use App\Mail\Disc\SendDiscTest;
-use App\Models\Customer\Customer;
-use App\Models\Respondent\Respondent;
-use App\Models\Respondent\RespondentDiscMessage;
 use App\Models\Respondent\RespondentDiscSession;
 use App\Models\Respondent\RespondentList;
-use App\Notifications\SendDiscTestMailNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\str;
 
 class Disc extends Model
 {

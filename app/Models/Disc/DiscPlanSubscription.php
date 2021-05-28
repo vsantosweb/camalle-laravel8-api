@@ -18,6 +18,7 @@ class DiscPlanSubscription extends Model
         'amount',
         'validity_days',
         'expire_at',
+        'additionals_credits',
         'credits',
     ];
 

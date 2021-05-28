@@ -22,7 +22,14 @@ class DiscPlanController extends Controller
     }
     public function index()
     {
-        return $this->discPlan->all();
+        $plans = $this->discPlan->with('periods');
+
+        $plans = isset(request()->name) ? $plans->where('name', 'like',  '%' . request()->name . '%') : $plans;
+        $plans = isset(request()->email) ? $plans->where('email', request()->email) : $plans;
+
+        $result = isset(request()->paginate) ? $plans->paginate(request()->paginate) : $plans->get();
+
+        return $this->outputJSON($result, '', false);
     }
 
     /**

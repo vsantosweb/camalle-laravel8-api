@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Api\v1\Backoffice\Disc\Plan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer\Customer;
+use App\Models\Disc\DiscPlan;
 use App\Models\Disc\DiscPlanSubscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class DiscPlanSubscriptionController extends Controller
 {
 
-    public function __construct(DiscPlanSubscription $discPlanSubscription){
+    public function __construct(DiscPlanSubscription $discPlanSubscription)
+    {
 
         $this->discPlanSubscription = $discPlanSubscription;
     }
@@ -20,11 +24,11 @@ class DiscPlanSubscriptionController extends Controller
      */
     public function index()
     {
-        $customers = $this->discPlanSubscription->with(['customer' => function($query){
+        $customers = $this->discPlanSubscription->with(['customer' => function ($query) {
             $query->select('id', 'name', 'company_name');
         }])->get();
 
-        return $customers;
+        return $this->outputJSON($customers, '', false);
     }
 
     /**
@@ -35,7 +39,38 @@ class DiscPlanSubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $discPlan = DiscPlan::where('code', $request->disc_plan_code)->first();
+        $customer = Customer::where('uuid', $request->customer_id)->first();
+        $subscription = DiscPlanSubscription::where('customer_id', $customer->id)->where('disc_plan_id', $discPlan->id)->first();
+
+        if ($subscription) return $this->outputJSON([], 'customer already has a subscription', true, 400);
+
+
+        try {
+            $subscription = $discPlan->subscriptions()->create([
+                'code' => strtoupper(Str::random(15)),
+                'customer_id' => $customer->id,
+                'status' => 1,
+                'credits' => $discPlan->features->credits,
+                'amount' => $discPlan->price,
+                'validity_days' => $discPlan->periods()->find($request->period_id)->validity_days,
+                'expire_at' => now()->addDays($discPlan->periods()->find($request->period_id)->validity_days),
+            ]);
+
+            $subscription->invoices()->create([
+                'code' => strtoupper(uniqid()),
+                'plan_subscription_id' => $subscription->id,
+                'status' => 'PAID',
+                'amount' => $subscription->amount,
+                'expire_at' => now()->addDays($subscription->validity_days),
+            ]);
+
+            return $this->outputJSON($subscription->with('plan')->find($subscription->id), 'Success', false, 201);
+        } catch (\Throwable $th) {
+
+            return $this->outputJSON([], $th->getMessage(), true, 500);
+        }
     }
 
     /**
@@ -70,5 +105,38 @@ class DiscPlanSubscriptionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function storeAdditionalsCredits()
+    {
+
+        $customer = Customer::where('uuid', request()->customer_id)->first();
+
+        $order = $customer->orders()->create([
+            'code' => strtoupper(uniqid()),
+            'order_status_id' => 1,
+            'status' => 'APPROVED',
+            'payment_method' => request()->payment_method,
+            'type' => 'ADDITIONAL_CREDITS',
+            'user_agent' => request()->userAgent(),
+            'ip' => request()->ip(),
+            'total' => request()->total_amount,
+        ]);
+
+        $currentAdditionalCredits = $customer->subscription->additionals_credits;
+        $customer->subscription->update([
+            'additionals_credits' => $currentAdditionalCredits + request()->additionals_credits
+        ]);
+        
+
+        $currentInvoiceAmount = $customer->subscription->invoices->last()->amount;
+        $customer->subscription->invoices->last()->update([
+            'code' => strtoupper(uniqid()),
+            'status' => 'PAID',
+            'amount' =>  $currentInvoiceAmount + request()->total_amount,
+            'expire_at' => now()->addDays($customer->subscription->validity_days),
+        ]);
+        return $customer->subscription;
     }
 }
