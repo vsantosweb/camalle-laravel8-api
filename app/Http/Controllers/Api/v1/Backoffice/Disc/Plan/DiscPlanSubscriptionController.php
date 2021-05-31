@@ -48,6 +48,25 @@ class DiscPlanSubscriptionController extends Controller
 
 
         try {
+
+            $order = $customer->orders()->create([
+                'code' => strtoupper(uniqid()),
+                'order_status_id' => 1,
+                'status' => 'APPROVED',
+                'payment_method' => 'FREE_MODE',
+                'type' => 'PLAN_SUBSCRIPTION',
+                'user_agent' => request()->userAgent(),
+                'ip' => request()->ip(),
+                'total' => 0,
+            ]);
+
+            $discPlan->order()->create([
+                'order_id' => $order->id,
+                'price' => $discPlan->price,
+                'total' => 0,
+                'tax' => 0,
+            ]);
+
             $subscription = $discPlan->subscriptions()->create([
                 'code' => strtoupper(Str::random(15)),
                 'customer_id' => $customer->id,
@@ -67,6 +86,7 @@ class DiscPlanSubscriptionController extends Controller
             ]);
 
             return $this->outputJSON($subscription->with('plan')->find($subscription->id), 'Success', false, 201);
+            
         } catch (\Throwable $th) {
 
             return $this->outputJSON([], $th->getMessage(), true, 500);
@@ -128,15 +148,16 @@ class DiscPlanSubscriptionController extends Controller
         $customer->subscription->update([
             'additionals_credits' => $currentAdditionalCredits + request()->additionals_credits
         ]);
-        
 
         $currentInvoiceAmount = $customer->subscription->invoices->last()->amount;
+
         $customer->subscription->invoices->last()->update([
             'code' => strtoupper(uniqid()),
             'status' => 'PAID',
             'amount' =>  $currentInvoiceAmount + request()->total_amount,
             'expire_at' => now()->addDays($customer->subscription->validity_days),
         ]);
-        return $customer->subscription;
+
+        return $this->outputJSON($customer->subscription, '', false, 200);
     }
 }
