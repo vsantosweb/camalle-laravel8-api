@@ -24,7 +24,7 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customers = $this->customer;
+        $customers = $this->customer->with('type');
 
         $customers = isset(request()->name) ? $customers->where('name', 'like',  '%' . request()->name . '%') : $customers;
         $customers = isset(request()->email) ? $customers->where('email', request()->email) : $customers;
@@ -80,7 +80,9 @@ class CustomerController extends Controller
      */
     public function show($uuid)
     {
-        $customer = $this->customer->where('uuid', $uuid)->firstOrFail();
+        $customer = $this->customer->with(['subscription','type' => function ($type) {
+            $type->select('id', 'name');
+        }])->where('uuid', $uuid)->firstOrFail();
         return $this->outPutJson($customer, '', false, 200);
     }
 
@@ -130,6 +132,9 @@ class CustomerController extends Controller
 
     public function online()
     {
-        return $this->customer->where('last_activity', '>', now()->subMinutes(5)->format('Y-m-d H:i:s'))->get();
+        $onlineCustomers = $this->customer->where('last_activity', '>', now()->subMinutes(2)->format('Y-m-d H:i:s'))->get();
+
+        return $this->outputJSON( $onlineCustomers, '', false, 200);
+
     }
 }

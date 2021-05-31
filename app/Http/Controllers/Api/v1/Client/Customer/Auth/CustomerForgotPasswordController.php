@@ -5,11 +5,7 @@ namespace App\Http\Controllers\Api\v1\Client\Customer\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Customer\Customer;
 use App\Notifications\SendResetEmailNotification;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
 class CustomerForgotPasswordController extends Controller
