@@ -144,7 +144,7 @@ class CustomerDiscController extends Controller
                 'report_url' =>$report->was_finished ? env('APP_URL') . '/view-report?trackid=' . $report->code : NULL,
                 'created_at' => $report->created_at->format('d-m-Y H:i'),
                 'finished_at' => $report->was_finished ? $report->updated_at->format('d-m-Y H:i') : NULL,
-                'metadata' => $report->metadata ? $report->metadata->intensities->difference : NULL,
+                'metadata' => $report->metadata 
             ];
         });
 

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendResetEmailNotification extends Notification
+class CustomerCreditAdditionalNotification extends Notification
 {
     use Queueable;
 
@@ -16,10 +16,9 @@ class SendResetEmailNotification extends Notification
      *
      * @return void
      */
-    public function __construct($customer, $link)
+    public function __construct($order)
     {
-        $this->customer = $customer;
-        $this->link = $link;
+        $this->order = $order;
     }
 
     /**
@@ -41,10 +40,9 @@ class SendResetEmailNotification extends Notification
      */
     public function toMail($notifiable)
     {
-
         return (new MailMessage)
-            ->subject('Redefinição da sua senha')
-            ->view('mails.auth.password.passwordForgotMail', ['customer' => $this->customer, 'link' => $this->link]);
+            ->subject('Créditos Adicionais')
+            ->view('mails.subscription.customerCreditAdditional', ['customer' => $this->order->customer, 'order' => $this->order->history]);
     }
 
     /**
