@@ -18,7 +18,7 @@ Route::prefix('v1')->namespace('Api\v1')->group(function () {
 
     Route::prefix('webhook')->namespace('Disc')->group(function () {
 
-        Route::get('message', 'DiscQuestionsController@index');
+        // Route::get('message', 'DiscQuestionsController@index');
     });
 
     Route::get('/swagger.json', function () { return response()->json(json_decode(file_get_contents(public_path('swagger-doc.json'))), 200)

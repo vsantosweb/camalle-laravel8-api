@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api\v1\Backoffice\Disc\Plan;
 
+use App\Events\Customer\CustomerNotificationEvent;
+use App\Events\Notification\SendNotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Customer\Customer;
 use App\Models\Disc\DiscPlan;
 use App\Models\Disc\DiscPlanSubscription;
 use App\Notifications\CustomerCreditAdditionalNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 
 class DiscPlanSubscriptionController extends Controller
@@ -149,6 +152,7 @@ class DiscPlanSubscriptionController extends Controller
         ]);
 
         $currentAdditionalCredits = $customer->subscription->additionals_credits;
+
         $customer->subscription->update([
             'additionals_credits' => $currentAdditionalCredits + request()->additionals_credits
         ]);
@@ -161,8 +165,17 @@ class DiscPlanSubscriptionController extends Controller
             'amount' =>  $currentInvoiceAmount + request()->total_amount,
             'expire_at' => now()->addDays($customer->subscription->validity_days),
         ]);
+        
+        $customer->notifications()->create([
 
-        $customer->notify(new CustomerCreditAdditionalNotification($order));
+            'type' => 'notify',
+            'title' => 'Créditos Adicionais',
+            'data' => 'Foram adicionados' . request()->additionals_credits . ' em sua conta.',
+
+        ]);
+        
+        event(new CustomerNotificationEvent($customer->notifications()->where('read_at', NULL)->get(), $customer));
+        // $customer->notify(new CustomerCreditAdditionalNotification($order));
         
         return $this->outputJSON($customer->subscription, '', false, 200);
     }

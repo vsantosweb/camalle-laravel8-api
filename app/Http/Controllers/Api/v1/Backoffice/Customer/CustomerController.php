@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api\v1\Backoffice\Customer;
 
+use App\Events\Customer\CustomerOnlineEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Customer\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -132,7 +134,9 @@ class CustomerController extends Controller
 
     public function online()
     {
-        $onlineCustomers = $this->customer->where('last_activity', '>', now()->subMinutes(2)->format('Y-m-d H:i:s'))->get();
+        $onlineCustomers = $this->customer->where('last_activity', '>', now()->subMinutes(1)->format('Y-m-d H:i:s'))->get();
+        
+        event(new CustomerOnlineEvent($onlineCustomers));
 
         return $this->outputJSON( $onlineCustomers, '', false, 200);
 
