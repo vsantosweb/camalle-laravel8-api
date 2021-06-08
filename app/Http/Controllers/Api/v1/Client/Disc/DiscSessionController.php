@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1\Client\Disc;
 
-use App\Http\Controllers\Controller;
+use App\Events\Customer\CustomerNotificationEvent;
 use App\Mail\mailToOwners;
 use App\Models\Disc\DiscCombination;
 use App\Models\Disc\DiscRanges;
-use App\Models\Respondent\Respondent;
 use App\Models\Respondent\RespondentDemographic;
 use App\Models\Respondent\RespondentDiscSession;
 use App\Models\Respondent\RespondentDiscReport;
-use App\Notifications\TestFinished;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Str;
 
 class DiscSessionController extends DiscController
 {
@@ -47,10 +43,9 @@ class DiscSessionController extends DiscController
     {
 
         $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->where('was_finished', 0)->with('respondent')->firstOrFail();
-        $respondentTest = RespondentDiscReport::where('code', $request->disc_test_code)->where('was_finished', 0)->firstOrFail();
-
+        $respondentReport = RespondentDiscReport::where('code', $request->disc_test_code)->where('was_finished', 0)->firstOrFail();
+        
         $graphs = $request->graphs;
-        // dd( $graphs);
 
         for ($i = 0; $i < count($graphs); $i++) {
 
@@ -88,7 +83,7 @@ class DiscSessionController extends DiscController
 
 
 
-        $respondentTest->update([
+        $respondentReport->update([
             'metadata' => $combination,
             'was_finished' => 1,
             'ip' => $request->ip(),
@@ -121,11 +116,22 @@ class DiscSessionController extends DiscController
         // if (isset($request->respondent_uuid)) {
 
         //     if (!empty($respondent->list->settings->ownerMailList)) {
-        //         Notification::route('mail', $respondent->list->settings->ownerMailList)->notify(new TestFinished($respondentTest));
+        //         Notification::route('mail', $respondent->list->settings->ownerMailList)->notify(new TestFinished($respondentReport));
         //     }
 
         // }
 
+        $customer = $respondentReport->customer;
+
+        $customer->notifications()->create([
+
+            'type' => 'quiz-finished',
+            'title' => 'Questionário Finalizado',
+            'data' => 'O respondente <strong>' . $respondentReport->respondent_name . '</strong> finalizou o questionário.',
+
+        ]);
+
+        event(new CustomerNotificationEvent($customer->notifications()->where('read_at', NULL)->get(), $customer));
 
         return $this->outputJSON($respondentDiscSession, '', false);
     }

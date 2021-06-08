@@ -2,6 +2,7 @@
 
 namespace App\Models\Respondent;
 
+use App\Models\Customer\Customer;
 use App\Models\Disc\DiscCombination;
 use App\Models\Disc\DiscRanges;
 use App\Models\Respondent\Respondent;
@@ -34,6 +35,11 @@ class RespondentDiscReport extends Model
         return $this->belongsTo(Respondent::class);
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+    
     public function respondenetDiscTestMessage()
     {
         return $this->belongsTo(RespondentDiscReportMessage::class, 'uuid', 'message_uuid');

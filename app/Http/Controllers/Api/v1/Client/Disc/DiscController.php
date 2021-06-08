@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\v1\Client\Disc;
 
-use App\Http\Controllers\Api\v1\Backoffice\Disc\DiscController as DiscDiscController;
+use App\Http\Controllers\Api\v1\Backoffice\Disc\DiscController as DiscBackofficeController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DiscController extends DiscDiscController
+class DiscController extends DiscBackofficeController
 {
     public function create(Request $request)
     {

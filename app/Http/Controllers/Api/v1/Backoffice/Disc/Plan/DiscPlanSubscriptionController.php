@@ -175,7 +175,8 @@ class DiscPlanSubscriptionController extends Controller
         ]);
         
         event(new CustomerNotificationEvent($customer->notifications()->where('read_at', NULL)->get(), $customer));
-        // $customer->notify(new CustomerCreditAdditionalNotification($order));
+
+        $customer->notify(new CustomerCreditAdditionalNotification($order));
         
         return $this->outputJSON($customer->subscription, '', false, 200);
     }
