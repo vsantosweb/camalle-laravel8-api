@@ -71,6 +71,13 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
         Route::prefix('settings')->group(function () {
             Route::resource('custom-fields', 'CustomerRespondentCustomFieldController');
         });
+
+        Route::prefix('notifications')->group(function () {
+            Route::get('/', 'CustomerNotificationController@index');
+            Route::get('/unread', 'CustomerNotificationController@unread');
+            Route::put('read/{id}', 'CustomerNotificationController@read');
+            Route::post('/read-all', 'CustomerNotificationController@readAll');
+        });
     });
 });
 

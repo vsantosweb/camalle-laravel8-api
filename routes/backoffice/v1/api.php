@@ -22,9 +22,9 @@ Route::middleware('auth:user')->group(function(){
     });
 
     Route::namespace('Api\v1\Backoffice\Disc\Plan')->group(function () {
-        Route::resource('customer/subscriptions', 'DiscPlanSubscriptionController');
-        Route::put('customer/subscription/additional-credits', 'DiscPlanSubscriptionController@storeAdditionalsCredits');
-
+        Route::resource('customer/{uuid}/subscriptions', 'DiscPlanSubscriptionController');
+        Route::put('customer/{uuid}/subscription/additional-credits', 'DiscPlanSubscriptionController@storeAdditionalsCredits');
+        Route::get('customer/{uuid}/subscription/additional-credits/history', 'DiscPlanSubscriptionController@additionalCreditOrderHistory');
         Route::resource('disc-plans', 'DiscPlanController');
     });
     

@@ -117,6 +117,11 @@ class Customer extends Authenticatable implements JWTSubject
         }
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(CustomerNotification::class);
+    }
+    
     public function address()
     {
         return $this->hasMany(CustomerAddress::class);

@@ -37,4 +37,9 @@ class Order extends Model
 
         return $this->hasOne(DiscPlanOrder::class)->with('plan');
     }
+
+    public function history()
+    {
+        return $this->hasOne(OrderHistory::class);
+    }
 }

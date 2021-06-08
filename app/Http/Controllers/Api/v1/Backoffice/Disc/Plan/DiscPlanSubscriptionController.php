@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Api\v1\Backoffice\Disc\Plan;
 
+use App\Events\Customer\CustomerNotificationEvent;
+use App\Events\Notification\SendNotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Customer\Customer;
 use App\Models\Disc\DiscPlan;
 use App\Models\Disc\DiscPlanSubscription;
+use App\Notifications\CustomerCreditAdditionalNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 
 class DiscPlanSubscriptionController extends Controller
@@ -86,7 +90,6 @@ class DiscPlanSubscriptionController extends Controller
             ]);
 
             return $this->outputJSON($subscription->with('plan')->find($subscription->id), 'Success', false, 201);
-            
         } catch (\Throwable $th) {
 
             return $this->outputJSON([], $th->getMessage(), true, 500);
@@ -144,7 +147,12 @@ class DiscPlanSubscriptionController extends Controller
             'total' => request()->total_amount,
         ]);
 
+        $order->history()->create([
+            'order_data' => request()->all()
+        ]);
+
         $currentAdditionalCredits = $customer->subscription->additionals_credits;
+
         $customer->subscription->update([
             'additionals_credits' => $currentAdditionalCredits + request()->additionals_credits
         ]);
@@ -157,7 +165,28 @@ class DiscPlanSubscriptionController extends Controller
             'amount' =>  $currentInvoiceAmount + request()->total_amount,
             'expire_at' => now()->addDays($customer->subscription->validity_days),
         ]);
+        
+        $customer->notifications()->create([
 
+            'type' => 'notify',
+            'title' => 'Créditos Adicionais',
+            'data' => 'Foram adicionados' . request()->additionals_credits . ' em sua conta.',
+
+        ]);
+        
+        event(new CustomerNotificationEvent($customer->notifications()->where('read_at', NULL)->get(), $customer));
+        // $customer->notify(new CustomerCreditAdditionalNotification($order));
+        
         return $this->outputJSON($customer->subscription, '', false, 200);
+    }
+
+    public function additionalCreditOrderHistory($customer_id)
+    {
+
+        $customer = Customer::where('uuid', $customer_id)->first();
+
+        $additionalCreditOrders = $customer->orders()->with('history')->orderBy('created_at', 'DESC')->where('type', 'ADDITIONAL_CREDITS')->get();
+
+        return $this->outputJSON($additionalCreditOrders, '', false, 200);
     }
 }
