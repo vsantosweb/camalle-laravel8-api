@@ -168,7 +168,7 @@ class DiscPlanSubscriptionController extends Controller
         
         $customer->notifications()->create([
 
-            'type' => 'notify',
+            'type' => 'additional-credits',
             'title' => 'Créditos Adicionais',
             'data' => 'Foram adicionados' . request()->additionals_credits . ' em sua conta.',
 

@@ -9,7 +9,7 @@ class CustomerNotification extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'customer_id', 'type', 'tyle','data' , 'read_at'];
+    protected $fillable = [ 'customer_id', 'title', 'type', 'tyle','data' , 'read_at'];
 
     public function customer()
     {
