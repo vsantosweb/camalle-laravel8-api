@@ -10,7 +10,7 @@ for command in $COMMANDS; do
    if [ $PROCESS_COUNT -gt 1 ]; then
       echo $command "job already running, nothing to do"  >> /dev/null &
    else
-      EXEC=$(php $PWD/artisan $command) >> /dev/null &
+      EXEC=$(sudo php $PWD/artisan $command) >> /dev/null &
    fi
 
 done
