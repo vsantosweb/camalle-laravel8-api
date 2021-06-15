@@ -44,7 +44,7 @@ class SendResetEmailNotification extends Notification
 
         return (new MailMessage)
             ->subject('Redefinição da sua senha')
-            ->view('mails.auth.password.passwordForgotMail', ['customer' => $this->customer, 'link' => $this->link]);
+            ->view('mails.auth.passwordForgotMail', ['customer' => $this->customer, 'link' => $this->link]);
     }
 
     /**
