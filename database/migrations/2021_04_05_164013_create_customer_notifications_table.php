@@ -22,7 +22,7 @@ class CreateCustomerNotificationsTable extends Migration
             $table->text('data');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }

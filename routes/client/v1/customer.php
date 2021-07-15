@@ -77,6 +77,7 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
             Route::get('/unread', 'CustomerNotificationController@unread');
             Route::put('read/{id}', 'CustomerNotificationController@read');
             Route::post('/read-all', 'CustomerNotificationController@readAll');
+            Route::delete('/delete', 'CustomerNotificationController@delete');
         });
     });
 });

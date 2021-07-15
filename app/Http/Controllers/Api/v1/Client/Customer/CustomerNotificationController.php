@@ -12,7 +12,7 @@ class CustomerNotificationController extends Controller
 
         $notifications = auth()->user()->notifications()->orderBy('created_at', 'DESC');
 
-        $result = isset(request()->paginate) ? $notifications->paginate(request()->paginate) : $notifications->get();
+        $result = isset(request()->paginate) ? $notifications->paginate(request()->paginate) : $notifications->take(45)->get();
 
         return $this->outputJSON($result, '', false);
     }
@@ -43,5 +43,12 @@ class CustomerNotificationController extends Controller
         ]);
 
         return $this->outputJSON(auth()->user()->notifications, '', false);
+    }
+
+    public function delete(Request $request)
+    {
+         auth()->user()->notifications()->whereIn('id', $request->ids)->delete();
+
+         return $this->index();
     }
 }

@@ -170,7 +170,7 @@ class DiscPlanSubscriptionController extends Controller
 
             'type' => 'additional-credits',
             'title' => 'Créditos Adicionais',
-            'data' => 'Foram adicionados' . request()->additionals_credits . ' em sua conta.',
+            'data' => 'Foram adicionados <strong>' . request()->additionals_credits . '</strong> créditos em sua conta.',
 
         ]);
         
