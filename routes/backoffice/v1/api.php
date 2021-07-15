@@ -27,6 +27,19 @@ Route::middleware('auth:user')->group(function(){
         Route::get('customer/{uuid}/subscription/additional-credits/history', 'DiscPlanSubscriptionController@additionalCreditOrderHistory');
         Route::resource('disc-plans', 'DiscPlanController');
     });
+
+
+    Route::namespace('Api\v1\Backoffice\Disc\Plan')->group(function () {
+        Route::resource('customer/{uuid}/subscriptions', 'DiscPlanSubscriptionController');
+        Route::put('customer/{uuid}/subscription/additional-credits', 'DiscPlanSubscriptionController@storeAdditionalsCredits');
+        Route::get('customer/{uuid}/subscription/additional-credits/history', 'DiscPlanSubscriptionController@additionalCreditOrderHistory');
+    });
+
+    Route::namespace('Api\v1\Backoffice\Notification')->group(function(){
+
+        Route::resource('notifications', 'NotificationController');
+    });
+
     
 });
 
