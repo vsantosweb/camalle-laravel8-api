@@ -14,17 +14,21 @@ class DiscController extends DiscBackofficeController
     }
     public function questions()
     {
-        return $this->outputJSON($this->discQuestion->with('options')->get(),'', false);
+        return $this->outputJSON($this->discQuestion->with('options')->get(), '', false);
     }
 
     public function questionShow($uuid)
     {
-        return $this->outputJSON($this->discQuestion->where('uuid', '$uuid')->with('options')->get(),'', false);
+        return $this->outputJSON($this->discQuestion->where('uuid', '$uuid')->with('options')->get(), '', false);
     }
 
     public function intensities()
     {
-        return $this->outputJSON( $this->discIntensities->with('disc')->get(),'', false);
+        return $this->outputJSON($this->discIntensities->with('disc')->get(), '', false);
+    }
 
+    public function discIntensities()
+    {
+        return $this->outputJSON($this->disc->with('intensities')->get(), '', false);
     }
 }

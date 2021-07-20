@@ -26,4 +26,6 @@ Route::prefix('disc')->namespace('Api\v1\Client\Disc')->group(function () {
     });
 
     Route::get('intensities', 'DiscController@intensities');
+    Route::get('disc-intensities', 'DiscController@discIntensities');
+
 });
