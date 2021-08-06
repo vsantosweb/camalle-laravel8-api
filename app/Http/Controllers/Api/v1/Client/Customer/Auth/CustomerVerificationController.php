@@ -37,6 +37,7 @@ class CustomerVerificationController extends Controller
 
     public function resend()
     {
-        return auth()->user()->sendMailVerification();
+        $customer = Customer::where('email', request()->email)->firstOrfail();
+        return $customer->sendMailVerification();
     }
 }

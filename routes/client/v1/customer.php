@@ -24,12 +24,12 @@ Route::prefix('customer')->namespace('Api\v1\Client\Customer')->group(function (
         Route::post('login', 'CustomerAuthController@login');
         Route::post('register', 'CustomerRegisterController@register');
         Route::post('email/verify', 'CustomerVerificationController@verify');
+        Route::post('email/resend', 'CustomerVerificationController@resend');
 
         Route::get('customer-types', 'CustomerRegisterController@customerTypes');
 
         Route::middleware('auth:customer')->group(function () {
 
-            Route::post('email/resend', 'CustomerVerificationController@resend');
 
             Route::post('logout', 'CustomerAuthController@logout');
             Route::get('logged', 'CustomerAuthController@logged')->middleware('emailVerified');

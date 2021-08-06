@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Client\Customer\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer\Customer;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
@@ -15,9 +16,16 @@ class CustomerAuthController extends Controller
         $input = $request->only('email', 'password');
         $token = null;
 
+        
         if (!$token = auth()->guard('customer')->attempt($input)) {
 
-            return $this->outputJSON('', 'Invalid email or password', true, 401);
+            return $this->outputJSON('', 'Usuário ou senha inválidos', true, 401);
+        }
+
+        $customer = Customer::where('email', $request->email)->firstOrFail();
+        
+        if(is_null($customer->email_verified_at)){
+            return $this->outputJSON('MAIL_VERIFY', 'Email verification required', true, 401);
         }
 
         return $this->outputJSON($token, '', false, 200);
