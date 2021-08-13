@@ -11,6 +11,7 @@ class CustomerAddress extends Model
         'customer_id',
         'address_1',
         'address_2',
+        'number',
         'complement',
         'zipcode',
         'city',

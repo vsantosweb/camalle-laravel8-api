@@ -23,11 +23,7 @@ class CustomerRespondentListController extends Controller
     public function index()
     {
 
-
-        $respondentLists = auth()->user()->respondentLists()
-        ->with('respondents', function($query){
-            $query->select('id', 'name', 'email');
-        })->withCount('respondents')->orderBy('created_at', 'desc');
+        $respondentLists = auth()->user()->respondentLists()->withCount('respondents')->orderBy('created_at', 'desc');
 
         $result = isset(request()->page) ? $respondentLists->paginate(25) : $respondentLists->get();
         return $this->outputJSON($result, '', false);
@@ -65,7 +61,16 @@ class CustomerRespondentListController extends Controller
      */
     public function show($uuid)
     {
-        $respondentList = auth()->user()->respondentLists()->where('uuid', $uuid)->with('respondents')->firstOrFail();
+        $respondentList = auth()->user()->respondentLists()->where('uuid', $uuid)->firstOrFail();
+
+        $respondents = $respondentList->respondents();
+
+        $respondents = isset(request()->name) ? $respondents->where('name', 'like',  '%' . request()->name . '%') : $respondents;
+
+        $respondents = isset(request()->email) ? $respondents->where('email', request()->email) : $respondents;
+
+        $respondentList->respondents = $respondents->withCount(['reports'])->paginate(3);
+
         return $this->outputJSON($respondentList, 'Success', false);
     }
 
@@ -110,12 +115,12 @@ class CustomerRespondentListController extends Controller
 
         $fileToUpload = auth()->user()->respondentLists()->where('uuid', $request->respondent_list_uuids[0])->firstOrFail();
 
-         explode(';',$request->fileBase64);
+        explode(';', $request->fileBase64);
 
         try {
             $fileToUpload->acceptedFileFormat($request->file_format);
             $fileToUpload->uploadFile($request->all());
-            
+
             return $this->outputJSON($fileToUpload, 'Success', false, 201);
         } catch (\Exception $e) {
             return $this->outputJSON('', $e->getMessage(), true, 500);

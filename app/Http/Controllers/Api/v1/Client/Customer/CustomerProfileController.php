@@ -16,11 +16,11 @@ class CustomerProfileController extends Controller
 
     public function updateProfile(Request $request)
     {
+
         try {
-            
             auth()->user()->update($request->all());
 
-            if (is_null(auth()->user()->address)) {
+            if (auth()->user()->address->isEmpty()) {
                 auth()->user()->address()->create($request->address);
             }
 
@@ -29,6 +29,7 @@ class CustomerProfileController extends Controller
             }
 
             return $this->outputJSON(auth()->user()->load('address'), 'Sucesss', 200);
+
         } catch (\Exception $e) {
 
             return $this->outputJSON([], 'false', $e->getMessage(), 500);

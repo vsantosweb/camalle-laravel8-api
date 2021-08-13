@@ -58,7 +58,7 @@ class RespondentList extends Model
 
             $fileBin = base64_decode($base64Data);
             $fileName = $base64File['file_name'] . '.'.$base64File['file_format'];
-            $filePath = auth()->user()->home_dir . DIRECTORY_SEPARATOR . 'imports' . DIRECTORY_SEPARATOR . $fileName;
+            $filePath = auth()->user()->uuid . DIRECTORY_SEPARATOR . 'imports' . DIRECTORY_SEPARATOR . $fileName;
             $pathSize = public_path('storage/' . $filePath);
             $fileUrl = Storage::disk('public')->url($filePath);
             Storage::disk('public')->put($filePath, $fileBin);

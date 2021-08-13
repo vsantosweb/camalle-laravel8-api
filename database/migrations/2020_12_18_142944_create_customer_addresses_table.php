@@ -18,6 +18,7 @@ class CreateCustomerAddressesTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
+            $table->string('number')->nullable();
             $table->string('complement')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('city')->nullable();
