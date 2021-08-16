@@ -19,20 +19,19 @@ class CustomerProfileController extends Controller
 
         try {
             auth()->user()->update($request->all());
-
-            if (auth()->user()->address->isEmpty()) {
+            if (!isset(auth()->user()->address)) {
                 auth()->user()->address()->create($request->address);
             }
-
+            
             if (isset($request->address)) {
                 auth()->user()->address()->update($request->address);
             }
 
-            return $this->outputJSON(auth()->user()->load('address'), 'Sucesss', 200);
+            return $this->outputJSON(auth()->user()->load('address', 'subscription'), 'Sucesss', false);
 
         } catch (\Exception $e) {
 
-            return $this->outputJSON([], 'false', $e->getMessage(), 500);
+            return $this->outputJSON([], false, $e->getMessage(), 500);
         }
     }
 
@@ -43,17 +42,17 @@ class CustomerProfileController extends Controller
         ]);
         if ($validator->fails()) {
 
-            return $this->outputJSON([], 'true', $validator->errors(), 400);
+            return $this->outputJSON([], true, $validator->errors(), 400);
         }
 
         try {
 
             auth()->user()->update(['password' => Hash::make($request->password)]);
 
-            return $this->outputJSON([], 'Success', 200);
+            return $this->outputJSON([], 'Senha alterada com sucesso.', false);
         } catch (\Exception $e) {
 
-            return $this->outputJSON([], 'false', $e->getMessage(), 500);
+            return $this->outputJSON([], false, $e->getMessage(), 500);
         }
     }
 

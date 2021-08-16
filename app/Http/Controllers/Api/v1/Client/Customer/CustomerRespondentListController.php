@@ -69,7 +69,7 @@ class CustomerRespondentListController extends Controller
 
         $respondents = isset(request()->email) ? $respondents->where('email', request()->email) : $respondents;
 
-        $respondentList->respondents = $respondents->withCount(['reports'])->paginate(3);
+        $respondentList->respondents = $respondents->withCount(['reports'])->orderBy('created_at', 'DESC')->paginate(20);
 
         return $this->outputJSON($respondentList, 'Success', false);
     }
