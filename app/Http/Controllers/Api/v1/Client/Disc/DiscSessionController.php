@@ -41,7 +41,6 @@ class DiscSessionController extends DiscController
 
     public function finish(Request $request)
     {
-
         $respondentDiscSession = RespondentDiscSession::where('token', $request->token)->where('was_finished', 0)->with('respondent')->firstOrFail();
         $respondentReport = RespondentDiscReport::where('code', $request->disc_test_code)->where('was_finished', 0)->firstOrFail();
         

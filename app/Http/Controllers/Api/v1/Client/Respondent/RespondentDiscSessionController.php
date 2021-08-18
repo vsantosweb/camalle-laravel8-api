@@ -17,9 +17,7 @@ class RespondentDiscSessionController extends Controller
     {
         $session = RespondentDiscSession::where('token', $token)->with('respondent')->first();
 
-        if (is_null($session)) {
-            return $this->outputJSON([], 'Invalid session', true, 401);
-        }
+        if (is_null($session)) return $this->outputJSON([], 'Invalid session', true, 200);
 
         $session->update(['last_activity' => now()]);
 
